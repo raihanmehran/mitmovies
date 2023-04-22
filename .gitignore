@@ -1,3 +1,4 @@
+API/obj
 API/obj/API.csproj.nuget.dgspec.json
 API/obj/API.csproj.nuget.g.props
 API/obj/API.csproj.nuget.g.targets
@@ -12,3 +13,16 @@ API/obj/Debug/net7.0/API.GeneratedMSBuildEditorConfig.editorconfig
 API/obj/Debug/net7.0/API.GlobalUsings.g.cs
 API/appsettings.json
 API/appsettings.Development.json
+Application/obj/Application.csproj.nuget.dgspec.json
+Application/obj/Application.csproj.nuget.g.props
+Application/obj/Application.csproj.nuget.g.targets
+Application/obj/project.assets.json
+Application/obj/project.nuget.cache
+.gitignore
+Domain/obj
+Domain/obj/Domain.csproj.nuget.dgspec.json
+Domain/obj/Domain.csproj.nuget.g.props
+Domain/obj/Domain.csproj.nuget.g.targets
+Domain/obj/project.assets.json
+Domain/obj/project.nuget.cache
+Infrastructure/obj
