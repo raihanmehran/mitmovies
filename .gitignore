@@ -1,0 +1,14 @@
+API/obj/API.csproj.nuget.dgspec.json
+API/obj/API.csproj.nuget.g.props
+API/obj/API.csproj.nuget.g.targets
+API/obj/project.assets.json
+API/obj/project.nuget.cache
+API/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs
+API/obj/Debug/net7.0/API.AssemblyInfo.cs
+API/obj/Debug/net7.0/API.AssemblyInfoInputs.cache
+API/obj/Debug/net7.0/API.assets.cache
+API/obj/Debug/net7.0/API.csproj.AssemblyReference.cache
+API/obj/Debug/net7.0/API.GeneratedMSBuildEditorConfig.editorconfig
+API/obj/Debug/net7.0/API.GlobalUsings.g.cs
+API/appsettings.json
+API/appsettings.Development.json
