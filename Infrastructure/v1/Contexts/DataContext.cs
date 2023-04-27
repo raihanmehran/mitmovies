@@ -24,5 +24,59 @@ namespace Infrastructure.v1.Contexts
         public DbSet<UserRating> Ratings { get; set; }
         public DbSet<SpokenLanguage> SpokenLanguages { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Credit>().HasNoKey();
+            builder.Entity<MovieKeywords>().HasNoKey();
+            builder.Entity<MovieLinks>().HasNoKey();
+            builder.Entity<ProductionCountry>().HasNoKey();
+
+            builder.Entity<Movie>()
+                .HasMany(m => m.Genres)
+                .WithMany()
+                .UsingEntity<Dictionary<string, object>>(
+                    "MovieGenre",
+                    j => j.HasOne<Genre>().WithMany().HasForeignKey("GenreId"),
+                    j => j.HasOne<Movie>().WithMany().HasForeignKey("MovieId"));
+
+            builder.Entity<Movie>()
+                .HasMany(m => m.ProductionCompanies)
+                .WithMany()
+                .UsingEntity<Dictionary<string, object>>(
+                    "MovieProductionCompany",
+                    j => j.HasOne<ProductionCompany>().WithMany().HasForeignKey("ProductionCompanyId"),
+                    j => j.HasOne<Movie>().WithMany().HasForeignKey("MovieId"));
+
+            builder.Entity<Movie>()
+                .HasMany(m => m.ProductionCountries)
+                .WithMany()
+                .UsingEntity<Dictionary<string, object>>(
+                    "MovieProductionCountry",
+                    j => j.HasOne<ProductionCountry>().WithMany().HasForeignKey("ProductionCountryId"),
+                    j => j.HasOne<Movie>().WithMany().HasForeignKey("MovieId"));
+
+            builder.Entity<Movie>()
+                .HasMany(m => m.SpokenLanguages)
+                .WithMany()
+                .UsingEntity<Dictionary<string, object>>(
+                    "MovieSpokenLanguage",
+                    j => j.HasOne<SpokenLanguage>().WithMany().HasForeignKey("SpokenLanguageId"),
+                    j => j.HasOne<Movie>().WithMany().HasForeignKey("MovieId"));
+
+            // builder.Entity<AppUser>()
+            //     .HasMany(ur => ur.UserRoles)
+            //     .WithOne(u => u.User)
+            //     .HasForeignKey(ur => ur.UserId)
+            //     .IsRequired();
+
+            // builder.Entity<AppRole>()
+            //     .HasMany(ur => ur.UserRoles)
+            //     .WithOne(u => u.Role)
+            //     .HasForeignKey(ur => ur.RoleId)
+            //     .IsRequired();
+        }
+
     }
 }

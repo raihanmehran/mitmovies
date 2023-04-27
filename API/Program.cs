@@ -1,6 +1,7 @@
 using API.Extensions;
 using API.Middlewares;
 using Infrastructure.v1.Contexts;
+using Infrastructure.v1.Utils;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,7 @@ try
 {
     var context = services.GetRequiredService<DataContext>();
     await context.Database.MigrateAsync();
+    Seed.ReadData();
 }
 catch (Exception ex)
 {

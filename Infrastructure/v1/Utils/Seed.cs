@@ -2,19 +2,17 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace Infrastructure.v1.Utils
 {
-    public class Seed
+    public static class Seed
     {
-        string pathToCSV = @"C:\Users\SCS\Desktop\IMDB\movies_metadata.csv";
-
-        public void ReadData()
+        public static void ReadData()
         {
-            using (TextFieldParser parser = new TextFieldParser(pathToCSV))
+            using (TextFieldParser parser = new TextFieldParser(@"C:\Users\SCS\Desktop\IMDB\movies_metadata.csv"))
             {
+                string[] fields;
                 parser.Delimiters = new string[] { "," };
-
                 while (!parser.EndOfData)
                 {
-                    string[] fields = parser.ReadFields();
+                    fields = parser.ReadFields();
                     System.Console.WriteLine(fields[0] + " " + fields[1]);
                 }
             }

@@ -26,3 +26,6 @@ Domain/obj/Domain.csproj.nuget.g.targets
 Domain/obj/project.assets.json
 Domain/obj/project.nuget.cache
 Infrastructure/obj
+Domain/bin
+Infrastructure/bin
+API/bin
