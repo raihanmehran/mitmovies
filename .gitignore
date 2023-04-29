@@ -30,4 +30,9 @@ Domain/bin
 Infrastructure/bin
 API/bin
 Application/obj
+Application/bin
 API.Tests.Unit/obj
+
+API/mitmovies.db
+API/mitmovies.db-shm
+API/mitmovies.db-wal
