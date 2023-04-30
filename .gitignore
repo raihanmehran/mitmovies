@@ -31,8 +31,12 @@ Infrastructure/bin
 API/bin
 Application/obj
 Application/bin
-API.Tests.Unit/obj
 
 API/mitmovies.db
 API/mitmovies.db-shm
 API/mitmovies.db-wal
+MitMovies.Tests.Unit/obj/MitMovies.Tests.Unit.csproj.nuget.dgspec.json
+MitMovies.Tests.Unit/obj/MitMovies.Tests.Unit.csproj.nuget.g.props
+MitMovies.Tests.Unit/obj/MitMovies.Tests.Unit.csproj.nuget.g.targets
+MitMovies.Tests.Unit/obj/project.assets.json
+MitMovies.Tests.Unit/obj/project.nuget.cache
