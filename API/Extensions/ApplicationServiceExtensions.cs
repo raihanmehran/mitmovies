@@ -36,6 +36,7 @@ namespace API.Extensions
 
             services.AddScoped<ITrendingMoviesRepository, TrendingMoviesRepository>();
             services.AddScoped<IRequestHandler<GetTodayTrendingMoviesQuery, ResponseMessage>, GetTodayTrendingMoviesQueryHandler>();
+            services.AddScoped<IRequestHandler<GetThisWeekTrendingMoviesQuery, ResponseMessage>, GetThisWeekTrendingMoviesQueryHandler>();
 
             return services;
         }

@@ -29,5 +29,22 @@ namespace API.Controllers.v1
                 throw;
             }
         }
+
+        [HttpGet("week")]
+        public async Task<ActionResult<ResponseMessage>> GetThisWeekTrendingMovies()
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetThisWeekTrendingMoviesQuery { });
+
+                if (result.Data == null) return NotFound();
+
+                return Ok(result.Data);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
