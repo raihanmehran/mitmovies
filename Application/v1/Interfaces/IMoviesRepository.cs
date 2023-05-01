@@ -7,5 +7,6 @@ namespace Application.v1.Interfaces
     {
         Task<ResponseMessage> GetMovieById(int movieId);
         Task<ResponseMessage> GetMovieDetailById(int movieId);
+        Task<ResponseMessage> SearchMovie(string payload);
     }
 }

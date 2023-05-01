@@ -25,6 +25,8 @@ namespace API.Extensions
             services.AddScoped<TmdbContext>();
             services.AddScoped<IMoviesRepository, MoviesRepository>();
             services.AddScoped<IRequestHandler<GetMovieByIdQuery, ResponseMessage>, GetMovieByIdQueryHandler>();
+            services.AddScoped<IRequestHandler<GetMovieDetailByIdQuery, ResponseMessage>, GetMovieDetailByIdQueryHandler>();
+            services.AddScoped<IRequestHandler<SearchMovieQuery, ResponseMessage>, SearchMovieQueryHandler>();
 
             return services;
         }

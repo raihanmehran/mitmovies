@@ -46,5 +46,22 @@ namespace API.Controllers.v1
                 throw;
             }
         }
+
+        [HttpGet("search/{payload}")]
+        public async Task<ActionResult<ResponseMessage>> SearchMovie(string payload)
+        {
+            try
+            {
+                var result = await _mediator.Send(new SearchMovieQuery { Payload = payload });
+
+                if (result.Data == null) return NotFound(result.Data);
+
+                return Ok(result.Data);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
