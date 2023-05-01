@@ -47,7 +47,7 @@ namespace API.Controllers.v1
             }
         }
 
-        [HttpGet("search/{payload}")]
+        [HttpGet("search")]
         public async Task<ActionResult<ResponseMessage>> SearchMovie(string payload)
         {
             try
