@@ -2,6 +2,7 @@ using Application.v1.DTOs;
 using Application.v1.Interfaces;
 using Application.v1.Services.MovieService.Query;
 using Application.v1.Services.PersonService.Query;
+using Application.v1.Services.TrendingMoviesService.Query;
 using Infrastructure.v1.Contexts;
 using Infrastructure.v1.Repositories;
 using MediatR;
@@ -32,6 +33,9 @@ namespace API.Extensions
 
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IRequestHandler<GetPersonByIdQuery, ResponseMessage>, GetPersonByIdQueryHandler>();
+
+            services.AddScoped<ITrendingMoviesRepository, TrendingMoviesRepository>();
+            services.AddScoped<IRequestHandler<GetTodayTrendingMoviesQuery, ResponseMessage>, GetTodayTrendingMoviesQueryHandler>();
 
             return services;
         }

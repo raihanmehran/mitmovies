@@ -47,6 +47,8 @@ namespace Infrastructure.v1.Repositories
 
             result.Data = response.Results;
 
+            
+
             return result;
         }
     }
