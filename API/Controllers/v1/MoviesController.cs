@@ -63,5 +63,22 @@ namespace API.Controllers.v1
                 throw;
             }
         }
+
+        [HttpGet("upcoming")]
+        public async Task<ActionResult<ResponseMessage>> GetUpcomingMovies()
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetUpcomingMoviesQuery { });
+
+                if (result.Data == null) return NotFound();
+
+                return Ok(result.Data);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
