@@ -14,6 +14,23 @@ namespace API.Controllers.v1
         }
 
         [HttpGet]
+        public async Task<ActionResult<ResponseMessage>> GetPopularPeople()
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetPopularPeopleQuery { });
+
+                if (result.Data == null) return NotFound();
+
+                return Ok(result.Data);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpGet("{personId}")]
         public async Task<ActionResult<ResponseMessage>> GetPersonById(int personId)
         {
             try

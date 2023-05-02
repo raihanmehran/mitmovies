@@ -34,6 +34,7 @@ namespace API.Extensions
 
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IRequestHandler<GetPersonByIdQuery, ResponseMessage>, GetPersonByIdQueryHandler>();
+            services.AddScoped<IRequestHandler<GetPopularPeopleQuery, ResponseMessage>, GetPopularPeopleQueryHandler>();
 
             services.AddScoped<ITrendingMoviesRepository, TrendingMoviesRepository>();
             services.AddScoped<IRequestHandler<GetTodayTrendingMoviesQuery, ResponseMessage>, GetTodayTrendingMoviesQueryHandler>();

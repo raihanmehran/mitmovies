@@ -25,5 +25,15 @@ namespace Infrastructure.v1.Repositories
 
             return result;
         }
+
+        public async Task<ResponseMessage> GetPopularPeople()
+        {
+            var result = new ResponseMessage();
+
+            result.Data = await _tmdbContext.client
+                .GetPersonPopularListAsync();
+
+            return result;
+        }
     }
 }
