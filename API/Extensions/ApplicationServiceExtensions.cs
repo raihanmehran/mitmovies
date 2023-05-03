@@ -32,6 +32,7 @@ namespace API.Extensions
             services.AddScoped<IRequestHandler<GetMovieDetailByIdQuery, ResponseMessage>, GetMovieDetailByIdQueryHandler>();
             services.AddScoped<IRequestHandler<SearchMovieQuery, ResponseMessage>, SearchMovieQueryHandler>();
             services.AddScoped<IRequestHandler<GetUpcomingMoviesQuery, ResponseMessage>, GetUpcomingMoviesQueryHandler>();
+            services.AddScoped<IRequestHandler<GetPopularMoviesQuery, ResponseMessage>, GetPopularMoviesQueryHandler>();
 
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IRequestHandler<GetPersonByIdQuery, ResponseMessage>, GetPersonByIdQueryHandler>();

@@ -80,5 +80,23 @@ namespace API.Controllers.v1
                 throw;
             }
         }
+
+        [HttpGet("popular")]
+        public async Task<ActionResult<ResponseMessage>> GetPopularMovies()
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetPopularMoviesQuery { });
+
+                if (result.Data == null) return NotFound();
+
+                return Ok(result.Data);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
     }
 }

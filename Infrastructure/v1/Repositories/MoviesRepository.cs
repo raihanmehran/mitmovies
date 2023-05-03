@@ -38,6 +38,16 @@ namespace Infrastructure.v1.Repositories
             return result;
         }
 
+        public async Task<ResponseMessage> GetPopularMovies()
+        {
+            var result = new ResponseMessage();
+
+            result.Data = await _tmdbContext.client
+                .GetMoviePopularListAsync();
+
+            return result;
+        }
+
         public async Task<ResponseMessage> GetUpcomingMovies()
         {
             ResponseMessage result = new ResponseMessage();

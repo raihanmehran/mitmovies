@@ -9,5 +9,6 @@ namespace Application.v1.Interfaces
         Task<ResponseMessage> GetMovieDetailById(int movieId);
         Task<ResponseMessage> SearchMovie(string payload);
         Task<ResponseMessage> GetUpcomingMovies();
+        Task<ResponseMessage> GetPopularMovies();
     }
 }
