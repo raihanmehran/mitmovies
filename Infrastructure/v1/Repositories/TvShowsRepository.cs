@@ -21,5 +21,15 @@ namespace Infrastructure.v1.Repositories
 
             return result;
         }
+
+        public async Task<ResponseMessage> GetTopRatedTvShows()
+        {
+            var result = new ResponseMessage();
+
+            result.Data = await _tmdbContext.client
+                .GetTvShowListAsync(TvShowListType.TopRated);
+
+            return result;
+        }
     }
 }

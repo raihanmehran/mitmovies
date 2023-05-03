@@ -43,6 +43,7 @@ namespace API.Extensions
 
             services.AddScoped<ITvShowsRepository, TvShowsRepository>();
             services.AddScoped<IRequestHandler<GetPopularTvShowsQuery, ResponseMessage>, GetPopularTvShowsQueryHandler>();
+            services.AddScoped<IRequestHandler<GetTopRatedTvShowsQuery, ResponseMessage>, GetTopRatedTvShowsQueryHandler>();
 
             return services;
         }

@@ -5,5 +5,6 @@ namespace Application.v1.Interfaces
     public interface ITvShowsRepository
     {
         Task<ResponseMessage> GetPopularTvShows();
+        Task<ResponseMessage> GetTopRatedTvShows();
     }
 }
