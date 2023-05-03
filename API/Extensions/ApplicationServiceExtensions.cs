@@ -3,6 +3,7 @@ using Application.v1.Interfaces;
 using Application.v1.Services.MovieService.Query;
 using Application.v1.Services.PersonService.Query;
 using Application.v1.Services.TrendingMoviesService.Query;
+using Application.v1.Services.TvShowService.Query;
 using Infrastructure.v1.Contexts;
 using Infrastructure.v1.Repositories;
 using MediatR;
@@ -39,6 +40,9 @@ namespace API.Extensions
             services.AddScoped<ITrendingMoviesRepository, TrendingMoviesRepository>();
             services.AddScoped<IRequestHandler<GetTodayTrendingMoviesQuery, ResponseMessage>, GetTodayTrendingMoviesQueryHandler>();
             services.AddScoped<IRequestHandler<GetThisWeekTrendingMoviesQuery, ResponseMessage>, GetThisWeekTrendingMoviesQueryHandler>();
+
+            services.AddScoped<ITvShowsRepository, TvShowsRepository>();
+            services.AddScoped<IRequestHandler<GetPopularTvShowsQuery, ResponseMessage>, GetPopularTvShowsQueryHandler>();
 
             return services;
         }
