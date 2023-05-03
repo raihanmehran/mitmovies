@@ -10,5 +10,6 @@ namespace Application.v1.Interfaces
         Task<ResponseMessage> SearchMovie(string payload);
         Task<ResponseMessage> GetUpcomingMovies();
         Task<ResponseMessage> GetPopularMovies();
+        Task<ResponseMessage> GetTopRatedMovies();
     }
 }

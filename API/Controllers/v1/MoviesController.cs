@@ -98,5 +98,22 @@ namespace API.Controllers.v1
             }
 
         }
+
+        [HttpGet("toprated")]
+        public async Task<ActionResult<ResponseMessage>> GetTopRatedMovies()
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetTopRatedMoviesQuery { });
+
+                if (result.Data == null) return NotFound();
+
+                return Ok(result.Data);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

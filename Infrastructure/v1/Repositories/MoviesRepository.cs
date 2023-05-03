@@ -48,6 +48,16 @@ namespace Infrastructure.v1.Repositories
             return result;
         }
 
+        public async Task<ResponseMessage> GetTopRatedMovies()
+        {
+            var result = new ResponseMessage();
+
+            result.Data = await _tmdbContext.client
+                .GetMovieTopRatedListAsync();
+
+            return result;
+        }
+
         public async Task<ResponseMessage> GetUpcomingMovies()
         {
             ResponseMessage result = new ResponseMessage();
