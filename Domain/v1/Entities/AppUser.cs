@@ -7,8 +7,8 @@ namespace Domain.v1.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Country { get; set; }
-        public DateTime Created { get; set; }
-        public DateTime LastActive { get; set; }
+        public DateTime Created { get; set; } = DateTime.UtcNow;
+        public DateTime LastActive { get; set; } = DateTime.UtcNow;
         public bool IsAccountActive { get; set; } = true;
         public bool IsPremium { get; set; } = false;
         public ICollection<AppUserRole> UserRoles { get; set; }
