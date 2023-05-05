@@ -1,0 +1,9 @@
+using Microsoft.AspNetCore.Identity;
+
+namespace Domain.v1.Entities
+{
+    public class AppRole : IdentityRole<int>
+    {
+        public ICollection<AppUserRole> UserRoles { get; set; }
+    }
+}

@@ -2,6 +2,7 @@ using Application.v1.DTOs;
 using Application.v1.Interfaces;
 using Application.v1.Services.MovieService.Query;
 using Application.v1.Services.PersonService.Query;
+using Application.v1.Services.TokenService.Command;
 using Application.v1.Services.TrendingMoviesService.Query;
 using Application.v1.Services.TvShowService.Query;
 using Infrastructure.v1.Contexts;
@@ -26,6 +27,7 @@ namespace API.Extensions
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<TmdbContext>();
+            services.AddScoped<ITokenService, TokenService>();
 
             services.AddScoped<IMoviesRepository, MoviesRepository>();
             services.AddScoped<IRequestHandler<GetMovieByIdQuery, ResponseMessage>, GetMovieByIdQueryHandler>();
