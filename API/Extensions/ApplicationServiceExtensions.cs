@@ -1,5 +1,6 @@
 using Application.v1.DTOs;
 using Application.v1.Interfaces;
+using Application.v1.Services.AuthService.Command;
 using Application.v1.Services.MovieService.Query;
 using Application.v1.Services.PersonService.Query;
 using Application.v1.Services.TokenService.Command;
@@ -28,6 +29,9 @@ namespace API.Extensions
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<TmdbContext>();
             services.AddScoped<ITokenService, TokenService>();
+
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IRequestHandler<AuthenticateUserCommand, ResponseMessage>, AuthenticateUserCommandHandler>();
 
             services.AddScoped<IMoviesRepository, MoviesRepository>();
             services.AddScoped<IRequestHandler<GetMovieByIdQuery, ResponseMessage>, GetMovieByIdQueryHandler>();
