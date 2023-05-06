@@ -29,6 +29,30 @@ namespace Infrastructure.v1.Contexts
                 .WithOne(u => u.Role)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
+
+            builder.Entity<AppUser>()
+                .HasMany(u => u.Photos)
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.AppUserId)
+                .IsRequired(required: false);
+
+            builder.Entity<AppUser>()
+                .HasMany(u => u.FavouriteMovies)
+                .WithOne(fm => fm.User)
+                .HasForeignKey(fm => fm.AppUserId)
+                .IsRequired(required: false);
+
+            builder.Entity<AppUser>()
+                .HasMany(u => u.FavouriteTvShows)
+                .WithOne(ft => ft.User)
+                .HasForeignKey(ft => ft.AppUserId)
+                .IsRequired(required: false);
+
+            builder.Entity<AppUser>()
+                .HasMany(u => u.FavouritePeople)
+                .WithOne(fp => fp.User)
+                .HasForeignKey(fp => fp.AppUserId)
+                .IsRequired();
         }
     }
 }

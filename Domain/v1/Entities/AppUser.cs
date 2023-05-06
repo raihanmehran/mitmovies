@@ -12,5 +12,9 @@ namespace Domain.v1.Entities
         public bool IsAccountActive { get; set; } = true;
         public bool IsPremium { get; set; } = false;
         public ICollection<AppUserRole> UserRoles { get; set; }
+        public List<Photo> Photos { get; set; } = new();
+        public ICollection<FavouriteMovie> FavouriteMovies { get; set; }
+        public ICollection<FavouriteTvShow> FavouriteTvShows { get; set; }
+        public ICollection<FavouritePerson> FavouritePeople { get; set; }
     }
 }
