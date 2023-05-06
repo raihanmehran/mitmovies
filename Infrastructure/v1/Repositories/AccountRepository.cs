@@ -18,14 +18,8 @@ namespace Infrastructure.v1.Repositories
         }
         public async Task<ResponseMessage> RegisterUser(RegisterUserDto registerUserDto)
         {
-            var response = new ResponseMessage();
-
-            if (await UserExists(username: registerUserDto.Username))
-            {
-                response.StatusCode = 400;
-                response.Message = "Username is taken";
-                return response;
-            }
+            if (await UserExists(username: registerUserDto.Username)) return Response(
+                    statusCode: 400, message: "Username is taken");
 
             var user = _mapper.Map<AppUser>(source: registerUserDto);
             user.UserName = registerUserDto.Username;
@@ -33,33 +27,32 @@ namespace Infrastructure.v1.Repositories
             var result = await _userManager
                 .CreateAsync(user: user, password: registerUserDto.Password);
 
-            if (!result.Succeeded)
-            {
-                response.StatusCode = 400;
-                response.Message = "Something went wrong while registering a new user";
-                return response;
-            }
+            if (!result.Succeeded) return Response(
+                statusCode: 400, message: "Something went wrong while registering a new user");
 
             var roleResult = await _userManager.AddToRoleAsync(user: user, role: "Member");
 
-            if (!roleResult.Succeeded)
-            {
-                response.StatusCode = 400;
-                response.Message = roleResult.Errors.ToString();
-                return response;
-            }
+            if (!roleResult.Succeeded) return Response(
+                statusCode: 400, message: roleResult.Errors.ToString());
 
-            response.StatusCode = 200;
-            response.Message = "User Registered";
-            response.Data = _mapper.Map<MemberDto>(source: user);
-
-            return response;
+            return Response(statusCode: 200, message: "User Registered",
+                data: _mapper.Map<MemberDto>(source: user));
         }
 
         private async Task<bool> UserExists(string username)
         {
             return await _userManager.Users.AnyAsync(u =>
                 u.UserName == username);
+        }
+
+        private ResponseMessage Response(int statusCode, string message, object data = null)
+        {
+            var response = new ResponseMessage();
+            response.StatusCode = statusCode;
+            response.Message = message;
+            response.Data = data;
+
+            return response;
         }
     }
 }
