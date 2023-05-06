@@ -9,6 +9,8 @@ namespace Infrastructure.v1.Utils
         public AutoMapperProfiles()
         {
             CreateMap<AppUser, UserDto>();
+            CreateMap<RegisterUserDto, AppUser>();
+            CreateMap<AppUser, MemberDto>();
         }
     }
 }
