@@ -7,6 +7,7 @@ using Application.v1.Services.PersonService.Query;
 using Application.v1.Services.TokenService.Command;
 using Application.v1.Services.TrendingMoviesService.Query;
 using Application.v1.Services.TvShowService.Query;
+using Application.v1.Services.UserService.Query;
 using Infrastructure.v1.Contexts;
 using Infrastructure.v1.Repositories;
 using MediatR;
@@ -56,6 +57,9 @@ namespace API.Extensions
             services.AddScoped<ITvShowsRepository, TvShowsRepository>();
             services.AddScoped<IRequestHandler<GetPopularTvShowsQuery, ResponseMessage>, GetPopularTvShowsQueryHandler>();
             services.AddScoped<IRequestHandler<GetTopRatedTvShowsQuery, ResponseMessage>, GetTopRatedTvShowsQueryHandler>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRequestHandler<GetUserByUsernameQuery, ResponseMessage>, GetUserByUsernameQueryHandler>();
 
             return services;
         }
