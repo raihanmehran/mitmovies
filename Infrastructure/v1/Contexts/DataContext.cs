@@ -65,6 +65,19 @@ namespace Infrastructure.v1.Contexts
                 .WithOne(wt => wt.User)
                 .HasForeignKey(wt => wt.AppUserId)
                 .IsRequired(required: false);
+
+            builder.Entity<UserGenre>()
+                .HasKey(ug => new { ug.AppUserId, ug.GenreId });
+
+            builder.Entity<UserGenre>()
+                .HasOne(ug => ug.User)
+                .WithMany(u => u.UserGenres)
+                .HasForeignKey(ug => ug.AppUserId);
+
+            builder.Entity<UserGenre>()
+                .HasOne(ug => ug.Genre)
+                .WithMany(g => g.UserGenres)
+                .HasForeignKey(ug => ug.GenreId);
         }
     }
 }
