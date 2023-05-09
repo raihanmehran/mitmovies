@@ -52,7 +52,19 @@ namespace Infrastructure.v1.Contexts
                 .HasMany(u => u.FavouritePeople)
                 .WithOne(fp => fp.User)
                 .HasForeignKey(fp => fp.AppUserId)
-                .IsRequired();
+                .IsRequired(required: false);
+
+            builder.Entity<AppUser>()
+                .HasMany(u => u.WatchedMovies)
+                .WithOne(wm => wm.User)
+                .HasForeignKey(wm => wm.AppUserId)
+                .IsRequired(required: false);
+
+            builder.Entity<AppUser>()
+                .HasMany(u => u.WatchedTvShows)
+                .WithOne(wt => wt.User)
+                .HasForeignKey(wt => wt.AppUserId)
+                .IsRequired(required: false);
         }
     }
 }

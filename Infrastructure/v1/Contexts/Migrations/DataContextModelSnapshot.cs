@@ -239,6 +239,50 @@ namespace Infrastructure.v1.Contexts.Migrations
                     b.ToTable("Photos");
                 });
 
+            modelBuilder.Entity("Domain.v1.Entities.WatchedMovie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("WatchedMovie");
+                });
+
+            modelBuilder.Entity("Domain.v1.Entities.WatchedTvShow", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TvShowId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("WatchedTvShow");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -355,9 +399,7 @@ namespace Infrastructure.v1.Contexts.Migrations
                 {
                     b.HasOne("Domain.v1.Entities.AppUser", "User")
                         .WithMany("FavouritePeople")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AppUserId");
 
                     b.Navigation("User");
                 });
@@ -375,6 +417,24 @@ namespace Infrastructure.v1.Contexts.Migrations
                 {
                     b.HasOne("Domain.v1.Entities.AppUser", "User")
                         .WithMany("Photos")
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.v1.Entities.WatchedMovie", b =>
+                {
+                    b.HasOne("Domain.v1.Entities.AppUser", "User")
+                        .WithMany("WatchedMovies")
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.v1.Entities.WatchedTvShow", b =>
+                {
+                    b.HasOne("Domain.v1.Entities.AppUser", "User")
+                        .WithMany("WatchedTvShows")
                         .HasForeignKey("AppUserId");
 
                     b.Navigation("User");
@@ -432,6 +492,10 @@ namespace Infrastructure.v1.Contexts.Migrations
                     b.Navigation("Photos");
 
                     b.Navigation("UserRoles");
+
+                    b.Navigation("WatchedMovies");
+
+                    b.Navigation("WatchedTvShows");
                 });
 #pragma warning restore 612, 618
         }
