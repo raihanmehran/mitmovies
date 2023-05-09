@@ -12,6 +12,22 @@ namespace Infrastructure.v1.Repositories
         {
             _context = context;
         }
+
+        public async Task<ResponseMessage> GetUserByUserIdAsync(int userId)
+        {
+            if (userId <= 0) return Response(
+                statusCode: 404, message: "User Id Not Provided");
+
+            var result = await _context.Users.SingleOrDefaultAsync(x =>
+                x.Id == userId);
+
+            if (result is null) return Response(
+                statusCode: 404, message: "User Not Found");
+
+            return Response(statusCode: 200, message: "User Found",
+                data: result);
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;

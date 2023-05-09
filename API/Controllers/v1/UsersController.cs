@@ -13,7 +13,7 @@ namespace API.Controllers.v1
             _mediator = mediator;
         }
 
-        [HttpGet]
+        [HttpGet("username/{username}")]
         public async Task<ActionResult<ResponseMessage>> GetUserByUsername(string username)
         {
             try
@@ -26,7 +26,24 @@ namespace API.Controllers.v1
             }
             catch (Exception)
             {
-                throw
+                throw;
+            }
+        }
+
+        [HttpGet("id/{userId}")]
+        public async Task<ActionResult<ResponseMessage>> GetUserById(int userId)
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetUserByUserIdQuery { UserId = userId });
+
+                if (result.StatusCode != 200) return NotFound();
+
+                return Ok(result.Data);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

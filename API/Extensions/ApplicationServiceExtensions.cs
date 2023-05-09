@@ -60,6 +60,7 @@ namespace API.Extensions
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRequestHandler<GetUserByUsernameQuery, ResponseMessage>, GetUserByUsernameQueryHandler>();
+            services.AddScoped<IRequestHandler<GetUserByUserIdQuery, ResponseMessage>, GetUserByUserIdQueryHandler>();
 
             return services;
         }

@@ -6,5 +6,6 @@ namespace Application.v1.Interfaces
     {
         Task<bool> SaveAllAsync();
         Task<ResponseMessage> GetUserByUsernameAsync(string username);
+        Task<ResponseMessage> GetUserByUserIdAsync(int userId);
     }
 }
