@@ -1,5 +1,6 @@
 using Application.v1.DTOs;
 using Application.v1.Interfaces;
+using AutoMapper;
 using Infrastructure.v1.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,8 +9,10 @@ namespace Infrastructure.v1.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly DataContext _context;
-        public UserRepository(DataContext context)
+        private readonly IMapper _mapper;
+        public UserRepository(DataContext context, IMapper mapper)
         {
+            _mapper = mapper;
             _context = context;
         }
 
@@ -25,7 +28,7 @@ namespace Infrastructure.v1.Repositories
                 statusCode: 404, message: "User Not Found");
 
             return Response(statusCode: 200, message: "User Found",
-                data: result);
+                data: _mapper.Map<MemberDto>(result));
         }
 
         public async Task<bool> SaveAllAsync()
@@ -42,7 +45,7 @@ namespace Infrastructure.v1.Repositories
                 statusCode: 404, message: "User Not Found");
 
             return Response(statusCode: 200, message: "User Found",
-                data: result);
+                data: _mapper.Map<MemberDto>(result));
 
         }
         private ResponseMessage Response(int statusCode, string message, object data = null)
