@@ -7,7 +7,9 @@ using Application.v1.Services.PersonService.Query;
 using Application.v1.Services.TokenService.Command;
 using Application.v1.Services.TrendingMoviesService.Query;
 using Application.v1.Services.TvShowService.Query;
+using Application.v1.Services.UserService.Command;
 using Application.v1.Services.UserService.Query;
+using Domain.v1.Entities;
 using Infrastructure.v1.Contexts;
 using Infrastructure.v1.Repositories;
 using MediatR;
@@ -59,8 +61,9 @@ namespace API.Extensions
             services.AddScoped<IRequestHandler<GetTopRatedTvShowsQuery, ResponseMessage>, GetTopRatedTvShowsQueryHandler>();
 
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IRequestHandler<GetUserByUsernameQuery, ResponseMessage>, GetUserByUsernameQueryHandler>();
-            services.AddScoped<IRequestHandler<GetUserByUserIdQuery, ResponseMessage>, GetUserByUserIdQueryHandler>();
+            services.AddScoped<IRequestHandler<GetUserByUsernameQuery, AppUser>, GetUserByUsernameQueryHandler>();
+            services.AddScoped<IRequestHandler<GetUserByUserIdQuery, AppUser>, GetUserByUserIdQueryHandler>();
+            services.AddScoped<IRequestHandler<UpdateUserCommand, ResponseMessage>, UpdateUserCommandHandler>();
 
             return services;
         }

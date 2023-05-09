@@ -1,6 +1,7 @@
 using Application.v1.DTOs;
 using Application.v1.Interfaces;
 using AutoMapper;
+using Domain.v1.Entities;
 using Infrastructure.v1.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,19 +17,19 @@ namespace Infrastructure.v1.Repositories
             _context = context;
         }
 
-        public async Task<ResponseMessage> GetUserByUserIdAsync(int userId)
+        public async Task<AppUser> GetUserByUserIdAsync(int userId)
         {
-            if (userId <= 0) return Response(
-                statusCode: 404, message: "User Id Not Provided");
+            // if (userId <= 0) return Response(
+            //     statusCode: 404, message: "User Id Not Provided");
 
-            var result = await _context.Users.SingleOrDefaultAsync(x =>
+            return await _context.Users.SingleOrDefaultAsync(x =>
                 x.Id == userId);
 
-            if (result is null) return Response(
-                statusCode: 404, message: "User Not Found");
+            // if (result is null) return Response(
+            //     statusCode: 404, message: "User Not Found");
 
-            return Response(statusCode: 200, message: "User Found",
-                data: _mapper.Map<MemberDto>(result));
+            // return Response(statusCode: 200, message: "User Found",
+            //     data: _mapper.Map<MemberDto>(result));
         }
 
         public async Task<bool> SaveAllAsync()
@@ -36,17 +37,30 @@ namespace Infrastructure.v1.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        async Task<ResponseMessage> IUserRepository.GetUserByUsernameAsync(string username)
+        public async Task<ResponseMessage> UpdateUserAsync(UserUpdateDto userUpdateDto, int userId)
         {
-            var result = await _context.Users.SingleOrDefaultAsync(x =>
-                x.UserName == username);
+            if (userUpdateDto is null || userId <= 0) return Response(
+                statusCode: 404, message: "Validation Error: Data Not Provided");
 
-            if (result is null) return Response(
+            var user = await GetUserByUserIdAsync(userId: userId);
+
+            if (user is null) Response(
                 statusCode: 404, message: "User Not Found");
 
-            return Response(statusCode: 200, message: "User Found",
-                data: _mapper.Map<MemberDto>(result));
+            _mapper.Map(userUpdateDto, user);
 
+            // _context.Entry(user).State = EntityState.Modified;
+            if (await SaveAllAsync()) return Response(
+                statusCode: 200, message: "User Updated");
+
+            return Response(
+                statusCode: 500, message: "Error Updating User");
+        }
+
+        public async Task<AppUser> GetUserByUsernameAsync(string username)
+        {
+            return await _context.Users.SingleOrDefaultAsync(x =>
+                x.UserName == username);
         }
         private ResponseMessage Response(int statusCode, string message, object data = null)
         {

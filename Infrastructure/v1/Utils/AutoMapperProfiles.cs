@@ -11,6 +11,7 @@ namespace Infrastructure.v1.Utils
             CreateMap<AppUser, UserDto>();
             CreateMap<RegisterUserDto, AppUser>();
             CreateMap<AppUser, MemberDto>();
+            CreateMap<UserUpdateDto, AppUser>();
         }
     }
 }
