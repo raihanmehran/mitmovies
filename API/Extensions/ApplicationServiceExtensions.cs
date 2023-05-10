@@ -69,6 +69,7 @@ namespace API.Extensions
 
             services.AddScoped<IFavouriteMoviesRepository, FavouriteMoviesRepository>();
             services.AddScoped<IRequestHandler<AddMovieToFavouriteCommand, ResponseMessage>, AddMovieToFavouriteCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveMovieFromFavouritesCommand, ResponseMessage>, RemoveMovieFromFavouritesCommandHandler>();
 
             return services;
         }

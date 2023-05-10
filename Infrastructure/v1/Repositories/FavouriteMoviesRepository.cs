@@ -32,15 +32,34 @@ namespace Infrastructure.v1.Repositories
             user.FavouriteMovies.Add(favouriteMovie);
 
             if (await SaveAllAsync()) return Response(
-                statusCode: 200, message: "Movie Added To Favourite");
+                statusCode: 200, message: "Movie Added To Favourites");
 
-            return Response(statusCode: 400, message: "Error While Adding Movie to Favourite");
+            return Response(statusCode: 400, message: "Error While Adding Movie to Favourites");
         }
 
         public bool IsFavouriteMovieExist(int movieId, AppUser user)
         {
             return (user.FavouriteMovies.Any(x =>
                 x.MovieId == movieId)) ? true : false;
+        }
+
+        public async Task<ResponseMessage> RemoveMovieFromFavourite(int movieId, AppUser user)
+        {
+            if (movieId <= 0 || user is null) return Response(
+                statusCode: 401, message: "Data Not Provided");
+
+            if (!IsFavouriteMovieExist(movieId: movieId, user: user)) return Response(
+                statusCode: 403, message: "The movie already removed");
+
+            var favouriteMovie = user.FavouriteMovies
+                .SingleOrDefault(x => x.MovieId == movieId);
+
+            user.FavouriteMovies.Remove(favouriteMovie);
+
+            if (await SaveAllAsync()) return Response(
+                statusCode: 200, message: "Movie Removed From Favourites");
+
+            return Response(statusCode: 400, message: "Error While Removing Movie to Favourites");
         }
 
         public async Task<bool> SaveAllAsync()

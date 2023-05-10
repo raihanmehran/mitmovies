@@ -35,7 +35,30 @@ namespace API.Controllers.v1
 
                 if (result.StatusCode != 200) return BadRequest(result.Message);
 
-                return Ok(result.Data);
+                return Ok(result.Message);
+            }
+            catch (Exception) { throw; }
+        }
+
+        [HttpPost("remove/{movieId}")]
+        public async Task<ActionResult<ResponseMessage>> RemoveMovieFromFavourites(int movieId)
+        {
+            try
+            {
+                var user = await _mediator.Send(new GetUserByUserIdQuery
+                {
+                    UserId = User.GetUserId()
+                });
+
+                var result = await _mediator.Send(new RemoveMovieFromFavouritesCommand
+                {
+                    MovieId = movieId,
+                    User = user
+                });
+
+                if (result.StatusCode != 200) return BadRequest(result.Message);
+
+                return Ok(result.Message);
             }
             catch (Exception) { throw; }
         }
