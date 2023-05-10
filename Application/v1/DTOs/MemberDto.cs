@@ -10,5 +10,7 @@ namespace Application.v1.DTOs
         public string Country { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
+        public List<PhotoDto> Photos { get; set; }
+        public ICollection<FavouriteMovieDto> MyProperty { get; set; }
     }
 }

@@ -1,72 +1,73 @@
-[
-  {
-    "FirstName": "Alice",
-    "LastName": "Jones",
-    "Country": "Canada",
-    "Email": "alice.jones123@gmail.com",
-    "UserName": "alice"
-  },
-  {
-    "FirstName": "Bobby",
-    "LastName": "Smith",
-    "Country": "United States",
-    "Email": "bob.smith456@yahoo.com",
-    "UserName": "bobby"
-  },
-  {
-    "FirstName": "Charlie",
-    "LastName": "Brown",
-    "Country": "Australia",
-    "Email": "charlie.brown789@hotmail.com",
-    "UserName": "charlie"
-  },
-  {
-    "FirstName": "David",
-    "LastName": "Davis",
-    "Country": "United Kingdom",
-    "Email": "david.davis1234@gmail.com",
-    "UserName": "david"
-  },
-  {
-    "FirstName": "Emily",
-    "LastName": "Johnson",
-    "Country": "New Zealand",
-    "Email": "emily.johnson567@gmail.com",
-    "UserName": "emily"
-  },
-  {
-    "FirstName": "Frank",
-    "LastName": "Wilson",
-    "Country": "Germany",
-    "Email": "frank.wilson890@yahoo.com",
-    "UserName": "frank"
-  },
-  {
-    "FirstName": "Grace",
-    "LastName": "Lee",
-    "Country": "South Korea",
-    "Email": "grace.lee123@gmail.com",
-    "UserName": "grace"
-  },
-  {
-    "FirstName": "Henry",
-    "LastName": "Jackson",
-    "Country": "Japan",
-    "Email": "henry.jackson456@hotmail.com",
-    "UserName": "henry"
-  },
-  {
-    "FirstName": "Isabella",
-    "LastName": "Garcia",
-    "Country": "Mexico",
-    "Email": "isabella.garcia789@gmail.com",
-    "UserName": "isabella"
-  },
-  {
-    "FirstName": "Jacob",
-    "LastName": "Martinez",
-    "Country": "Spain",
-    "Email": "jacob.martinez1234@yahoo.com",
-    "UserName": "jacob"
-  }
+[{
+        "FirstName": "Alice",
+        "LastName": "Jones",
+        "Country": "Canada",
+        "Email": "alice.jones123@gmail.com",
+        "UserName": "alice",
+        "FavouriteMovies": []
+    },
+    {
+        "FirstName": "Bobby",
+        "LastName": "Smith",
+        "Country": "United States",
+        "Email": "bob.smith456@yahoo.com",
+        "UserName": "bobby",
+        "FavouriteMovies": []
+    },
+    {
+        "FirstName": "Charlie",
+        "LastName": "Brown",
+        "Country": "Australia",
+        "Email": "charlie.brown789@hotmail.com",
+        "UserName": "charlie"
+    },
+    {
+        "FirstName": "David",
+        "LastName": "Davis",
+        "Country": "United Kingdom",
+        "Email": "david.davis1234@gmail.com",
+        "UserName": "david"
+    },
+    {
+        "FirstName": "Emily",
+        "LastName": "Johnson",
+        "Country": "New Zealand",
+        "Email": "emily.johnson567@gmail.com",
+        "UserName": "emily"
+    },
+    {
+        "FirstName": "Frank",
+        "LastName": "Wilson",
+        "Country": "Germany",
+        "Email": "frank.wilson890@yahoo.com",
+        "UserName": "frank"
+    },
+    {
+        "FirstName": "Grace",
+        "LastName": "Lee",
+        "Country": "South Korea",
+        "Email": "grace.lee123@gmail.com",
+        "UserName": "grace"
+    },
+    {
+        "FirstName": "Henry",
+        "LastName": "Jackson",
+        "Country": "Japan",
+        "Email": "henry.jackson456@hotmail.com",
+        "UserName": "henry"
+    },
+    {
+        "FirstName": "Isabella",
+        "LastName": "Garcia",
+        "Country": "Mexico",
+        "Email": "isabella.garcia789@gmail.com",
+        "UserName": "isabella"
+    },
+    {
+        "FirstName": "Jacob",
+        "LastName": "Martinez",
+        "Country": "Spain",
+        "Email": "jacob.martinez1234@yahoo.com",
+        "UserName": "jacob"
+    }
 ]
