@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.v1
 {
+    [Authorize]
     public class UsersController : BaseApiController
     {
         private readonly IMediator _mediator;
@@ -51,7 +52,6 @@ namespace API.Controllers.v1
             }
         }
 
-        [Authorize]
         [HttpPut("update")]
         public async Task<ActionResult> UpdateUser(UserUpdateDto userUpdateDto)
         {
@@ -72,5 +72,20 @@ namespace API.Controllers.v1
                 throw;
             }
         }
+
+        [HttpGet("member/id/{userId}")]
+        public async Task<ActionResult<ResponseMessage>> GetMemberById(int userId)
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetMemberByUserIdQuery { UserId = userId });
+
+                if (result.StatusCode != 200) return NotFound(result.Message);
+
+                return Ok(result.Data);
+            }
+            catch (Exception) { throw; }
+        }
+
     }
 }

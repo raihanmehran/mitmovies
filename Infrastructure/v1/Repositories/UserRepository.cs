@@ -1,6 +1,7 @@
 using Application.v1.DTOs;
 using Application.v1.Interfaces;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain.v1.Entities;
 using Infrastructure.v1.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -70,6 +71,19 @@ namespace Infrastructure.v1.Repositories
             response.Data = data;
 
             return response;
+        }
+
+        public async Task<ResponseMessage> GetMemberByUserIdAsync(int userId)
+        {
+            if (userId <= 0) return Response(
+                statusCode: 404, message: "User Id Not Provided");
+
+            var reuslt = await _context.Users
+                .Where(u => u.Id == userId)
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
+
+            return Response(statusCode: 200, message: "User Found", data: reuslt);
         }
     }
 }

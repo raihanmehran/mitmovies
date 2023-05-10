@@ -10,8 +10,14 @@ namespace Infrastructure.v1.Utils
         {
             CreateMap<AppUser, UserDto>();
             CreateMap<RegisterUserDto, AppUser>();
-            CreateMap<AppUser, MemberDto>();
+            CreateMap<AppUser, MemberDto>()
+                .ForMember(dest => dest.Photos, opt => opt
+                    .MapFrom(src => src.Photos))
+                .ForMember(dest => dest.FavouriteMovies, opt => opt
+                    .MapFrom(src => src.FavouriteMovies));
             CreateMap<UserUpdateDto, AppUser>();
+            CreateMap<Photo, PhotoDto>();
+            CreateMap<FavouriteMovie, FavouriteMovieDto>();
         }
     }
 }
