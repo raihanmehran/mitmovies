@@ -7,6 +7,6 @@ namespace Application.v1.Interfaces
     {
         Task<bool> SaveAllAsync();
         Task<ResponseMessage> AddMovieToFavourite(int movieId, AppUser user);
-        Task<FavouriteMovie> GetFavouriteMovie(int movieId, int userId);
+        bool IsFavouriteMovieExist(int movieId, AppUser user);
     }
 }

@@ -20,17 +20,10 @@ namespace Infrastructure.v1.Repositories
 
         public async Task<AppUser> GetUserByUserIdAsync(int userId)
         {
-            // if (userId <= 0) return Response(
-            //     statusCode: 404, message: "User Id Not Provided");
-
-            return await _context.Users.SingleOrDefaultAsync(x =>
-                x.Id == userId);
-
-            // if (result is null) return Response(
-            //     statusCode: 404, message: "User Not Found");
-
-            // return Response(statusCode: 200, message: "User Found",
-            //     data: _mapper.Map<MemberDto>(result));
+            return await _context.Users
+                .Include(x => x.Photos)
+                .Include(x => x.FavouriteMovies)
+                .SingleOrDefaultAsync(x => x.Id == userId);
         }
 
         public async Task<bool> SaveAllAsync()
@@ -60,8 +53,10 @@ namespace Infrastructure.v1.Repositories
 
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
-            return await _context.Users.SingleOrDefaultAsync(x =>
-                x.UserName == username);
+            return await _context.Users
+                .Include(x => x.Photos)
+                .Include(x => x.FavouriteMovies)
+                .SingleOrDefaultAsync(x => x.UserName == username);
         }
         private ResponseMessage Response(int statusCode, string message, object data = null)
         {

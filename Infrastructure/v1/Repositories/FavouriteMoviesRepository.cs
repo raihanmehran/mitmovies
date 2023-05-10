@@ -20,20 +20,13 @@ namespace Infrastructure.v1.Repositories
             if (movieId <= 0 || user is null) return Response(
                 statusCode: 401, message: "Data Not Provided");
 
-            if (user.FavouriteMovies == null) user.FavouriteMovies = new List<FavouriteMovie>();
-            else
-            {
-                var favMovie = await GetFavouriteMovie(movieId: movieId, userId: user.Id);
-
-                if (favMovie != null) return Response(
-                       statusCode: 401, message: "You already added this movie to favourites");
-            }
+            if (IsFavouriteMovieExist(movieId: movieId, user: user)) return Response(
+                   statusCode: 401, message: "You already added this movie to favourites");
 
             var favouriteMovie = new FavouriteMovie
             {
                 AppUserId = user.Id,
-                MovieId = movieId,
-                User = user
+                MovieId = movieId
             };
 
             user.FavouriteMovies.Add(favouriteMovie);
@@ -44,11 +37,10 @@ namespace Infrastructure.v1.Repositories
             return Response(statusCode: 400, message: "Error While Adding Movie to Favourite");
         }
 
-        public async Task<FavouriteMovie> GetFavouriteMovie(int movieId, int userId)
+        public bool IsFavouriteMovieExist(int movieId, AppUser user)
         {
-            //return await _context.FavouriteMovies.Where(
-            //    x => x.AppUserId == userId && x.MovieId == movieId).FirstOrDefaultAsync();
-            return new FavouriteMovie();
+            return (user.FavouriteMovies.Any(x =>
+                x.MovieId == movieId)) ? true : false;
         }
 
         public async Task<bool> SaveAllAsync()
