@@ -40,31 +40,36 @@ namespace Infrastructure.v1.Contexts
                 .HasMany(u => u.FavouriteMovies)
                 .WithOne(fm => fm.User)
                 .HasForeignKey(fm => fm.AppUserId)
-                .IsRequired(required: false);
+                .IsRequired(required: false)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<AppUser>()
                 .HasMany(u => u.FavouriteTvShows)
                 .WithOne(ft => ft.User)
                 .HasForeignKey(ft => ft.AppUserId)
-                .IsRequired(required: false);
+                .IsRequired(required: false)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<AppUser>()
                 .HasMany(u => u.FavouritePeople)
                 .WithOne(fp => fp.User)
                 .HasForeignKey(fp => fp.AppUserId)
-                .IsRequired(required: false);
+                .IsRequired(required: false)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<AppUser>()
                 .HasMany(u => u.WatchedMovies)
                 .WithOne(wm => wm.User)
                 .HasForeignKey(wm => wm.AppUserId)
-                .IsRequired(required: false);
+                .IsRequired(required: false)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<AppUser>()
                 .HasMany(u => u.WatchedTvShows)
                 .WithOne(wt => wt.User)
                 .HasForeignKey(wt => wt.AppUserId)
-                .IsRequired(required: false);
+                .IsRequired(required: false)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<UserGenre>()
                 .HasKey(ug => new { ug.AppUserId, ug.GenreId });
@@ -72,12 +77,14 @@ namespace Infrastructure.v1.Contexts
             builder.Entity<UserGenre>()
                 .HasOne(ug => ug.User)
                 .WithMany(u => u.UserGenres)
-                .HasForeignKey(ug => ug.AppUserId);
+                .HasForeignKey(ug => ug.AppUserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<UserGenre>()
                 .HasOne(ug => ug.Genre)
                 .WithMany(g => g.UserGenres)
-                .HasForeignKey(ug => ug.GenreId);
+                .HasForeignKey(ug => ug.GenreId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
