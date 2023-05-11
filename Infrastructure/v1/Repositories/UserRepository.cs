@@ -24,6 +24,7 @@ namespace Infrastructure.v1.Repositories
                 .Include(x => x.Photos)
                 .Include(x => x.FavouriteMovies)
                 .Include(x => x.FavouritePeople)
+                .Include(x => x.FavouriteTvShows)
                 .SingleOrDefaultAsync(x => x.Id == userId);
         }
 
@@ -58,6 +59,7 @@ namespace Infrastructure.v1.Repositories
                 .Include(x => x.Photos)
                 .Include(x => x.FavouriteMovies)
                 .Include(x => x.FavouritePeople)
+                .Include(x => x.FavouriteTvShows)
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
         private ResponseMessage Response(int statusCode, string message, object data = null)
