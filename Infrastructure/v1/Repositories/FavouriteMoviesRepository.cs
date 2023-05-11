@@ -34,7 +34,8 @@ namespace Infrastructure.v1.Repositories
             if (await SaveAllAsync()) return Response(
                 statusCode: 200, message: "Movie Added To Favourites");
 
-            return Response(statusCode: 400, message: "Error While Adding Movie to Favourites");
+            return Response(statusCode: 400,
+                message: "Error While Adding Movie to Favourites");
         }
 
         public bool IsFavouriteMovieExist(int movieId, AppUser user)
@@ -57,7 +58,8 @@ namespace Infrastructure.v1.Repositories
             if (await SaveAllAsync()) return Response(
                 statusCode: 200, message: "Movie Removed From Favourites");
 
-            return Response(statusCode: 500, message: "Error While Removing Movie to Favourites");
+            return Response(statusCode: 500,
+                message: "Error While Removing Movie to Favourites");
         }
 
         public FavouriteMovie GetFavouriteMovie(int movieId, AppUser user)
