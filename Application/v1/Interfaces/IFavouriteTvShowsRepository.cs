@@ -7,6 +7,7 @@ namespace Application.v1.Interfaces
     {
         Task<bool> SaveAllAsync();
         Task<ResponseMessage> AddTvShowToFavourites(int tvShowId, AppUser user);
+        Task<ResponseMessage> RemoveTvShowToFavourites(int tvShowId, AppUser user);
         bool IsFavouriteTvShowExist(int tvShowId, AppUser user);
     }
 }

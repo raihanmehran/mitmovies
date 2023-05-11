@@ -79,6 +79,7 @@ namespace API.Extensions
 
             services.AddScoped<IFavouriteTvShowsRepository, FavouriteTvShowsRepository>();
             services.AddScoped<IRequestHandler<AddTvShowToFavouritesCommand, ResponseMessage>, AddTvShowToFavouritesCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveTvShowToFavouritesCommand, ResponseMessage>, RemoveTvShowToFavouritesCommandHandler>();
 
             return services;
         }
