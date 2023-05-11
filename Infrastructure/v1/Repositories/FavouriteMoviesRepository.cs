@@ -51,15 +51,19 @@ namespace Infrastructure.v1.Repositories
             if (!IsFavouriteMovieExist(movieId: movieId, user: user)) return Response(
                 statusCode: 403, message: "The movie already removed");
 
-            var favouriteMovie = user.FavouriteMovies
-                .SingleOrDefault(x => x.MovieId == movieId);
-
+            var favouriteMovie = GetFavouriteMovie(movieId: movieId, user: user);
             user.FavouriteMovies.Remove(favouriteMovie);
 
             if (await SaveAllAsync()) return Response(
                 statusCode: 200, message: "Movie Removed From Favourites");
 
-            return Response(statusCode: 400, message: "Error While Removing Movie to Favourites");
+            return Response(statusCode: 500, message: "Error While Removing Movie to Favourites");
+        }
+
+        public FavouriteMovie GetFavouriteMovie(int movieId, AppUser user)
+        {
+            return user.FavouriteMovies.SingleOrDefault(x =>
+                x.MovieId == movieId);
         }
 
         public async Task<bool> SaveAllAsync()
