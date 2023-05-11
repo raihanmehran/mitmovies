@@ -31,7 +31,8 @@ namespace Infrastructure.v1.Repositories
             if (await SaveAllAsync()) return Response(
                 statusCode: 200, message: "Person added to favourites");
 
-            return Response(statusCode: 400, message: "Error While Adding Person to Favourites");
+            return Response(statusCode: 500,
+                message: "Error While Adding Person to Favourites");
         }
 
         public bool IsFavouritePersonExist(int personId, AppUser user)
@@ -48,15 +49,20 @@ namespace Infrastructure.v1.Repositories
             if (!IsFavouritePersonExist(personId: personId, user: user)) return Response(
                 statusCode: 401, message: "The person already removed");
 
-            var favouritePerson = user.FavouritePeople
-                .SingleOrDefault(x => x.PersonId == personId);
-
+            var favouritePerson = GetFavouritePerson(personId, user);
             user.FavouritePeople.Remove(favouritePerson);
 
             if (await SaveAllAsync()) return Response(
                 statusCode: 200, message: "Person Removed From Favourites");
 
-            return Response(statusCode: 500, message: "Error While Removing Person From Favourites");
+            return Response(statusCode: 500,
+                message: "Error While Removing Person From Favourites");
+        }
+
+        private FavouritePerson GetFavouritePerson(int personId, AppUser user)
+        {
+            return user.FavouritePeople
+                .SingleOrDefault(x => x.PersonId == personId);
         }
 
         public async Task<bool> SaveAllAsync()
