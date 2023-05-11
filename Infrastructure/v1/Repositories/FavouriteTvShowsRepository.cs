@@ -32,7 +32,8 @@ namespace Infrastructure.v1.Repositories
             if (await SaveAllAsync()) return Response(
                 statusCode: 200, message: "Tv Show Added To Favourites");
 
-            return Response(statusCode: 500, message: "Error while adding tv show to favourtes");
+            return Response(statusCode: 500,
+                message: "Error while adding tv show to favourtes");
         }
 
         public bool IsFavouriteTvShowExist(int tvShowId, AppUser user)
@@ -49,15 +50,20 @@ namespace Infrastructure.v1.Repositories
             if (!IsFavouriteTvShowExist(tvShowId: tvShowId, user: user)) return Response(
                 statusCode: 403, message: "The Tv Show already removed");
 
-            var favouriteTvShow = user.FavouriteTvShows
-                .SingleOrDefault(x => x.TvShowId == tvShowId);
-
+            var favouriteTvShow = GetFavouriteTvShow(tvShowId, user);
             user.FavouriteTvShows.Remove(favouriteTvShow);
 
             if (await SaveAllAsync()) return Response(
                 statusCode: 200, message: "Tv Show Removed From Favourites");
 
-            return Response(statusCode: 400, message: "Error While Removing Tv Show From Favourites");
+            return Response(statusCode: 500,
+                message: "Error While Removing Tv Show From Favourites");
+        }
+
+        private FavouriteTvShow GetFavouriteTvShow(int tvShowId, AppUser user)
+        {
+            return user.FavouriteTvShows
+                .SingleOrDefault(x => x.TvShowId == tvShowId);
         }
 
         public async Task<bool> SaveAllAsync()
