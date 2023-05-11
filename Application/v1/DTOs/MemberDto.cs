@@ -12,5 +12,6 @@ namespace Application.v1.DTOs
         public DateTime LastActive { get; set; }
         public List<PhotoDto> Photos { get; set; }
         public ICollection<FavouriteMovieDto> FavouriteMovies { get; set; }
+        public ICollection<FavouritePersonDto> FavouritePeople { get; set; }
     }
 }

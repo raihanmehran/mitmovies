@@ -14,10 +14,13 @@ namespace Infrastructure.v1.Utils
                 .ForMember(dest => dest.Photos, opt => opt
                     .MapFrom(src => src.Photos))
                 .ForMember(dest => dest.FavouriteMovies, opt => opt
-                    .MapFrom(src => src.FavouriteMovies));
+                    .MapFrom(src => src.FavouriteMovies))
+                .ForMember(dest => dest.FavouritePeople, opt => opt
+                    .MapFrom(src => src.FavouritePeople));
             CreateMap<UserUpdateDto, AppUser>();
             CreateMap<Photo, PhotoDto>();
             CreateMap<FavouriteMovie, FavouriteMovieDto>();
+            CreateMap<FavouritePerson, FavouritePersonDto>();
         }
     }
 }

@@ -74,6 +74,7 @@ namespace API.Extensions
 
             services.AddScoped<IFavouritePersonRepository, FavouritePersonRepository>();
             services.AddScoped<IRequestHandler<AddPersonToFavouriteCommand, ResponseMessage>, AddPersonToFavouriteCommandHandler>();
+            services.AddScoped<IRequestHandler<RemovePersonFromFavouriteCommand, ResponseMessage>, RemovePersonFromFavouriteCommandHandler>();
 
             return services;
         }

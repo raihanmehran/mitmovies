@@ -7,6 +7,7 @@ namespace Application.v1.Interfaces
     {
         Task<bool> SaveAllAsync();
         Task<ResponseMessage> AddPersonToFavourite(int personId, AppUser user);
+        Task<ResponseMessage> RemovePersonToFavourite(int personId, AppUser user);
         bool IsFavouritePersonExist(int personId, AppUser user);
     }
 }

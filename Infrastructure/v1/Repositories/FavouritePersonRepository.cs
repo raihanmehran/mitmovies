@@ -40,6 +40,25 @@ namespace Infrastructure.v1.Repositories
                 x.PersonId == personId)) ? true : false;
         }
 
+        public async Task<ResponseMessage> RemovePersonToFavourite(int personId, AppUser user)
+        {
+            if (personId <= 0 || user is null) return Response(
+                statusCode: 401, message: "Data Not Provided");
+
+            if (!IsFavouritePersonExist(personId: personId, user: user)) return Response(
+                statusCode: 401, message: "The person already removed");
+
+            var favouritePerson = user.FavouritePeople
+                .SingleOrDefault(x => x.PersonId == personId);
+
+            user.FavouritePeople.Remove(favouritePerson);
+
+            if (await SaveAllAsync()) return Response(
+                statusCode: 200, message: "Person Removed From Favourites");
+
+            return Response(statusCode: 500, message: "Error While Removing Person From Favourites");
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
