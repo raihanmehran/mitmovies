@@ -3,6 +3,7 @@ using Application.v1.Interfaces;
 using Application.v1.Services.AccountService.Command;
 using Application.v1.Services.AuthService.Command;
 using Application.v1.Services.FavouriteMovieService.Command;
+using Application.v1.Services.FavouritePersonService.Command;
 using Application.v1.Services.MovieService.Query;
 using Application.v1.Services.PersonService.Query;
 using Application.v1.Services.TokenService.Command;
@@ -70,6 +71,9 @@ namespace API.Extensions
             services.AddScoped<IFavouriteMoviesRepository, FavouriteMoviesRepository>();
             services.AddScoped<IRequestHandler<AddMovieToFavouriteCommand, ResponseMessage>, AddMovieToFavouriteCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveMovieFromFavouritesCommand, ResponseMessage>, RemoveMovieFromFavouritesCommandHandler>();
+
+            services.AddScoped<IFavouritePersonRepository, FavouritePersonRepository>();
+            services.AddScoped<IRequestHandler<AddPersonToFavouriteCommand, ResponseMessage>, AddPersonToFavouriteCommandHandler>();
 
             return services;
         }
