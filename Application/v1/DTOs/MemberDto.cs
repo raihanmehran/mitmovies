@@ -15,5 +15,6 @@ namespace Application.v1.DTOs
         public ICollection<FavouritePersonDto> FavouritePeople { get; set; }
         public ICollection<FavouriteTvShowDto> FavouriteTvShows { get; set; }
         public ICollection<WatchedMovieDto> WatchedMovies { get; set; }
+        public ICollection<WatchedTvShowDto> WatchedTvShows { get; set; }
     }
 }
