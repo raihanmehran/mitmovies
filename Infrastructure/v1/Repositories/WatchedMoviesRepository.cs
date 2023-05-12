@@ -49,9 +49,7 @@ namespace Infrastructure.v1.Repositories
             if (!IsWatchedMovieExist(movieId: movieId, user: user)) return Response(
                 statusCode: 401, message: "Movie Not Exist in Watched");
 
-            var watchedMovie = user.WatchedMovies
-                .FirstOrDefault(x => x.MovieId == movieId);
-
+            var watchedMovie = GetWatchedMovie(movieId, user);
             user.WatchedMovies.Remove(watchedMovie);
 
             if (await SaveAllAsync()) return Response(
@@ -59,6 +57,12 @@ namespace Infrastructure.v1.Repositories
 
             return Response(statusCode: 500,
                 message: "Error While Removing Movie From Watched");
+        }
+
+        private WatchedMovie GetWatchedMovie(int movieId, AppUser user)
+        {
+            return user.WatchedMovies
+                .FirstOrDefault(x => x.MovieId == movieId);
         }
 
         public async Task<bool> SaveAllAsync()
