@@ -37,5 +37,28 @@ namespace API.Controllers.v1
             }
             catch (Exception) { throw; }
         }
+
+        [HttpPost("remove/{movieId}")]
+        public async Task<ActionResult<ResponseMessage>> RemoveMovieFromWatched(int movieId)
+        {
+            try
+            {
+                var user = await _mediator.Send(new GetUserByUserIdQuery
+                {
+                    UserId = User.GetUserId()
+                });
+
+                var result = await _mediator.Send(new RemoveMovieFromWatchedCommand
+                {
+                    MovieId = movieId,
+                    User = user
+                });
+
+                if (result.StatusCode != 200) return BadRequest(result.Message);
+
+                return Ok(result.Message);
+            }
+            catch (Exception) { throw; }
+        }
     }
 }

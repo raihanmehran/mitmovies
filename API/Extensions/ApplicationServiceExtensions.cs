@@ -84,6 +84,7 @@ namespace API.Extensions
 
             services.AddScoped<IWatchedMoviesRepository, WatchedMoviesRepository>();
             services.AddScoped<IRequestHandler<AddMovieToWatchedCommand, ResponseMessage>, AddMovieToWatchedCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveMovieFromWatchedCommand, ResponseMessage>, RemoveMovieFromWatchedCommandHandler>();
 
             return services;
         }

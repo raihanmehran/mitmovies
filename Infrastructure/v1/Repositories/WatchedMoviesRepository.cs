@@ -41,6 +41,26 @@ namespace Infrastructure.v1.Repositories
             return user.WatchedMovies.Any(x => x.MovieId == movieId);
         }
 
+        public async Task<ResponseMessage> RemoveMovieFromWatched(int movieId, AppUser user)
+        {
+            if (movieId <= 0 || user is null) return Response(
+                statusCode: 400, message: "Data Not Provided");
+
+            if (!IsWatchedMovieExist(movieId: movieId, user: user)) return Response(
+                statusCode: 401, message: "Movie Not Exist in Watched");
+
+            var watchedMovie = user.WatchedMovies
+                .FirstOrDefault(x => x.MovieId == movieId);
+
+            user.WatchedMovies.Remove(watchedMovie);
+
+            if (await SaveAllAsync()) return Response(
+                statusCode: 200, message: "Movie Removed From Watched");
+
+            return Response(statusCode: 500,
+                message: "Error While Removing Movie From Watched");
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
