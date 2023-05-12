@@ -22,6 +22,7 @@ namespace Infrastructure.v1.Utils
             CreateMap<FavouriteMovie, FavouriteMovieDto>();
             CreateMap<FavouritePerson, FavouritePersonDto>();
             CreateMap<FavouriteTvShow, FavouriteTvShowDto>();
+            CreateMap<WatchedMovie, WatchedMovieDto>();
         }
     }
 }
