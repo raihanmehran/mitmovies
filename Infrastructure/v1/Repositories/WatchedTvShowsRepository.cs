@@ -21,26 +21,25 @@ namespace Infrastructure.v1.Repositories
             if (IsWatchedTvShowExist(tvShowId: tvShowId, user: user)) return Response(
                 statusCode: 401, message: "Movie Already Exist in Watched");
 
-            var WatchedTvShow = new WatchedTvShow
-            {
-                TvShowId = tvShowId,
-                AppUserId = user.Id
-            };
-
-            user.WatchedTvShows.Add(WatchedTvShow);
+            user.WatchedTvShows
+                .Add(GetTvShowToAdd(tvShowId: tvShowId, user: user));
 
             if (await SaveAllAsync()) return Response(
                 statusCode: 200, message: "Tv Show Added Successfully To Watched");
 
             return Response(statusCode: 500,
                 message: "Error while adding tv show to watched");
-
         }
 
-        public bool IsWatchedTvShowExist(int tvShowId, AppUser user)
-        {
-            return user.WatchedTvShows.Any(x => x.TvShowId == tvShowId);
-        }
+        private WatchedTvShow GetTvShowToAdd(int tvShowId, AppUser user) =>
+            new WatchedTvShow
+            {
+                TvShowId = tvShowId,
+                AppUserId = user.Id
+            };
+
+        public bool IsWatchedTvShowExist(int tvShowId, AppUser user) =>
+            user.WatchedTvShows.Any(x => x.TvShowId == tvShowId);
 
         public async Task<ResponseMessage> RemoveTvShowFromWatched(int tvShowId, AppUser user)
         {
@@ -50,10 +49,8 @@ namespace Infrastructure.v1.Repositories
             if (!IsWatchedTvShowExist(tvShowId: tvShowId, user: user)) return Response(
                 statusCode: 401, message: "Tv Show Not Exist in Watched");
 
-            var watchedTvShow = user.WatchedTvShows
-                .FirstOrDefault(x => x.TvShowId == tvShowId);
-
-            user.WatchedTvShows.Remove(watchedTvShow);
+            user.WatchedTvShows.Remove(
+                GetTvShowToRemove(tvShowId: tvShowId, user: user));
 
             if (await SaveAllAsync()) return Response(
                 statusCode: 200, message: "Tv Show Remove From Watched");
@@ -62,10 +59,13 @@ namespace Infrastructure.v1.Repositories
                 message: "Error while removing Tv Show from Watched");
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
+        private WatchedTvShow GetTvShowToRemove(int tvShowId, AppUser user) =>
+            user.WatchedTvShows.FirstOrDefault(x =>
+                x.TvShowId == tvShowId);
+
+        public async Task<bool> SaveAllAsync() =>
+            await _context.SaveChangesAsync() > 0;
+
         private ResponseMessage Response(int statusCode, string message, object data = null)
         {
             var response = new ResponseMessage();
