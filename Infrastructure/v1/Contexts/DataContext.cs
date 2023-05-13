@@ -13,6 +13,7 @@ namespace Infrastructure.v1.Contexts
             : base(options: options)
         {
         }
+        public DbSet<Genre> Genres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

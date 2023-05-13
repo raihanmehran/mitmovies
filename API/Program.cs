@@ -35,7 +35,7 @@ try
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     await context.Database.MigrateAsync();
-    Seed.ReadData(userManager: userManager, roleManager: roleManager);
+    Seed.ReadData(userManager: userManager, roleManager: roleManager, context: context);
 }
 catch (Exception ex)
 {
