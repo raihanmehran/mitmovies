@@ -42,6 +42,26 @@ namespace Infrastructure.v1.Repositories
             return user.WatchedTvShows.Any(x => x.TvShowId == tvShowId);
         }
 
+        public async Task<ResponseMessage> RemoveTvShowFromWatched(int tvShowId, AppUser user)
+        {
+            if (tvShowId <= 0 || user is null) return Response(
+                statusCode: 400, message: "Data Not Provided");
+
+            if (!IsWatchedTvShowExist(tvShowId: tvShowId, user: user)) return Response(
+                statusCode: 401, message: "Tv Show Not Exist in Watched");
+
+            var watchedTvShow = user.WatchedTvShows
+                .FirstOrDefault(x => x.TvShowId == tvShowId);
+
+            user.WatchedTvShows.Remove(watchedTvShow);
+
+            if (await SaveAllAsync()) return Response(
+                statusCode: 200, message: "Tv Show Remove From Watched");
+
+            return Response(statusCode: 500,
+                message: "Error while removing Tv Show from Watched");
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
