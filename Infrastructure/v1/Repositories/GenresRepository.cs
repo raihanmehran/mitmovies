@@ -22,7 +22,7 @@ namespace Infrastructure.v1.Repositories
             if (genreDto is null) return Response(
                 statusCode: 401, message: "Data Not Provided");
 
-            if (await IsGenreExist(genre: genreDto)) return Response(
+            if (await IsGenreExist(genreDto: genreDto)) return Response(
                 statusCode: 400, message: "Genre Already Exist");
 
             var genre = _mapper.Map<Genre>(genreDto);
@@ -35,13 +35,16 @@ namespace Infrastructure.v1.Repositories
                 message: "Error while adding Genre");
         }
 
-        public async Task<bool> IsGenreExist(GenreDto genre)
+        public async Task<bool> IsGenreExist(GenreDto genreDto)
         {
-            var result = await _context.Genres
-                .SingleOrDefaultAsync(x => x.Name == genre.Name);
+            var genre = await GetGenre(genreDto: genreDto);
 
-            return result == null ? false : true;
+            return genre == null ? false : true;
         }
+
+        public async Task<Genre> GetGenre(GenreDto genreDto) =>
+            await _context.Genres.SingleOrDefaultAsync(x =>
+                x.Name == genreDto.Name);
 
         public async Task<bool> SaveAllAsync() =>
             await _context.SaveChangesAsync() > 0;
