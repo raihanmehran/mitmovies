@@ -5,7 +5,8 @@ namespace Application.v1.Interfaces
     public interface IGenresRepository
     {
         Task<bool> SaveAllAsync();
-        Task<ResponseMessage> AddGenre(GenreDto genreDto);
-        Task<bool> IsGenreExist(GenreDto genreDto);
+        Task<ResponseMessage> AddGenreAsync(GenreDto genreDto);
+        Task<ResponseMessage> UpdateGenreAsync(GenreDto genreDto);
+        Task<bool> IsGenreExistAsync(GenreDto genreDto);
     }
 }

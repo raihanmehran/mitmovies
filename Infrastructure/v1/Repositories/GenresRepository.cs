@@ -17,12 +17,12 @@ namespace Infrastructure.v1.Repositories
             _mapper = mapper;
         }
 
-        public async Task<ResponseMessage> AddGenre(GenreDto genreDto)
+        public async Task<ResponseMessage> AddGenreAsync(GenreDto genreDto)
         {
             if (genreDto is null) return Response(
                 statusCode: 401, message: "Data Not Provided");
 
-            if (await IsGenreExist(genreDto: genreDto)) return Response(
+            if (await IsGenreExistAsync(genreDto: genreDto)) return Response(
                 statusCode: 400, message: "Genre Already Exist");
 
             var genre = _mapper.Map<Genre>(genreDto);
@@ -34,17 +34,35 @@ namespace Infrastructure.v1.Repositories
             return Response(statusCode: 500,
                 message: "Error while adding Genre");
         }
-
-        public async Task<bool> IsGenreExist(GenreDto genreDto)
+        public async Task<ResponseMessage> UpdateGenreAsync(GenreDto genreDto)
         {
-            var genre = await GetGenre(genreDto: genreDto);
+            if (genreDto is null) return Response(
+                statusCode: 401, message: "Data Not Provided");
 
-            return genre == null ? false : true;
+            var genre = await GetGenreAsync(genreDto: genreDto);
+
+            if (genre is null) return Response(
+                statusCode: 400, message: "Genre doesn't exist!");
+
+            if (genre.Name == genreDto.Name) return Response(
+                statusCode: 400, message: "Genre state not modified!");
+
+            _mapper.Map(genreDto, genre);
+
+            if (await SaveAllAsync()) return Response(
+                statusCode: 200, message: "Genre Updated Successfully");
+
+            return Response(statusCode: 500,
+                message: "Error while updating Genre");
         }
 
-        public async Task<Genre> GetGenre(GenreDto genreDto) =>
-            await _context.Genres.SingleOrDefaultAsync(x =>
+        public async Task<bool> IsGenreExistAsync(GenreDto genreDto) =>
+            await _context.Genres.AnyAsync(x =>
                 x.Name == genreDto.Name);
+
+        public async Task<Genre> GetGenreAsync(GenreDto genreDto) =>
+            await _context.Genres.SingleOrDefaultAsync(x =>
+                x.Id == genreDto.Id);
 
         public async Task<bool> SaveAllAsync() =>
             await _context.SaveChangesAsync() > 0;

@@ -93,6 +93,7 @@ namespace API.Extensions
 
             services.AddScoped<IGenresRepository, GenresRepository>();
             services.AddScoped<IRequestHandler<AddGenreCommand, ResponseMessage>, AddGenreCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateGenreCommand, ResponseMessage>, UpdateGenreCommandHandler>();
 
             return services;
         }

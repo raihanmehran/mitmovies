@@ -13,7 +13,7 @@ namespace Application.v1.Services.GenreService.Command
         }
         public async Task<ResponseMessage> Handle(AddGenreCommand request, CancellationToken cancellationToken)
         {
-            return await _genresRepository.AddGenre(genreDto: request.Genre);
+            return await _genresRepository.AddGenreAsync(genreDto: request.Genre);
         }
     }
 }
