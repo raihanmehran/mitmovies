@@ -6,6 +6,7 @@ using Application.v1.Services.FavouriteMovieService.Command;
 using Application.v1.Services.FavouritePersonService.Command;
 using Application.v1.Services.FavouriteTvShowService.Command;
 using Application.v1.Services.GenreService.Command;
+using Application.v1.Services.GenreService.Query;
 using Application.v1.Services.MovieService.Query;
 using Application.v1.Services.PersonService.Query;
 using Application.v1.Services.TokenService.Command;
@@ -94,6 +95,7 @@ namespace API.Extensions
             services.AddScoped<IGenresRepository, GenresRepository>();
             services.AddScoped<IRequestHandler<AddGenreCommand, ResponseMessage>, AddGenreCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateGenreCommand, ResponseMessage>, UpdateGenreCommandHandler>();
+            services.AddScoped<IRequestHandler<GetGenreByIdQuery, ResponseMessage>, GetGenreByIdQueryHandler>();
 
             return services;
         }

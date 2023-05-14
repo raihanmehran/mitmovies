@@ -1,5 +1,6 @@
 using Application.v1.DTOs;
 using Application.v1.Services.GenreService.Command;
+using Application.v1.Services.GenreService.Query;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +44,20 @@ namespace API.Controllers.v1
                 });
 
                 if (result.StatusCode == 200) return Ok(result.Message);
+
+                return BadRequest(result.Message);
+            }
+            catch (Exception) { throw; }
+        }
+
+        [HttpGet("{genreId}")]
+        public async Task<ActionResult<ResponseMessage>> GetGenreById(int genreId)
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetGenreByIdQuery { GenreId = genreId });
+
+                if (result.StatusCode == 200) return Ok(result.Data);
 
                 return BadRequest(result.Message);
             }

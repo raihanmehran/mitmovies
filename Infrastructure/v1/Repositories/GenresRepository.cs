@@ -39,7 +39,7 @@ namespace Infrastructure.v1.Repositories
             if (genreDto is null) return Response(
                 statusCode: 401, message: "Data Not Provided");
 
-            var genre = await GetGenreAsync(genreDto: genreDto);
+            var genre = await GetGenreAsync(genreId: genreDto.Id);
 
             if (genre is null) return Response(
                 statusCode: 400, message: "Genre doesn't exist!");
@@ -56,13 +56,27 @@ namespace Infrastructure.v1.Repositories
                 message: "Error while updating Genre");
         }
 
+        public async Task<ResponseMessage> GetGenreByIdAsync(int genreId)
+        {
+            if (genreId <= 0) return Response(
+                statusCode: 401, message: "Data Not Provided");
+
+            var genre = await GetGenreAsync(genreId: genreId);
+
+            if (genre is null) return Response(
+                statusCode: 400, message: "Genre doesn't exist!");
+
+            return Response(statusCode: 200,
+                message: "Genre Found", data: _mapper.Map<GenreDto>(genre));
+        }
+
         public async Task<bool> IsGenreExistAsync(GenreDto genreDto) =>
             await _context.Genres.AnyAsync(x =>
                 x.Name == genreDto.Name);
 
-        public async Task<Genre> GetGenreAsync(GenreDto genreDto) =>
+        public async Task<Genre> GetGenreAsync(int genreId) =>
             await _context.Genres.SingleOrDefaultAsync(x =>
-                x.Id == genreDto.Id);
+                x.Id == genreId);
 
         public async Task<bool> SaveAllAsync() =>
             await _context.SaveChangesAsync() > 0;
