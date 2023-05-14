@@ -70,6 +70,17 @@ namespace Infrastructure.v1.Repositories
                 message: "Genre Found", data: _mapper.Map<GenreDto>(genre));
         }
 
+        public async Task<ResponseMessage> GetGenresAsync()
+        {
+            var genres = await _context.Genres.ToListAsync();
+
+            if (genres is null) return Response(
+                statusCode: 400, message: "No genres were found!");
+
+            return Response(statusCode: 200,
+                message: "Genres Found", data: _mapper.Map<List<GenreDto>>(genres));
+        }
+
         public async Task<bool> IsGenreExistAsync(GenreDto genreDto) =>
             await _context.Genres.AnyAsync(x =>
                 x.Name == genreDto.Name);

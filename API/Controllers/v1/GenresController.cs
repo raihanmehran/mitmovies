@@ -50,6 +50,20 @@ namespace API.Controllers.v1
             catch (Exception) { throw; }
         }
 
+        [HttpGet]
+        public async Task<ActionResult<ResponseMessage>> GetGenres()
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetGenresQuery { });
+
+                if (result.StatusCode == 200) return Ok(result.Data);
+
+                return BadRequest(result.Message);
+            }
+            catch (Exception) { throw; }
+        }
+
         [HttpGet("{genreId}")]
         public async Task<ActionResult<ResponseMessage>> GetGenreById(int genreId)
         {

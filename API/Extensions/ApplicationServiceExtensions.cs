@@ -91,11 +91,13 @@ namespace API.Extensions
 
             services.AddScoped<IWatchedTvShowsRepository, WatchedTvShowsRepository>();
             services.AddScoped<IRequestHandler<AddTvShowToWatchedCommand, ResponseMessage>, AddTvShowToWatchedCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveTvShowFromWatchedCommand, ResponseMessage>, RemoveTvShowFromWatchedCommandHandler>();
 
             services.AddScoped<IGenresRepository, GenresRepository>();
             services.AddScoped<IRequestHandler<AddGenreCommand, ResponseMessage>, AddGenreCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateGenreCommand, ResponseMessage>, UpdateGenreCommandHandler>();
             services.AddScoped<IRequestHandler<GetGenreByIdQuery, ResponseMessage>, GetGenreByIdQueryHandler>();
+            services.AddScoped<IRequestHandler<GetGenresQuery, ResponseMessage>, GetGenresQueryHandler>();
 
             return services;
         }
