@@ -2,7 +2,7 @@ using Application.v1.DTOs;
 using Application.v1.Interfaces;
 using Domain.v1.Entities;
 using Infrastructure.v1.Contexts;
-using Microsoft.EntityFrameworkCore;
+using TMDbLib.Objects.Movies;
 
 namespace Infrastructure.v1.Repositories
 {
@@ -10,8 +10,11 @@ namespace Infrastructure.v1.Repositories
     {
         private readonly DataContext _context;
         private readonly IUserRepository _userRepository;
-        public FavouriteMoviesRepository(DataContext context, IUserRepository userRepository)
+        private readonly IMoviesRepository _moviesRepository;
+        public FavouriteMoviesRepository(DataContext context,
+            IUserRepository userRepository, IMoviesRepository moviesRepository)
         {
+            _moviesRepository = moviesRepository;
             _userRepository = userRepository;
             _context = context;
         }
@@ -66,6 +69,25 @@ namespace Infrastructure.v1.Repositories
         {
             return user.FavouriteMovies.SingleOrDefault(x =>
                 x.MovieId == movieId);
+        }
+
+        public async Task<ResponseMessage> GetFavouriteMoviesAsync(AppUser user)
+        {
+            if (user.FavouriteMovies.Count <= 0) return Response(
+                statusCode: 404, message: "No Favourite Movies Found");
+
+            var movies = new List<Movie>();
+
+            foreach (var favouriteMovie in user.FavouriteMovies)
+            {
+                var result = await _moviesRepository.GetMovieById(
+                    favouriteMovie.MovieId);
+                    
+                if (result.Data is not null) movies.Add(result.Data as Movie);
+            }
+
+            return Response(statusCode: 200, message: "Data Fetched Successfully",
+                data: movies);
         }
 
         public async Task<bool> SaveAllAsync()
