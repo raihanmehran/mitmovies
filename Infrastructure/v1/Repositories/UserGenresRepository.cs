@@ -31,6 +31,7 @@ namespace Infrastructure.v1.Repositories
 
             var selectedGenresStringArray = genres.Split(",".ToArray());
             var selectedGenres = Array.ConvertAll(selectedGenresStringArray, int.Parse);
+            bool changeDetected = false;
 
             foreach (var genreId in selectedGenres)
             {
@@ -41,19 +42,20 @@ namespace Infrastructure.v1.Repositories
                         GenreId = genreId,
                         AppUserId = user.Id
                     });
+                    changeDetected = true;
                 }
             }
 
-            foreach (var genreId in selectedGenres)
+            foreach (var genre in user.UserGenres)
             {
-                if (user.UserGenres.Any(x => x.GenreId != genreId))
+                if (!selectedGenres.Contains(genre.GenreId))
                 {
-                    user.UserGenres.Remove(new UserGenre
-                    {
-                        GenreId = genreId
-                    });
+                    user.UserGenres.Remove(genre);
+                    changeDetected = true;
                 }
             }
+
+            if (!changeDetected) return Response(statusCode: 400, message: "No Changes To Apply");
 
             if (await SaveAllAsync()) return Response(statusCode: 200, message: "Genres Updated");
 
