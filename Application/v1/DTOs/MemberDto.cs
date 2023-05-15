@@ -1,3 +1,5 @@
+using Domain.v1.Entities;
+
 namespace Application.v1.DTOs
 {
     public class MemberDto
@@ -16,5 +18,6 @@ namespace Application.v1.DTOs
         public ICollection<FavouriteTvShowDto> FavouriteTvShows { get; set; }
         public ICollection<WatchedMovieDto> WatchedMovies { get; set; }
         public ICollection<WatchedTvShowDto> WatchedTvShows { get; set; }
+        public ICollection<UserGenreDto> UserGenres { get; set; }
     }
 }

@@ -26,6 +26,8 @@ namespace Infrastructure.v1.Utils
             CreateMap<WatchedTvShow, WatchedTvShowDto>();
             CreateMap<Genre, GenreDto>();
             CreateMap<GenreDto, Genre>();
+            CreateMap<UserGenre, UserGenreDto>();
+            CreateMap<UserGenreDto, UserGenre>();
         }
     }
 }

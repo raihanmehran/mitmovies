@@ -12,6 +12,7 @@ using Application.v1.Services.PersonService.Query;
 using Application.v1.Services.TokenService.Command;
 using Application.v1.Services.TrendingMoviesService.Query;
 using Application.v1.Services.TvShowService.Query;
+using Application.v1.Services.UserGenreService.Command;
 using Application.v1.Services.UserService.Command;
 using Application.v1.Services.UserService.Query;
 using Application.v1.Services.WatchedMovieService.Command;
@@ -98,6 +99,9 @@ namespace API.Extensions
             services.AddScoped<IRequestHandler<UpdateGenreCommand, ResponseMessage>, UpdateGenreCommandHandler>();
             services.AddScoped<IRequestHandler<GetGenreByIdQuery, ResponseMessage>, GetGenreByIdQueryHandler>();
             services.AddScoped<IRequestHandler<GetGenresQuery, ResponseMessage>, GetGenresQueryHandler>();
+
+            services.AddScoped<IUserGenresRepository, UserGenresRepository>();
+            services.AddScoped<IRequestHandler<UpdateUserGenresCommand, ResponseMessage>, UpdateUserGenresCommandHandler>();
 
             return services;
         }

@@ -27,6 +27,7 @@ namespace Infrastructure.v1.Repositories
                 .Include(x => x.FavouriteTvShows)
                 .Include(x => x.WatchedMovies)
                 .Include(x => x.WatchedTvShows)
+                .Include(x => x.UserGenres)
                 .SingleOrDefaultAsync(x => x.Id == userId);
         }
 
@@ -64,6 +65,7 @@ namespace Infrastructure.v1.Repositories
                 .Include(x => x.FavouriteTvShows)
                 .Include(x => x.WatchedMovies)
                 .Include(x => x.WatchedTvShows)
+                .Include(x => x.UserGenres)
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
         private ResponseMessage Response(int statusCode, string message, object data = null)
