@@ -2,14 +2,17 @@ using Application.v1.DTOs;
 using Application.v1.Interfaces;
 using Domain.v1.Entities;
 using Infrastructure.v1.Contexts;
+using TMDbLib.Objects.People;
 
 namespace Infrastructure.v1.Repositories
 {
     public class FavouritePersonRepository : IFavouritePersonRepository
     {
         private readonly DataContext _context;
-        public FavouritePersonRepository(DataContext context)
+        private readonly IPersonRepository _personRepository;
+        public FavouritePersonRepository(DataContext context, IPersonRepository personRepository)
         {
+            this._personRepository = personRepository;
             _context = context;
         }
         public async Task<ResponseMessage> AddPersonToFavouriteAsync(int personId, AppUser user)
@@ -59,6 +62,24 @@ namespace Infrastructure.v1.Repositories
                 message: "Error While Removing Person From Favourites");
         }
 
+        public async Task<ResponseMessage> GetFavouritePeopleAsync(AppUser user)
+        {
+            if(user.FavouritePeople.Count <= 0) return Response(
+                statusCode: 404, message: "No favourite People found");
+            
+            var people = new List<Person>();
+
+            foreach(var favouritePerson in user.FavouritePeople){
+                var result = await _personRepository.GetPersonById(
+                    personId: favouritePerson.PersonId);
+                
+                if(result.Data is not null) people.Add(result.Data as Person);
+            }
+
+            return Response(statusCode: 200, message: "Favourite People Found",
+                data: people);
+        }
+
         private FavouritePerson GetFavouritePerson(int personId, AppUser user)
         {
             return user.FavouritePeople
@@ -78,6 +99,6 @@ namespace Infrastructure.v1.Repositories
             response.Data = data;
 
             return response;
-        }
+        }        
     }
 }

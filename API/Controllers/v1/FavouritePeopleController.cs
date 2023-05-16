@@ -1,6 +1,7 @@
 using API.Extensions;
 using Application.v1.DTOs;
 using Application.v1.Services.FavouritePersonService.Command;
+using Application.v1.Services.FavouritePersonService.Query;
 using Application.v1.Services.UserService.Query;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -61,6 +62,22 @@ namespace API.Controllers.v1
                 return Ok(result.Message);
             }
             catch (Exception) { throw; }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ResponseMessage>> GetFavouritePeople(){
+            try{
+                var user = await _mediator.Send(new GetUserByUserIdQuery{
+                    UserId = User.GetUserId()});
+                
+                var result = await _mediator.Send(new GetFavouritePeopleQuery{
+                    User = user});
+                
+                if(result.StatusCode==200)return Ok(result.Data);
+
+                return BadRequest(result.Message);
+            }
+            catch(Exception){throw;}
         }
     }
 }

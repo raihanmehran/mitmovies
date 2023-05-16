@@ -5,6 +5,7 @@ using Application.v1.Services.AuthService.Command;
 using Application.v1.Services.FavouriteMovieService.Command;
 using Application.v1.Services.FavouriteMovieService.Query;
 using Application.v1.Services.FavouritePersonService.Command;
+using Application.v1.Services.FavouritePersonService.Query;
 using Application.v1.Services.FavouriteTvShowService.Command;
 using Application.v1.Services.FavouriteTvShowService.Query;
 using Application.v1.Services.GenreService.Command;
@@ -85,6 +86,7 @@ namespace API.Extensions
             services.AddScoped<IFavouritePersonRepository, FavouritePersonRepository>();
             services.AddScoped<IRequestHandler<AddPersonToFavouriteCommand, ResponseMessage>, AddPersonToFavouriteCommandHandler>();
             services.AddScoped<IRequestHandler<RemovePersonFromFavouriteCommand, ResponseMessage>, RemovePersonFromFavouriteCommandHandler>();
+            services.AddScoped<IRequestHandler<GetFavouritePeopleQuery, ResponseMessage>, GetFavouritePeopleQueryHandler>();
 
             services.AddScoped<IFavouriteTvShowsRepository, FavouriteTvShowsRepository>();
             services.AddScoped<IRequestHandler<AddTvShowToFavouritesCommand, ResponseMessage>, AddTvShowToFavouritesCommandHandler>();
