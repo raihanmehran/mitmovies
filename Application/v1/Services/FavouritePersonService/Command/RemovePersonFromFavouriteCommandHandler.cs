@@ -13,7 +13,7 @@ namespace Application.v1.Services.FavouritePersonService.Command
         }
         public async Task<ResponseMessage> Handle(RemovePersonFromFavouriteCommand request, CancellationToken cancellationToken)
         {
-            return await _favouritePersonRepository.RemovePersonToFavourite(
+            return await _favouritePersonRepository.RemovePersonToFavouriteAsync(
                 personId: request.PersonId, user: request.User);
         }
     }

@@ -12,7 +12,7 @@ namespace Infrastructure.v1.Repositories
         {
             _context = context;
         }
-        public async Task<ResponseMessage> AddPersonToFavourite(int personId, AppUser user)
+        public async Task<ResponseMessage> AddPersonToFavouriteAsync(int personId, AppUser user)
         {
             if (personId <= 0 || user is null) return Response(
                 statusCode: 400, message: "Data Not Provided");
@@ -41,7 +41,7 @@ namespace Infrastructure.v1.Repositories
                 x.PersonId == personId)) ? true : false;
         }
 
-        public async Task<ResponseMessage> RemovePersonToFavourite(int personId, AppUser user)
+        public async Task<ResponseMessage> RemovePersonToFavouriteAsync(int personId, AppUser user)
         {
             if (personId <= 0 || user is null) return Response(
                 statusCode: 401, message: "Data Not Provided");
