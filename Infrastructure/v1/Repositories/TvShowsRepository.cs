@@ -31,5 +31,15 @@ namespace Infrastructure.v1.Repositories
 
             return result;
         }
+
+        public async Task<ResponseMessage> GetTvShowByIdAsync(int tvShowId)
+        {
+            var result = new ResponseMessage();
+
+            result.Data = await _tmdbContext.client
+                .GetTvShowAsync(id: tvShowId);
+
+            return result;
+        }
     }
 }

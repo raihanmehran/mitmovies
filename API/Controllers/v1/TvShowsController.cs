@@ -46,5 +46,19 @@ namespace API.Controllers.v1
                 throw;
             }
         }
+
+        [HttpGet("{tvShowId}")]
+        public async Task<ActionResult<ResponseMessage>> GetTvShowById(int tvShowId)
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetTvShowByIdQuery { TvShowId = tvShowId });
+
+                if (result.Data == null) return NotFound();
+
+                return Ok(result.Data);
+            }
+            catch (Exception) { throw; }
+        }
     }
 }
