@@ -6,6 +6,7 @@ using Application.v1.Services.FavouriteMovieService.Command;
 using Application.v1.Services.FavouriteMovieService.Query;
 using Application.v1.Services.FavouritePersonService.Command;
 using Application.v1.Services.FavouriteTvShowService.Command;
+using Application.v1.Services.FavouriteTvShowService.Query;
 using Application.v1.Services.GenreService.Command;
 using Application.v1.Services.GenreService.Query;
 using Application.v1.Services.MovieService.Query;
@@ -88,6 +89,7 @@ namespace API.Extensions
             services.AddScoped<IFavouriteTvShowsRepository, FavouriteTvShowsRepository>();
             services.AddScoped<IRequestHandler<AddTvShowToFavouritesCommand, ResponseMessage>, AddTvShowToFavouritesCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveTvShowToFavouritesCommand, ResponseMessage>, RemoveTvShowToFavouritesCommandHandler>();
+            services.AddScoped<IRequestHandler<GetFavouriteTvShowsQuery, ResponseMessage>, GetFavouriteTvShowsQueryHandler>();
 
             services.AddScoped<IWatchedMoviesRepository, WatchedMoviesRepository>();
             services.AddScoped<IRequestHandler<AddMovieToWatchedCommand, ResponseMessage>, AddMovieToWatchedCommandHandler>();

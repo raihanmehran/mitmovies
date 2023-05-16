@@ -2,14 +2,17 @@ using Application.v1.DTOs;
 using Application.v1.Interfaces;
 using Domain.v1.Entities;
 using Infrastructure.v1.Contexts;
+using TMDbLib.Objects.TvShows;
 
 namespace Infrastructure.v1.Repositories
 {
     public class FavouriteTvShowsRepository : IFavouriteTvShowsRepository
     {
         private readonly DataContext _context;
-        public FavouriteTvShowsRepository(DataContext context)
+        private readonly ITvShowsRepository _tvShowsRepository;
+        public FavouriteTvShowsRepository(DataContext context, ITvShowsRepository tvShowsRepository)
         {
+            _tvShowsRepository = tvShowsRepository;
             _context = context;
         }
 
@@ -58,6 +61,25 @@ namespace Infrastructure.v1.Repositories
 
             return Response(statusCode: 500,
                 message: "Error While Removing Tv Show From Favourites");
+        }
+
+        public async Task<ResponseMessage> GetFavouriteTvShowsAsync(AppUser user)
+        {
+            if (user.FavouriteTvShows.Count <= 0) return Response(
+                statusCode: 404, message: "No Favourite Tv Shows Found");
+
+            var tvShows = new List<TvShow>();
+
+            foreach (var favouriteTvShow in user.FavouriteTvShows)
+            {
+                var result = await _tvShowsRepository
+                    .GetTvShowByIdAsync(tvShowId: favouriteTvShow.TvShowId);
+
+                if (result.Data is not null) tvShows.Add(result.Data as TvShow);
+            }
+
+            return Response(statusCode: 200, message: "Data Fetched Successfully",
+                data: tvShows);
         }
 
         private FavouriteTvShow GetFavouriteTvShow(int tvShowId, AppUser user)
