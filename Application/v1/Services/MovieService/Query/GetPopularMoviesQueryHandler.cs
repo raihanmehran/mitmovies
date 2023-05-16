@@ -13,7 +13,7 @@ namespace Application.v1.Services.MovieService.Query
         }
         public async Task<ResponseMessage> Handle(GetPopularMoviesQuery request, CancellationToken cancellationToken)
         {
-            return await _moviesRepository.GetPopularMovies();
+            return await _moviesRepository.GetPopularMoviesAsync();
         }
     }
 }

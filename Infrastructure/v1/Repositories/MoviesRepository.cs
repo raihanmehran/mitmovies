@@ -14,7 +14,7 @@ namespace Infrastructure.v1.Repositories
         {
             _tmdbContext = tmdbContext;
         }
-        public async Task<ResponseMessage> GetMovieById(int movieId)
+        public async Task<ResponseMessage> GetMovieByIdAsync(int movieId)
         {
             ResponseMessage result = new ResponseMessage();
 
@@ -24,7 +24,7 @@ namespace Infrastructure.v1.Repositories
             return result;
         }
 
-        public async Task<ResponseMessage> GetMovieDetailById(int movieId)
+        public async Task<ResponseMessage> GetMovieDetailByIdAsync(int movieId)
         {
             ResponseMessage result = new ResponseMessage();
 
@@ -38,7 +38,7 @@ namespace Infrastructure.v1.Repositories
             return result;
         }
 
-        public async Task<ResponseMessage> GetPopularMovies()
+        public async Task<ResponseMessage> GetPopularMoviesAsync()
         {
             var result = new ResponseMessage();
 
@@ -48,7 +48,7 @@ namespace Infrastructure.v1.Repositories
             return result;
         }
 
-        public async Task<ResponseMessage> GetTopRatedMovies()
+        public async Task<ResponseMessage> GetTopRatedMoviesAsync()
         {
             var result = new ResponseMessage();
 
@@ -58,7 +58,7 @@ namespace Infrastructure.v1.Repositories
             return result;
         }
 
-        public async Task<ResponseMessage> GetUpcomingMovies()
+        public async Task<ResponseMessage> GetUpcomingMoviesAsync()
         {
             ResponseMessage result = new ResponseMessage();
 
@@ -68,7 +68,7 @@ namespace Infrastructure.v1.Repositories
             return result;
         }
 
-        public async Task<ResponseMessage> SearchMovie(string payload)
+        public async Task<ResponseMessage> SearchMovieAsync(string payload)
         {
             ResponseMessage result = new ResponseMessage();
 

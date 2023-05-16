@@ -13,7 +13,7 @@ namespace Application.v1.Services.MovieService.Query
         }
         public async Task<ResponseMessage> Handle(SearchMovieQuery request, CancellationToken cancellationToken)
         {
-            return await _moviesRepository.SearchMovie(payload: request.Payload);
+            return await _moviesRepository.SearchMovieAsync(payload: request.Payload);
         }
     }
 }

@@ -5,11 +5,11 @@ namespace Application.v1.Interfaces
 {
     public interface IMoviesRepository
     {
-        Task<ResponseMessage> GetMovieById(int movieId);
-        Task<ResponseMessage> GetMovieDetailById(int movieId);
-        Task<ResponseMessage> SearchMovie(string payload);
-        Task<ResponseMessage> GetUpcomingMovies();
-        Task<ResponseMessage> GetPopularMovies();
-        Task<ResponseMessage> GetTopRatedMovies();
+        Task<ResponseMessage> GetMovieByIdAsync(int movieId);
+        Task<ResponseMessage> GetMovieDetailByIdAsync(int movieId);
+        Task<ResponseMessage> SearchMovieAsync(string payload);
+        Task<ResponseMessage> GetUpcomingMoviesAsync();
+        Task<ResponseMessage> GetPopularMoviesAsync();
+        Task<ResponseMessage> GetTopRatedMoviesAsync();
     }
 }

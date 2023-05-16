@@ -80,9 +80,9 @@ namespace Infrastructure.v1.Repositories
 
             foreach (var favouriteMovie in user.FavouriteMovies)
             {
-                var result = await _moviesRepository.GetMovieById(
+                var result = await _moviesRepository.GetMovieByIdAsync(
                     favouriteMovie.MovieId);
-                    
+
                 if (result.Data is not null) movies.Add(result.Data as Movie);
             }
 

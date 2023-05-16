@@ -13,7 +13,7 @@ namespace Application.v1.Services.MovieService.Query
         }
         public async Task<ResponseMessage> Handle(GetMovieDetailByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _moviesRepository.GetMovieDetailById(movieId: request.MovieId);
+            return await _moviesRepository.GetMovieDetailByIdAsync(movieId: request.MovieId);
         }
     }
 }

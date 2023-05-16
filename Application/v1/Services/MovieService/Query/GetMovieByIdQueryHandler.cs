@@ -14,7 +14,7 @@ namespace Application.v1.Services.MovieService.Query
 
         public async Task<ResponseMessage> Handle(GetMovieByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _moviesRepository.GetMovieById(movieId: request.MovieId);
+            return await _moviesRepository.GetMovieByIdAsync(movieId: request.MovieId);
         }
     }
 }
