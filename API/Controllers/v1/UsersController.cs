@@ -73,6 +73,7 @@ namespace API.Controllers.v1
             }
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("member/id/{userId}")]
         public async Task<ActionResult<ResponseMessage>> GetMemberById(int userId)
         {
