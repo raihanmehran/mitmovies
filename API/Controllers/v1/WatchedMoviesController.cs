@@ -4,10 +4,12 @@ using Application.v1.Services.UserService.Query;
 using Application.v1.Services.WatchedMovieService.Command;
 using Application.v1.Services.WatchedMovieService.Query;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.v1
 {
+    [Authorize]
     public class WatchedMoviesController : BaseApiController
     {
         private readonly IMediator _mediator;
