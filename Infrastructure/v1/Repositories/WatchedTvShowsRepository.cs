@@ -2,14 +2,17 @@ using Application.v1.DTOs;
 using Application.v1.Interfaces;
 using Domain.v1.Entities;
 using Infrastructure.v1.Contexts;
+using TMDbLib.Objects.TvShows;
 
 namespace Infrastructure.v1.Repositories
 {
     public class WatchedTvShowsRepository : IWatchedTvShowsRepository
     {
         private readonly DataContext _context;
-        public WatchedTvShowsRepository(DataContext context)
+        private readonly ITvShowsRepository _tvShowsRepository;
+        public WatchedTvShowsRepository(DataContext context, ITvShowsRepository tvShowsRepository)
         {
+            _tvShowsRepository = tvShowsRepository;
             _context = context;
         }
 
@@ -57,6 +60,25 @@ namespace Infrastructure.v1.Repositories
 
             return Response(statusCode: 500,
                 message: "Error while removing Tv Show from Watched");
+        }
+
+        public async Task<ResponseMessage> GetWatchedTvShowsAsync(AppUser user)
+        {
+            if (user.WatchedTvShows.Count <= 0) return Response(
+                statusCode: 404, message: "No Watched Movies Found!");
+
+            var tvShows = new List<TvShow>();
+
+            foreach (var watchedTvShow in user.WatchedTvShows)
+            {
+                var result = await _tvShowsRepository.GetTvShowByIdAsync(
+                    tvShowId: watchedTvShow.TvShowId);
+
+                if (result.Data is not null) tvShows.Add(result.Data as TvShow);
+            }
+
+            return Response(statusCode: 200, message: "Data Fetched Successfully",
+                data: tvShows);
         }
 
         private WatchedTvShow GetTvShowToRemove(int tvShowId, AppUser user) =>
