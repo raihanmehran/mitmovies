@@ -19,6 +19,7 @@ using Application.v1.Services.UserGenreService.Command;
 using Application.v1.Services.UserService.Command;
 using Application.v1.Services.UserService.Query;
 using Application.v1.Services.WatchedMovieService.Command;
+using Application.v1.Services.WatchedMovieService.Query;
 using Application.v1.Services.WatchedTvShowService.Command;
 using Domain.v1.Entities;
 using Infrastructure.v1.Contexts;
@@ -96,6 +97,7 @@ namespace API.Extensions
             services.AddScoped<IWatchedMoviesRepository, WatchedMoviesRepository>();
             services.AddScoped<IRequestHandler<AddMovieToWatchedCommand, ResponseMessage>, AddMovieToWatchedCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveMovieFromWatchedCommand, ResponseMessage>, RemoveMovieFromWatchedCommandHandler>();
+            services.AddScoped<IRequestHandler<GetWatchedMoviesQuery, ResponseMessage>, GetWatchedMoviesQueryHandler>();
 
             services.AddScoped<IWatchedTvShowsRepository, WatchedTvShowsRepository>();
             services.AddScoped<IRequestHandler<AddTvShowToWatchedCommand, ResponseMessage>, AddTvShowToWatchedCommandHandler>();

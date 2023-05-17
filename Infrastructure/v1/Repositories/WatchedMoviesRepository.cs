@@ -2,14 +2,17 @@ using Application.v1.DTOs;
 using Application.v1.Interfaces;
 using Domain.v1.Entities;
 using Infrastructure.v1.Contexts;
+using TMDbLib.Objects.Movies;
 
 namespace Infrastructure.v1.Repositories
 {
     public class WatchedMoviesRepository : IWatchedMoviesRepository
     {
         private readonly DataContext _context;
-        public WatchedMoviesRepository(DataContext context)
+        private readonly IMoviesRepository _moviesRepository;
+        public WatchedMoviesRepository(DataContext context, IMoviesRepository moviesRepository)
         {
+            this._moviesRepository = moviesRepository;
             _context = context;
         }
 
@@ -57,6 +60,26 @@ namespace Infrastructure.v1.Repositories
 
             return Response(statusCode: 500,
                 message: "Error While Removing Movie From Watched");
+        }
+
+        public async Task<ResponseMessage> GetWatchedMoviesAsync(AppUser user)
+        {
+            if (user.WatchedMovies.Count <= 0) return Response(
+                statusCode: 404, message: "No Watched Movies Found");
+
+            var movies = new List<Movie>();
+
+            foreach (var watchedMovie in user.WatchedMovies)
+            {
+                var result = await _moviesRepository.GetMovieByIdAsync(
+                    movieId: watchedMovie.MovieId);
+
+                if (result.Data is not null) movies.Add(
+                    result.Data as Movie);
+            }
+
+            return Response(statusCode: 200, message: "Data Fetched Succcessfully",
+                data: movies);
         }
 
         private WatchedMovie GetWatchedMovie(int movieId, AppUser user)
