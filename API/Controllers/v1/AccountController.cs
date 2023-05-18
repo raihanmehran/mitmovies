@@ -1,5 +1,6 @@
 using Application.v1.DTOs;
 using Application.v1.Services.AccountService.Command;
+using Application.v1.Services.AccountService.Query;
 using Application.v1.Services.AuthService.Command;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -52,6 +53,21 @@ namespace API.Controllers.v1
             {
                 throw;
             }
+        }
+
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpGet("users-with-roles")]
+        public async Task<ActionResult<ResponseMessage>> GetUsersWithRoles()
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetUsersWithRoleQuery { });
+
+                if (result.StatusCode == 200) return Ok(result.Data);
+
+                return BadRequest(result.Message);
+            }
+            catch (Exception) { throw; }
         }
     }
 }

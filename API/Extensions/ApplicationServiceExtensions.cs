@@ -1,6 +1,7 @@
 using Application.v1.DTOs;
 using Application.v1.Interfaces;
 using Application.v1.Services.AccountService.Command;
+using Application.v1.Services.AccountService.Query;
 using Application.v1.Services.AuthService.Command;
 using Application.v1.Services.FavouriteMovieService.Command;
 using Application.v1.Services.FavouriteMovieService.Query;
@@ -52,6 +53,7 @@ namespace API.Extensions
 
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IRequestHandler<RegisterUserCommand, ResponseMessage>, RegisterUserCommandHandler>();
+            services.AddScoped<IRequestHandler<GetUsersWithRoleQuery, ResponseMessage>, GetUsersWithRoleQueryHandler>();
 
             services.AddScoped<IMoviesRepository, MoviesRepository>();
             services.AddScoped<IRequestHandler<GetMovieByIdQuery, ResponseMessage>, GetMovieByIdQueryHandler>();

@@ -68,15 +68,6 @@ namespace Infrastructure.v1.Repositories
                 .Include(x => x.UserGenres)
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
-        private ResponseMessage Response(int statusCode, string message, object data = null)
-        {
-            var response = new ResponseMessage();
-            response.StatusCode = statusCode;
-            response.Message = message;
-            response.Data = data;
-
-            return response;
-        }
 
         public async Task<ResponseMessage> GetMemberByUserIdAsync(int userId)
         {
@@ -89,6 +80,16 @@ namespace Infrastructure.v1.Repositories
                 .SingleOrDefaultAsync();
 
             return Response(statusCode: 200, message: "User Found", data: reuslt);
+        }
+
+        private ResponseMessage Response(int statusCode, string message, object data = null)
+        {
+            var response = new ResponseMessage();
+            response.StatusCode = statusCode;
+            response.Message = message;
+            response.Data = data;
+
+            return response;
         }
     }
 }

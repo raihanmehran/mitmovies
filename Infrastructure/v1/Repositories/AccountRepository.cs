@@ -44,7 +44,24 @@ namespace Infrastructure.v1.Repositories
             return await _userManager.Users.AnyAsync(u =>
                 u.UserName == username);
         }
+        public async Task<ResponseMessage> GetUsersWithRoleAsync()
+        {
+            var users = await _userManager.Users
+                .OrderBy(u => u.UserName)
+                .Select(u => new
+                {
+                    u.Id,
+                    Username = u.UserName,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Roles = u.UserRoles.Select(r => r.Role.Name).ToList()
+                }).ToListAsync();
 
+            return (users.Count > 0)
+                ? Response(statusCode: 200,
+                    message: "Data Fetched Successfully", data: users)
+                : Response(statusCode: 404, message: "Users Not Found");
+        }
         private ResponseMessage Response(int statusCode, string message, object data = null)
         {
             var response = new ResponseMessage();
