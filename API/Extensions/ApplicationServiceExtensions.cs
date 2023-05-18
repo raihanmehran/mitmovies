@@ -54,6 +54,7 @@ namespace API.Extensions
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IRequestHandler<RegisterUserCommand, ResponseMessage>, RegisterUserCommandHandler>();
             services.AddScoped<IRequestHandler<GetUsersWithRoleQuery, ResponseMessage>, GetUsersWithRoleQueryHandler>();
+            services.AddScoped<IRequestHandler<EditUserRolesCommand, ResponseMessage>, EditUserRolesCommandHandler>();
 
             services.AddScoped<IMoviesRepository, MoviesRepository>();
             services.AddScoped<IRequestHandler<GetMovieByIdQuery, ResponseMessage>, GetMovieByIdQueryHandler>();

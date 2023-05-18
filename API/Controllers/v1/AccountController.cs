@@ -2,6 +2,7 @@ using Application.v1.DTOs;
 using Application.v1.Services.AccountService.Command;
 using Application.v1.Services.AccountService.Query;
 using Application.v1.Services.AuthService.Command;
+using Application.v1.Services.UserService.Query;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -69,5 +70,24 @@ namespace API.Controllers.v1
             }
             catch (Exception) { throw; }
         }
+
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpPost("edit-roles/{userId}")]
+        public async Task<ActionResult<ResponseMessage>> EditUserRoles(int userId, [FromQuery] string roles)
+        {
+            try
+            {
+                if (userId <= 0) return BadRequest("User Id Cannot be null");
+
+                var user = await _mediator.Send(new GetUserByUserIdQuery { UserId = userId });
+                var result = await _mediator.Send(new EditUserRolesCommand { Roles = roles, User = user });
+
+                if (result.StatusCode == 200) return Ok(result.Data);
+
+                return BadRequest(result.Message);
+            }
+            catch (Exception) { throw; }
+        }
+
     }
 }

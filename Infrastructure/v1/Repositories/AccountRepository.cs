@@ -62,6 +62,34 @@ namespace Infrastructure.v1.Repositories
                     message: "Data Fetched Successfully", data: users)
                 : Response(statusCode: 404, message: "Users Not Found");
         }
+
+        public async Task<ResponseMessage> EditUserRolesAsync(AppUser user, string roles)
+        {
+            if (user == null) return Response(
+                statusCode: 404, message: "User Not Found");
+
+            if (string.IsNullOrEmpty(roles)) return Response(
+                statusCode: 400, message: "You must select at least one role");
+
+            var selectedRoles = roles.Split(",".ToArray());
+            var userRoles = await _userManager.GetRolesAsync(user: user);
+
+            var result = await _userManager.AddToRolesAsync(user: user,
+                roles: selectedRoles.Except(userRoles));
+
+            if (!result.Succeeded) return Response(statusCode: 400,
+                message: "Failed To Add To Roles");
+
+            result = await _userManager.RemoveFromRolesAsync(user: user,
+                roles: userRoles.Except(selectedRoles));
+
+            if (!result.Succeeded) return Response(statusCode: 400,
+                message: "Failed To Remove From Roles");
+
+            return Response(statusCode: 200, message: "User Roles Edited",
+                data: await _userManager.GetRolesAsync(user: user));
+        }
+
         private ResponseMessage Response(int statusCode, string message, object data = null)
         {
             var response = new ResponseMessage();

@@ -1,4 +1,5 @@
 using Application.v1.DTOs;
+using Domain.v1.Entities;
 
 namespace Application.v1.Interfaces
 {
@@ -6,5 +7,6 @@ namespace Application.v1.Interfaces
     {
         Task<ResponseMessage> RegisterUser(RegisterUserDto registerUserDto);
         Task<ResponseMessage> GetUsersWithRoleAsync();
+        Task<ResponseMessage> EditUserRolesAsync(AppUser user, string roles);
     }
 }
