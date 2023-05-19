@@ -24,6 +24,7 @@ using Application.v1.Services.WatchedMovieService.Query;
 using Application.v1.Services.WatchedTvShowService.Command;
 using Application.v1.Services.WatchedTvShowService.Query;
 using Domain.v1.Entities;
+using Domain.v1.Utils;
 using Infrastructure.v1.Contexts;
 using Infrastructure.v1.Repositories;
 using MediatR;
@@ -47,6 +48,7 @@ namespace API.Extensions
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<TmdbContext>();
             services.AddScoped<ITokenService, TokenService>();
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
 
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IRequestHandler<AuthenticateUserCommand, ResponseMessage>, AuthenticateUserCommandHandler>();
