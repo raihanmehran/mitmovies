@@ -9,7 +9,7 @@ namespace Domain.v1.Entities
         public string Url { get; set; }
         public bool IsProfile { get; set; }
         public bool IsCover { get; set; }
-        public int PublicId { get; set; }
+        public string PublicId { get; set; }
         public int AppUserId { get; set; }
         public AppUser User { get; set; }
     }

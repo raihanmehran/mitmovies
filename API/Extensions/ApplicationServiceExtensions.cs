@@ -13,10 +13,12 @@ using Application.v1.Services.GenreService.Command;
 using Application.v1.Services.GenreService.Query;
 using Application.v1.Services.MovieService.Query;
 using Application.v1.Services.PersonService.Query;
+using Application.v1.Services.PhotoService.Command;
 using Application.v1.Services.TokenService.Command;
 using Application.v1.Services.TrendingMoviesService.Query;
 using Application.v1.Services.TvShowService.Query;
 using Application.v1.Services.UserGenreService.Command;
+using Application.v1.Services.UserPhotoService.Command;
 using Application.v1.Services.UserService.Command;
 using Application.v1.Services.UserService.Query;
 using Application.v1.Services.WatchedMovieService.Command;
@@ -48,6 +50,7 @@ namespace API.Extensions
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<TmdbContext>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IPhotoService, PhotoService>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
 
             services.AddScoped<IAuthRepository, AuthRepository>();
@@ -118,6 +121,9 @@ namespace API.Extensions
 
             services.AddScoped<IUserGenresRepository, UserGenresRepository>();
             services.AddScoped<IRequestHandler<UpdateUserGenresCommand, ResponseMessage>, UpdateUserGenresCommandHandler>();
+
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
+            services.AddScoped<IRequestHandler<AddProfilePhotoCommand, ResponseMessage>, AddProfilePhotoCommandHandler>();
 
             return services;
         }
