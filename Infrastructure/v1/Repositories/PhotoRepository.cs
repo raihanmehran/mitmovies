@@ -52,6 +52,30 @@ namespace Infrastructure.v1.Repositories
             return Response(statusCode: 500, message: "Failed to add profile picture");
         }
 
+        public async Task<ResponseMessage> DeletePhotoAsync(AppUser user, int photoId)
+        {
+            if (user.Photos is null) return Response(
+                statusCode: 404, message: "User Not Found!");
+
+            var photo = user.Photos.FirstOrDefault(p => p.Id == photoId);
+
+            if (photo == null && photo.PublicId != null) return Response(
+                statusCode: 404, message: "Photo Not Found!");
+
+            var result = await _photoService.DeletePhotoAsync(
+                publicId: photo.PublicId);
+
+            if (result.Error != null) return Response(statusCode: 400,
+                message: result.Error.Message);
+
+            user.Photos.Remove(photo);
+
+            if (await SaveAllAsync()) return Response(statusCode: 200,
+                message: "Photo removed successfully");
+
+            return Response(statusCode: 500, message: "Failed to remove photo");
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;

@@ -40,6 +40,28 @@ namespace API.Controllers.v1
             catch (Exception) { throw; }
         }
 
+        [HttpPost("remove/{photoId}")]
+        public async Task<ActionResult<ResponseMessage>> DeleteUserPhoto(int photoId)
+        {
+            try
+            {
+                var user = await _mediator.Send(new GetUserByUserIdQuery
+                {
+                    UserId = User.GetUserId()
+                });
+
+                var result = await _mediator.Send(new DeleteUserPhotoCommand
+                {
+                    User = user,
+                    PhotoId = photoId
+                });
+
+                if (result.StatusCode == 200) return Ok(result.Message);
+
+                return BadRequest(result.Message);
+            }
+            catch (Exception) { throw; }
+        }
 
     }
 }

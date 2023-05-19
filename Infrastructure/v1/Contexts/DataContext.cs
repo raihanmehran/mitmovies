@@ -35,7 +35,8 @@ namespace Infrastructure.v1.Contexts
                 .HasMany(u => u.Photos)
                 .WithOne(p => p.User)
                 .HasForeignKey(p => p.AppUserId)
-                .IsRequired(required: false);
+                .IsRequired(required: false)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<AppUser>()
                 .HasMany(u => u.FavouriteMovies)
