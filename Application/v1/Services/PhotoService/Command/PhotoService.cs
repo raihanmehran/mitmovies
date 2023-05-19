@@ -20,7 +20,7 @@ namespace Application.v1.Services.PhotoService.Command
 
             _cloudinary = new Cloudinary(account: account);
         }
-        public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file, string storageFolder)
+        public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file, string photoType)
         {
             var uploadResult = new ImageUploadResult();
 
@@ -31,9 +31,8 @@ namespace Application.v1.Services.PhotoService.Command
                 var uploadParams = new ImageUploadParams
                 {
                     File = new FileDescription(file.FileName, stream),
-                    Transformation = new Transformation().Height(500)
-                        .Width(500).Crop("fill").Gravity("face"),
-                    Folder = storageFolder
+                    Transformation = GetTransformation(photoType: photoType),
+                    Folder = GetStorageFolder(photoType: photoType)
                 };
 
                 uploadResult = await _cloudinary.UploadAsync(parameters: uploadParams);
@@ -47,6 +46,35 @@ namespace Application.v1.Services.PhotoService.Command
             var deleteParams = new DeletionParams(publicId: publicId);
 
             return await _cloudinary.DestroyAsync(parameters: deleteParams);
+        }
+
+        private string GetStorageFolder(string photoType)
+        {
+            var storageFolder = "";
+
+            if (photoType == "Profile") storageFolder = "mitmovies-profile";
+
+            else if (photoType == "Cover") storageFolder = "mitmovies-cover";
+
+            return storageFolder;
+        }
+
+        private Transformation GetTransformation(string photoType)
+        {
+            var transformation = new Transformation();
+
+            if (photoType == "Profile")
+            {
+                transformation.Width(150).Height(150)
+                    .Crop("fill").Gravity("face");
+            }
+            else if (photoType == "Cover")
+            {
+                transformation.Width(820).Height(312)
+                    .Crop("fill");
+            }
+
+            return transformation;
         }
     }
 }

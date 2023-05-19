@@ -25,7 +25,7 @@ namespace Infrastructure.v1.Repositories
                 statusCode: 404, message: "User Not Found!");
 
             var result = await _photoService.AddPhotoAsync(
-                file: file, storageFolder: "mitmovies-profile");
+                file: file, photoType: "Profile");
 
             if (result.Error != null) return Response(
                 statusCode: 400, message: result.Error.Message);
