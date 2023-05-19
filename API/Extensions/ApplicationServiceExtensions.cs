@@ -125,6 +125,7 @@ namespace API.Extensions
             services.AddScoped<IPhotoRepository, PhotoRepository>();
             services.AddScoped<IRequestHandler<AddProfilePhotoCommand, ResponseMessage>, AddProfilePhotoCommandHandler>();
             services.AddScoped<IRequestHandler<DeleteUserPhotoCommand, ResponseMessage>, DeleteUserPhotoCommandHandler>();
+            services.AddScoped<IRequestHandler<AddCoverPhotoCommand, ResponseMessage>, AddCoverPhotoCommandHandler>();
 
             return services;
         }

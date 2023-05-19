@@ -19,6 +19,37 @@ namespace Infrastructure.v1.Repositories
             _context = context;
         }
 
+        public async Task<ResponseMessage> AddCoverPhotoAsync(AppUser user, IFormFile file)
+        {
+            if (user is null) return Response(
+                statusCode: 404, message: "User Not Found!");
+
+            var result = await _photoService.AddPhotoAsync(
+                file: file, photoType: "Cover");
+
+            if (result.Error != null) return Response(
+                statusCode: 400, message: result.Error.Message);
+
+            var newPhoto = new Photo
+            {
+                IsCover = true,
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId
+            };
+
+            if (user.Photos.Count > 0)
+                foreach (var photo in user.Photos.ToList())
+                    if (photo.IsCover) user.Photos.Remove(photo);
+
+            user.Photos.Add(newPhoto);
+
+            if (await SaveAllAsync()) return Response(statusCode: 200,
+                message: "Photo Added Successfully",
+                data: _mapper.Map<PhotoDto>(newPhoto));
+
+            return Response(statusCode: 500, message: "Failed to add cover picture");
+        }
+
         public async Task<ResponseMessage> AddProfilePhotoAsync(AppUser user, IFormFile file)
         {
             if (user is null) return Response(

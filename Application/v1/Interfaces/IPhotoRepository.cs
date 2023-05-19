@@ -7,6 +7,7 @@ namespace Application.v1.Interfaces
     public interface IPhotoRepository
     {
         Task<ResponseMessage> AddProfilePhotoAsync(AppUser user, IFormFile file);
+        Task<ResponseMessage> AddCoverPhotoAsync(AppUser user, IFormFile file);
         Task<ResponseMessage> DeletePhotoAsync(AppUser user, int photoId);
         Task<bool> SaveAllAsync();
     }

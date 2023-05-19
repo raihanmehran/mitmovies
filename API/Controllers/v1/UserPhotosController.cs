@@ -40,6 +40,29 @@ namespace API.Controllers.v1
             catch (Exception) { throw; }
         }
 
+        [HttpPost("cover-photo/add")]
+        public async Task<ActionResult<ResponseMessage>> AddCoverPhoto(IFormFile file)
+        {
+            try
+            {
+                var user = await _mediator.Send(new GetUserByUserIdQuery
+                {
+                    UserId = User.GetUserId()
+                });
+
+                var result = await _mediator.Send(new AddCoverPhotoCommand
+                {
+                    User = user,
+                    Photo = file
+                });
+
+                if (result.StatusCode == 200) return Ok(result.Data);
+
+                return BadRequest(result.Message);
+            }
+            catch (Exception) { throw; }
+        }
+
         [HttpPost("remove/{photoId}")]
         public async Task<ActionResult<ResponseMessage>> DeleteUserPhoto(int photoId)
         {
