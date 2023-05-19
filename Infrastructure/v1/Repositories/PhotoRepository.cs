@@ -38,7 +38,7 @@ namespace Infrastructure.v1.Repositories
             };
 
             if (user.Photos.Count > 0)
-                foreach (var photo in user.Photos)
+                foreach (var photo in user.Photos.ToList())
                 {
                     if (photo.IsProfile) user.Photos.Remove(photo);
                 }
@@ -54,13 +54,16 @@ namespace Infrastructure.v1.Repositories
 
         public async Task<ResponseMessage> DeletePhotoAsync(AppUser user, int photoId)
         {
-            if (user.Photos is null) return Response(
-                statusCode: 404, message: "User Not Found!");
+            if (user.Photos.Count <= 0) return Response(
+                statusCode: 404, message: "No User Photos Found!");
 
             var photo = user.Photos.FirstOrDefault(p => p.Id == photoId);
 
-            if (photo == null && photo.PublicId != null) return Response(
+            if (photo == null) return Response(
                 statusCode: 404, message: "Photo Not Found!");
+
+            if (photo.PublicId == null) return Response(
+                statusCode: 400, message: "Photo Not Found on the Cloud");
 
             var result = await _photoService.DeletePhotoAsync(
                 publicId: photo.PublicId);
