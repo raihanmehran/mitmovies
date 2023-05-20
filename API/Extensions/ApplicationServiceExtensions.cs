@@ -1,3 +1,4 @@
+using API.Utils;
 using Application.v1.DTOs;
 using Application.v1.Interfaces;
 using Application.v1.Services.AccountService.Command;
@@ -53,6 +54,7 @@ namespace API.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            services.AddScoped<LogUserActivity>();
 
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IRequestHandler<AuthenticateUserCommand, ResponseMessage>, AuthenticateUserCommandHandler>();
