@@ -1,5 +1,6 @@
 using Application.v1.DTOs;
 using Application.v1.Interfaces;
+using Application.v1.Utils;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain.v1.Entities;
@@ -82,12 +83,19 @@ namespace Infrastructure.v1.Repositories
             return Response(statusCode: 200, message: "User Found", data: reuslt);
         }
 
-        public async Task<ResponseMessage> GetMembersAsync()
+        public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            return Response(statusCode: 200, message: "Users Found",
-                data: await _context.Users
-                    .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-                    .ToListAsync());
+            // return Response(statusCode: 200, message: "Users Found",
+            //     data: await _context.Users
+            //         .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+            //         .ToListAsync());
+
+            var query = _context.Users
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .AsNoTracking();
+
+            return await PagedList<MemberDto>.CreateAsync(source: query,
+                pageNumber: userParams.PageNumber, pageSize: userParams.PageSize);
         }
 
         private ResponseMessage Response(int statusCode, string message, object data = null)

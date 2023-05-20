@@ -25,6 +25,7 @@ using Application.v1.Services.WatchedMovieService.Command;
 using Application.v1.Services.WatchedMovieService.Query;
 using Application.v1.Services.WatchedTvShowService.Command;
 using Application.v1.Services.WatchedTvShowService.Query;
+using Application.v1.Utils;
 using Domain.v1.Entities;
 using Domain.v1.Utils;
 using Infrastructure.v1.Contexts;
@@ -87,7 +88,7 @@ namespace API.Extensions
             services.AddScoped<IRequestHandler<GetUserByUserIdQuery, AppUser>, GetUserByUserIdQueryHandler>();
             services.AddScoped<IRequestHandler<UpdateUserCommand, ResponseMessage>, UpdateUserCommandHandler>();
             services.AddScoped<IRequestHandler<GetMemberByUserIdQuery, ResponseMessage>, GetMemberByUserIdQueryHandler>();
-            services.AddScoped<IRequestHandler<GetMembersQuery, ResponseMessage>, GetMembersQueryHandler>();
+            services.AddScoped<IRequestHandler<GetMembersQuery, PagedList<MemberDto>>, GetMembersQueryHandler>();
 
             services.AddScoped<IFavouriteMoviesRepository, FavouriteMoviesRepository>();
             services.AddScoped<IRequestHandler<AddMovieToFavouriteCommand, ResponseMessage>, AddMovieToFavouriteCommandHandler>();

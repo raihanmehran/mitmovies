@@ -2,6 +2,7 @@ using API.Extensions;
 using Application.v1.DTOs;
 using Application.v1.Services.UserService.Command;
 using Application.v1.Services.UserService.Query;
+using Application.v1.Utils;
 using Domain.v1.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -90,13 +91,19 @@ namespace API.Controllers.v1
 
         [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("members")]
-        public async Task<ActionResult<ResponseMessage>> GetMembers()
+        public async Task<ActionResult<PagedList<MemberDto>>> GetMembers([FromQuery] UserParams userParams)
         {
             try
             {
-                var result = await _mediator.Send(new GetMembersQuery { });
+                var users = await _mediator.Send(new GetMembersQuery
+                {
+                    UserParams = userParams
+                });
 
-                return Ok(result.Data);
+                Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage,
+                    users.PageSize, users.TotalCount, users.TotalPages));
+
+                return Ok(users);
             }
             catch (Exception) { throw; }
         }

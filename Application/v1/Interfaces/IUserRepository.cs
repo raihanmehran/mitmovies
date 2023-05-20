@@ -1,4 +1,5 @@
 using Application.v1.DTOs;
+using Application.v1.Utils;
 using Domain.v1.Entities;
 
 namespace Application.v1.Interfaces
@@ -10,6 +11,6 @@ namespace Application.v1.Interfaces
         Task<AppUser> GetUserByUserIdAsync(int userId);
         Task<ResponseMessage> UpdateUserAsync(UserUpdateDto userUpdateDto, int userId);
         Task<ResponseMessage> GetMemberByUserIdAsync(int userId);
-        Task<ResponseMessage> GetMembersAsync();
+        Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams);
     }
 }
