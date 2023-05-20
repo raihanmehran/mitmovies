@@ -95,6 +95,8 @@ namespace API.Controllers.v1
         {
             try
             {
+                userParams.CurrentUsername = User.GetUsername();
+
                 var users = await _mediator.Send(new GetMembersQuery
                 {
                     UserParams = userParams

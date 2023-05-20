@@ -85,17 +85,14 @@ namespace Infrastructure.v1.Repositories
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            // return Response(statusCode: 200, message: "Users Found",
-            //     data: await _context.Users
-            //         .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-            //         .ToListAsync());
+            var query = _context.Users.AsQueryable();
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
 
-            var query = _context.Users
-                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-                .AsNoTracking();
-
-            return await PagedList<MemberDto>.CreateAsync(source: query,
-                pageNumber: userParams.PageNumber, pageSize: userParams.PageSize);
+            return await PagedList<MemberDto>.CreateAsync(
+                source: query.AsNoTracking()
+                    .ProjectTo<MemberDto>(_mapper.ConfigurationProvider),
+                pageNumber: userParams.PageNumber,
+                pageSize: userParams.PageSize);
         }
 
         private ResponseMessage Response(int statusCode, string message, object data = null)

@@ -10,6 +10,6 @@ namespace Application.v1.Utils
             get => _pageSize;
             set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
         }
-
+        public string CurrentUsername { get; set; }
     }
 }
