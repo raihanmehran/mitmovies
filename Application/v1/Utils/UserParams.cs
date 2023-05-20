@@ -11,5 +11,6 @@ namespace Application.v1.Utils
             set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
         }
         public string CurrentUsername { get; set; }
+        public string OrderBy { get; set; } = "lastActive";
     }
 }
