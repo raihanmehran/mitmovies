@@ -87,6 +87,7 @@ namespace API.Extensions
             services.AddScoped<IRequestHandler<GetUserByUserIdQuery, AppUser>, GetUserByUserIdQueryHandler>();
             services.AddScoped<IRequestHandler<UpdateUserCommand, ResponseMessage>, UpdateUserCommandHandler>();
             services.AddScoped<IRequestHandler<GetMemberByUserIdQuery, ResponseMessage>, GetMemberByUserIdQueryHandler>();
+            services.AddScoped<IRequestHandler<GetMembersQuery, ResponseMessage>, GetMembersQueryHandler>();
 
             services.AddScoped<IFavouriteMoviesRepository, FavouriteMoviesRepository>();
             services.AddScoped<IRequestHandler<AddMovieToFavouriteCommand, ResponseMessage>, AddMovieToFavouriteCommandHandler>();

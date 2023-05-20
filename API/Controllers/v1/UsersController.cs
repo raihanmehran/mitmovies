@@ -88,5 +88,18 @@ namespace API.Controllers.v1
             catch (Exception) { throw; }
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpGet("members")]
+        public async Task<ActionResult<ResponseMessage>> GetMembers()
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetMembersQuery { });
+
+                return Ok(result.Data);
+            }
+            catch (Exception) { throw; }
+        }
+
     }
 }

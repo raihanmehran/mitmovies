@@ -10,5 +10,6 @@ namespace Application.v1.Interfaces
         Task<AppUser> GetUserByUserIdAsync(int userId);
         Task<ResponseMessage> UpdateUserAsync(UserUpdateDto userUpdateDto, int userId);
         Task<ResponseMessage> GetMemberByUserIdAsync(int userId);
+        Task<ResponseMessage> GetMembersAsync();
     }
 }

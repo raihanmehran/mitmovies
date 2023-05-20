@@ -82,6 +82,14 @@ namespace Infrastructure.v1.Repositories
             return Response(statusCode: 200, message: "User Found", data: reuslt);
         }
 
+        public async Task<ResponseMessage> GetMembersAsync()
+        {
+            return Response(statusCode: 200, message: "Users Found",
+                data: await _context.Users
+                    .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync());
+        }
+
         private ResponseMessage Response(int statusCode, string message, object data = null)
         {
             var response = new ResponseMessage();
