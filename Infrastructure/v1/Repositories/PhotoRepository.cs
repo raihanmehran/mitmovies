@@ -38,8 +38,16 @@ namespace Infrastructure.v1.Repositories
             };
 
             if (user.Photos.Count > 0)
+            {
                 foreach (var photo in user.Photos.ToList())
-                    if (photo.IsCover) user.Photos.Remove(photo);
+                {
+                    if (photo.IsCover)
+                    {
+                        user.Photos.Remove(photo);
+                        await _photoService.DeletePhotoAsync(publicId: photo.PublicId);
+                    }
+                }
+            }
 
             user.Photos.Add(newPhoto);
 
@@ -69,10 +77,16 @@ namespace Infrastructure.v1.Repositories
             };
 
             if (user.Photos.Count > 0)
+            {
                 foreach (var photo in user.Photos.ToList())
                 {
-                    if (photo.IsProfile) user.Photos.Remove(photo);
+                    if (photo.IsProfile)
+                    {
+                        user.Photos.Remove(photo);
+                        await _photoService.DeletePhotoAsync(publicId: photo.PublicId);
+                    }
                 }
+            }
 
             user.Photos.Add(newPhoto);
 

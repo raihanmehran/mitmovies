@@ -65,7 +65,7 @@ namespace Application.v1.Services.PhotoService.Command
 
             if (photoType == "Profile")
             {
-                transformation.Width(150).Height(150)
+                transformation.Width(500).Height(500)
                     .Crop("fill").Gravity("face");
             }
             else if (photoType == "Cover")
