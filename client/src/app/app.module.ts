@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { TextAreaComponent } from './_forms/text-area/text-area.component';
 import { SharedModule } from './_modules/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
 
 @NgModule({
-  declarations: [AppComponent, TextAreaComponent],
+  declarations: [AppComponent, TextAreaComponent, TextInputComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
