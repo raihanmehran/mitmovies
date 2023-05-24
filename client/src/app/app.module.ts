@@ -9,9 +9,10 @@ import { SharedModule } from './_modules/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
 
 @NgModule({
-  declarations: [AppComponent, TextAreaComponent, TextInputComponent],
+  declarations: [AppComponent, TextAreaComponent, TextInputComponent, DatePickerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
