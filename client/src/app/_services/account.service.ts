@@ -10,16 +10,22 @@ import { HttpClient } from '@angular/common/http';
 export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new BehaviorSubject<User | null>(null);
-  currentUser = this.currentUserSource.asObservable();
+  currentUser$ = this.currentUserSource.asObservable();
+  // model: any = {};
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // this.login(model);
+  }
 
   login(model: any) {
     return this.http.post<User>(this.baseUrl + 'account', model).pipe(
       map((response: User) => {
         const user = response;
+        console.log(response);
+
         if (user) {
           this.setCurrentUser(user);
+          console.log(this.currentUser$);
         }
         return user;
       })
