@@ -10,9 +10,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
+import { NavComponent } from './components/base/nav/nav.component';
 
 @NgModule({
-  declarations: [AppComponent, TextAreaComponent, TextInputComponent, DatePickerComponent],
+  declarations: [AppComponent, TextAreaComponent, TextInputComponent, DatePickerComponent, NavComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
