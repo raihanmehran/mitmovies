@@ -12,11 +12,20 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
 import { NavComponent } from './components/base/nav/nav.component';
 import { LoginComponent } from './components/base/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [AppComponent, TextAreaComponent, TextInputComponent, DatePickerComponent, NavComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    TextAreaComponent,
+    TextInputComponent,
+    DatePickerComponent,
+    NavComponent,
+    LoginComponent,
+  ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
