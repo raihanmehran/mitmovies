@@ -30,11 +30,13 @@ export class AppComponent implements OnInit {
 
     this.initializeForm();
 
-    this.accountService.login(this.loginForm.value).subscribe({
-      next: () => {
-        console.log('login success');
-      },
-    });
+    // this.accountService.login(this.loginForm.value).subscribe({
+    //   next: () => {
+    //     console.log('login success');
+    //   },
+    // });
+
+    // this.accountService.logout();
   }
 
   initializeForm() {
