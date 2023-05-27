@@ -13,6 +13,9 @@ import { DatePickerComponent } from './_forms/date-picker/date-picker.component'
 import { NavComponent } from './components/base/nav/nav.component';
 import { LoginComponent } from './components/base/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './components/base/home/home/home.component';
+import { HeaderHomeComponent } from './components/base/home/header-home/header-home.component';
+import { FooterHomeComponent } from './components/base/home/footer-home/footer-home.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DatePickerComponent,
     NavComponent,
     LoginComponent,
+    HomeComponent,
+    HeaderHomeComponent,
+    FooterHomeComponent,
   ],
   imports: [
     BrowserModule,
