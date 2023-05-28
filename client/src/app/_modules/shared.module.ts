@@ -1,19 +1,36 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { AppComponent } from '../app.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ToastrModule } from 'ngx-toastr';
+import { FileUploadModule } from 'ng2-file-upload';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    BsDatepickerModule.forRoot(),
-    FontAwesomeModule,
+    TabsModule.forRoot(),
     ToastrModule.forRoot(),
+    // NgxSpinnerModule.forRoot({
+    //   type: 'ball-clip-rotate-pulse',
+    // }),
+    FileUploadModule,
+    BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
+    TimeagoModule.forRoot(),
+    CarouselModule.forRoot(),
   ],
-  exports: [BsDatepickerModule, FontAwesomeModule, ToastrModule],
-  bootstrap: [AppComponent],
+  exports: [
+    TabsModule,
+    ToastrModule,
+    // NgxSpinnerModule,
+    FileUploadModule,
+    BsDatepickerModule,
+    PaginationModule,
+    TimeagoModule,
+  ],
 })
 export class SharedModule {}
