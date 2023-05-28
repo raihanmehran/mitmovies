@@ -16,6 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/base/home/home/home.component';
 import { HeaderHomeComponent } from './components/base/home/header-home/header-home.component';
 import { FooterHomeComponent } from './components/base/home/footer-home/footer-home.component';
+import { CarouselHomeComponent } from './components/base/home/carousel-home/carousel-home.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { FooterHomeComponent } from './components/base/home/footer-home/footer-h
     HomeComponent,
     HeaderHomeComponent,
     FooterHomeComponent,
+    CarouselHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { FooterHomeComponent } from './components/base/home/footer-home/footer-h
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    CarouselModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
