@@ -1,0 +1,88 @@
+<div class="">
+  <div class="col-12 shadow rounded" id="user-profile">
+    <img src="./assets/pic.jpg" class="cover-photo rounded" alt="cover photo" />
+    <div class="d-flex">
+      <div class="p-2">
+        <img
+          src="./assets/user.png"
+          class="profile-photo rounded-circle"
+          alt="profile photo"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="col-12">
+      <div class="col-12 card mt-2">
+        <div class="col-12 p-2">
+          <!-- TABSET GOES HERE -->
+          <tabset class="member-tabset" #memberTabs>
+            <tab heading="About">
+              <app-card-long></app-card-long>
+              <h4>This is about Tab</h4>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quis
+              tempora voluptate eaque, perferendis dolore officiis magni beatae
+              aspernatur sunt, corporis libero error alias dolorem, nemo autem
+              natus soluta repudiandae!
+              <hr />
+              <h5>Favourite Generes also goes here</h5>
+              <h3>IMPORT & EXPORT CSV</h3>
+            </tab>
+            <tab heading="Favourites">
+              <h4>This is Favorites Tab</h4>
+              <tabset #favoriteTabs>
+                <tab heading="Movies">
+                  <h5>Favorite Movies Goes Here</h5>
+                </tab>
+                <tab heading="Tv Shows">
+                  <h5>Favorite Tv Shows Goes here</h5>
+                </tab>
+                <tab heading="People">
+                  <h5>Favorite People Goes here</h5>
+                </tab>
+              </tabset>
+            </tab>
+            <tab heading="Watched">
+              <h4>This is Watched Tab</h4>
+              <tabset #watchedTabs>
+                <tab heading="Movies">
+                  <h5>Watched Movies Goes Here</h5>
+                </tab>
+                <tab heading="Tv Shows">
+                  <h5>Watched Tv Shows Goes here</h5>
+                </tab>
+              </tabset>
+            </tab>
+            <tab heading="Ratings">
+              <h4>This is Rating's Tab</h4>
+              <tabset #ratingsTabs>
+                <tab heading="Movies">
+                  <h5>Rated Movies Goes Here</h5>
+                </tab>
+                <tab heading="Tv Shows">
+                  <h5>Rated Tv Shows Goes here</h5>
+                </tab>
+              </tabset>
+            </tab>
+            <tab heading="Watch Later">
+              <h4>This is Watch Later Tab</h4>
+              <tabset #watchLaterTabs>
+                <tab heading="Movies">
+                  <h5>Watch Later Movies Goes Here</h5>
+                </tab>
+                <tab heading="Tv Shows">
+                  <h5>Watch Later Shows Goes here</h5>
+                </tab>
+              </tabset>
+              <hr />
+              <h4>
+                Send email to user to remind him that he has to watch a movie or
+                tv series
+              </h4>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

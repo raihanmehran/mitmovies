@@ -30,7 +30,7 @@ export class AuthComponent implements OnInit {
               ) {
                 this.router.navigateByUrl('/admin');
               } else if (user.roles.includes('Member')) {
-                this.router.navigateByUrl('/profile');
+                this.router.navigateByUrl('/user/profile');
               }
               this.model = {};
               this.toastr.success('You are logged in', 'LOGIN SUCCEED');

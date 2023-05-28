@@ -1,0 +1,26 @@
+/* .profile-picture {
+  border-radius: 50%;
+  position: absolute;
+  top: 170px;
+  left: 20px;
+  z-index: 1;
+}
+
+img {
+  object-fit: fill;
+}
+*/
+
+.cover-photo {
+  object-fit: cover;
+  max-height: 250px;
+  width: 100%;
+}
+
+.profile-photo {
+  max-width: 200px;
+  position: absolute;
+  top: 80px;
+  left: 40px;
+  z-index: 1;
+}

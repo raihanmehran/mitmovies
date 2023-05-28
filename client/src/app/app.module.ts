@@ -9,10 +9,14 @@ import { DatePickerComponent } from './_forms/date-picker/date-picker.component'
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { TextAreaComponent } from './_forms/text-area/text-area.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthComponent } from './components/base/user/auth/auth.component';
+import { AuthComponent } from './components/user/auth/auth.component';
 import { NavComponent } from './components/home/nav/nav.component';
 import { HomeComponent } from './components/home/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterHomeComponent } from './components/home/footer-home/footer-home.component';
+import { HeaderHomeComponent } from './components/home/header-home/header-home.component';
+import { ProfileUserComponent } from './components/user/profile-user/profile-user.component';
+import { CardLongComponent } from './_forms/card-long/card-long.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { HttpClientModule } from '@angular/common/http';
     AuthComponent,
     NavComponent,
     HomeComponent,
+    FooterHomeComponent,
+    HeaderHomeComponent,
+    ProfileUserComponent,
+    CardLongComponent,
   ],
   imports: [
     BrowserModule,
