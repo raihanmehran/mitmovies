@@ -17,6 +17,7 @@ import { FooterHomeComponent } from './components/home/footer-home/footer-home.c
 import { HeaderHomeComponent } from './components/home/header-home/header-home.component';
 import { ProfileUserComponent } from './components/user/profile-user/profile-user.component';
 import { CardLongComponent } from './_forms/card-long/card-long.component';
+import { CardShortComponent } from './_forms/card-short/card-short.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CardLongComponent } from './_forms/card-long/card-long.component';
     HeaderHomeComponent,
     ProfileUserComponent,
     CardLongComponent,
+    CardShortComponent,
   ],
   imports: [
     BrowserModule,
