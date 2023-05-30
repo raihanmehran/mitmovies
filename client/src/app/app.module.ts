@@ -18,6 +18,7 @@ import { HeaderHomeComponent } from './components/home/header-home/header-home.c
 import { ProfileUserComponent } from './components/user/profile-user/profile-user.component';
 import { CardLongComponent } from './_forms/card-long/card-long.component';
 import { CardShortComponent } from './_forms/card-short/card-short.component';
+import { EditUserComponent } from './components/user/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { CardShortComponent } from './_forms/card-short/card-short.component';
     ProfileUserComponent,
     CardLongComponent,
     CardShortComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
