@@ -17,17 +17,48 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ml-auto">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="#">Features</a>
-        <a class="nav-link" href="#">Pricing</a>
-        <a class="nav-link disabled">Disabled</a>
+      <ng-container>
+        <ul class="navbar-nav ml-auto">
+          <li>
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li>
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li>
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li *ngIf="!(accountService.currentUser$ | async)">
+            <a
+              class="nav-link btn btn-dark text-white"
+              routerLink="/account/auth"
+              >Log In</a
+            >
+          </li>
+        </ul>
+      </ng-container>
+      <div *ngIf="user">
+        <div class="d-flex justify-content-end">
+          <div class="dropdown" dropdown>
+            <img
+              src="{{ profileUrl || './assets/user.png' }}"
+              class="rounded-circle"
+              alt="user photo"
+            />
+            <a
+              class="dropdown-toggle text-light text-decoration-none ms-1"
+              dropdownToggle
+              ><span class="fw-bold"
+                >{{ user.firstName }} {{ user.lastName }}</span
+              ></a
+            >
+            <div class="dropdown-menu mt-3" *dropdownMenu>
+              <a class="dropdown-item" routerLink="/user/edit">Edit Profile</a>
+              <a (click)="logout()" class="dropdown-item">Logout</a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="d-flex">
-      <button class="btn btn-dark" (click)="navigate('/account/auth')">
-        Log In
-      </button>
     </div>
   </div>
 </nav>

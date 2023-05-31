@@ -19,6 +19,7 @@ import { ProfileUserComponent } from './components/user/profile-user/profile-use
 import { CardLongComponent } from './_forms/card-long/card-long.component';
 import { CardShortComponent } from './_forms/card-short/card-short.component';
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { EditUserComponent } from './components/user/edit-user/edit-user.compone
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
+    BsDropdownModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
