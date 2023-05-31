@@ -24,3 +24,10 @@ img {
   left: 40px;
   z-index: 1;
 }
+
+.user-details {
+  position: absolute;
+  top: 150px;
+  left: 300px;
+  color: white;
+}
