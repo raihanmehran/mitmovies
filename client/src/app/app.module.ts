@@ -20,6 +20,7 @@ import { CardLongComponent } from './_forms/card-long/card-long.component';
 import { CardShortComponent } from './_forms/card-short/card-short.component';
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { PopularMoviesComponent } from './components/movies/popular-movies/popular-movies.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     CardLongComponent,
     CardShortComponent,
     EditUserComponent,
+    PopularMoviesComponent,
   ],
   imports: [
     BrowserModule,
