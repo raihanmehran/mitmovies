@@ -1,0 +1,25 @@
+<div class="contianer">
+  <div class="p-2">
+    <h4>TRENDING</h4>
+    <tabset type="pills">
+      <tab heading="Today" class="m-2">
+        <div class="col">
+          <div class="row" *ngIf="movies">
+            <div class="col" *ngFor="let movie of movies">
+              <app-card-short [movie]="movie"></app-card-short>
+            </div>
+          </div>
+        </div>
+      </tab>
+      <tab heading="This Week" class="m-2">
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <app-card-short></app-card-short>
+            </div>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,8 +21,11 @@ import { CardShortComponent } from './_forms/card-short/card-short.component';
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PopularMoviesComponent } from './components/movies/popular-movies/popular-movies.component';
+import { TrendingMoviesComponent } from './components/home/trending-movies/trending-movies.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
+  schemas: [NO_ERRORS_SCHEMA],
   declarations: [
     AppComponent,
     DatePickerComponent,
@@ -38,8 +41,10 @@ import { PopularMoviesComponent } from './components/movies/popular-movies/popul
     CardShortComponent,
     EditUserComponent,
     PopularMoviesComponent,
+    TrendingMoviesComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
