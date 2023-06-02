@@ -22,21 +22,25 @@ export class AuthComponent implements OnInit {
   login() {
     this.accountService.login(this.model).subscribe({
       next: (user) => {
-        this.accountService.currentUser$.subscribe({
-          next: (user) => {
-            if (user) {
-              if (
-                user.roles.includes('Admin' || user.roles.includes('Moderator'))
-              ) {
-                this.router.navigateByUrl('/admin');
-              } else if (user.roles.includes('Member')) {
-                this.router.navigateByUrl('/user/profile');
+        if (user) {
+          this.accountService.currentUser$.subscribe({
+            next: (user) => {
+              if (user) {
+                if (
+                  user.roles.includes(
+                    'Admin' || user.roles.includes('Moderator')
+                  )
+                ) {
+                  this.router.navigateByUrl('/admin');
+                } else if (user.roles.includes('Member')) {
+                  this.router.navigateByUrl('/user/profile');
+                }
+                this.toastr.success('You are logged in', 'LOGIN SUCCEED');
+                this.model = {};
               }
-              this.model = {};
-              this.toastr.success('You are logged in', 'LOGIN SUCCEED');
-            }
-          },
-        });
+            },
+          });
+        }
       },
       error: (error) => this.toastr.error(error.error, 'LOGIN NOT SUCCEED'),
     });

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 
@@ -13,7 +14,11 @@ export class NavComponent implements OnInit {
   profileUrl: string = '';
   coverUrl: string = '';
 
-  constructor(public accountService: AccountService, private router: Router) {}
+  constructor(
+    public accountService: AccountService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getUser();
@@ -39,6 +44,8 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.accountService.logout();
+    this.user = undefined;
     this.router.navigateByUrl('/home');
+    this.toastr.warning('You are logged out', 'LOGGED OUT');
   }
 }

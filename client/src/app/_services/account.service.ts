@@ -18,11 +18,8 @@ export class AccountService {
     return this.http.post<User>(this.baseUrl + 'account', model).pipe(
       map((response: User) => {
         const user = response;
-        console.log(response);
-
         if (user) {
           this.setCurrentUser(user);
-          console.log(this.currentUser$);
         }
         return user;
       })

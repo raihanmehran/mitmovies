@@ -13,7 +13,9 @@ import { TimeagoModule } from 'ngx-timeago';
   imports: [
     CommonModule,
     TabsModule.forRoot(),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+    }),
     // NgxSpinnerModule.forRoot({
     //   type: 'ball-clip-rotate-pulse',
     // }),
