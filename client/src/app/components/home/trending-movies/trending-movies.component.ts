@@ -8,21 +8,32 @@ import { TrendingMoviesService } from 'src/app/_services/trending-movies.service
   styleUrls: ['./trending-movies.component.css'],
 })
 export class TrendingMoviesComponent implements OnInit {
-  movies: Movie[] = [];
+  todayTrendingMovies: Movie[] = [];
+  thisWeekTrendingMovies: Movie[] = [];
 
   constructor(public trendingMoviesService: TrendingMoviesService) {}
 
   ngOnInit(): void {
     this.getTodayTrendingMovies();
+
     this.trendingMoviesService.todayTrendingMovies$.subscribe({
       next: (movies) => {
-        if (movies) this.movies = movies;
-        console.log(this.movies);
+        if (movies) this.todayTrendingMovies = movies;
+      },
+    });
+
+    this.trendingMoviesService.thisWeekTrendingMovies$.subscribe({
+      next: (movies) => {
+        if (movies) this.thisWeekTrendingMovies = movies;
       },
     });
   }
 
   getTodayTrendingMovies() {
     this.trendingMoviesService.getTodayTrendingMovies();
+  }
+
+  getThisWeekTrendingMovies() {
+    this.trendingMoviesService.getThisWeekTrendingMovies();
   }
 }

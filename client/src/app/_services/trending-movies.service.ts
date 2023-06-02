@@ -11,19 +11,36 @@ export class TrendingMoviesService {
   baseUrl = environment.apiUrl;
 
   private todayTrendingMoviesSource = new BehaviorSubject<Movie[] | null>(null);
-  public todayTrendingMovies$ = this.todayTrendingMoviesSource.asObservable();
+  todayTrendingMovies$ = this.todayTrendingMoviesSource.asObservable();
+
+  private thisWeekTrendingMoviesSource = new BehaviorSubject<Movie[] | null>(
+    null
+  );
+  thisWeekTrendingMovies$ = this.thisWeekTrendingMoviesSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
   getTodayTrendingMovies() {
-    return this.http
-      .get<any[]>(this.baseUrl + 'trendingmovies/today')
+    this.getTrendingMovies('today');
+  }
+
+  getThisWeekTrendingMovies() {
+    this.getTrendingMovies('week');
+  }
+
+  getTrendingMovies(predicate: string) {
+    this.http
+      .get<any[]>(this.baseUrl + 'trendingmovies/' + predicate)
       .subscribe({
         next: (movies: any) => {
           console.log(movies.results);
-          if (movies)
-            this.todayTrendingMoviesSource.next(movies.results as Movie[]);
-          return movies;
+          if (movies) {
+            if (predicate === 'today') {
+              this.todayTrendingMoviesSource.next(movies.results as Movie[]);
+            } else {
+              this.thisWeekTrendingMoviesSource.next(movies.results as Movie[]);
+            }
+          }
         },
         error: (error) => console.log(error.error),
       });
