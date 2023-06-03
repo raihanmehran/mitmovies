@@ -23,9 +23,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PopularMoviesComponent } from './components/movies/popular-movies/popular-movies.component';
 import { TrendingMoviesComponent } from './components/home/trending-movies/trending-movies.component';
 import { CommonModule } from '@angular/common';
+import { HomePopularMoviesComponent } from './components/home/home-popular-movies/home-popular-movies.component';
 
 @NgModule({
-  schemas: [NO_ERRORS_SCHEMA],
   declarations: [
     AppComponent,
     DatePickerComponent,
@@ -40,8 +40,9 @@ import { CommonModule } from '@angular/common';
     CardLongComponent,
     CardShortComponent,
     EditUserComponent,
-    PopularMoviesComponent,
     TrendingMoviesComponent,
+    PopularMoviesComponent,
+    HomePopularMoviesComponent,
   ],
   imports: [
     CommonModule,

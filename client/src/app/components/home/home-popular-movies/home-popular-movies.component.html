@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="p-2">
+        <h4>What's Popular</h4>
+        <tabset type="pills">
+            <tab heading="Today" class="m-2">
+                <div class="scrollable-container">
+                    <div class="scrollable-row" *ngIf="popularMovies">
+                        <div class="col" *ngFor="let movie of popularMovies">
+                            <app-card-short [movie]="movie"></app-card-short>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <!--<tab heading="This Week" class="m-2">
+                 <div class="scrollable-container">
+                    <div class="scrollable-row" *ngIf="thisWeekTrendingMovies">
+                        <div class="col" *ngFor="let movie of thisWeekTrendingMovies">
+                            <app-card-short [movie]="movie"></app-card-short>
+                        </div>
+                    </div>
+                </div> 
+            </tab>-->
+        </tabset>
+    </div>
+</div>

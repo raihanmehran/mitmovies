@@ -33,7 +33,6 @@ export class TrendingMoviesService {
       .get<any[]>(this.baseUrl + 'trendingmovies/' + predicate)
       .subscribe({
         next: (movies: any) => {
-          console.log(movies.results);
           if (movies) {
             if (predicate === 'today') {
               this.todayTrendingMoviesSource.next(movies.results as Movie[]);
