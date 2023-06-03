@@ -1,0 +1,12 @@
+.scrollable-container {
+  overflow-x: auto;
+}
+
+.scrollable-row {
+  display: inline-flex;
+}
+
+.col {
+  flex: 0 0 auto;
+  margin-right: 10px; /* Adjust as needed */
+}
