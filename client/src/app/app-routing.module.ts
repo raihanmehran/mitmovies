@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './components/user/auth/auth.component';
 import { HomeComponent } from './components/home/home/home.component';
 import { ProfileUserComponent } from './components/user/profile-user/profile-user.component';
+import { MovieDetailComponent } from './components/movies/movie-detail/movie-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: 'user/profile',
         component: ProfileUserComponent,
+      },
+      {
+        path: 'movies/:movieid',
+        component: MovieDetailComponent,
       },
     ],
   },

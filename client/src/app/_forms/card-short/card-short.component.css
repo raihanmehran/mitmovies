@@ -1,0 +1,12 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.title {
+  color: black;
+}
+
+.title:hover {
+  color: rgb(0, 162, 255);
+}

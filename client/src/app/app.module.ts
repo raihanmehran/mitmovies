@@ -1,4 +1,4 @@
-import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,11 +19,11 @@ import { ProfileUserComponent } from './components/user/profile-user/profile-use
 import { CardLongComponent } from './_forms/card-long/card-long.component';
 import { CardShortComponent } from './_forms/card-short/card-short.component';
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PopularMoviesComponent } from './components/movies/popular-movies/popular-movies.component';
 import { TrendingMoviesComponent } from './components/home/trending-movies/trending-movies.component';
 import { CommonModule } from '@angular/common';
 import { HomePopularMoviesComponent } from './components/home/home-popular-movies/home-popular-movies.component';
+import { MovieDetailComponent } from './components/movies/movie-detail/movie-detail.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import { HomePopularMoviesComponent } from './components/home/home-popular-movie
     TrendingMoviesComponent,
     PopularMoviesComponent,
     HomePopularMoviesComponent,
+    MovieDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -53,7 +54,6 @@ import { HomePopularMoviesComponent } from './components/home/home-popular-movie
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
-    BsDropdownModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
