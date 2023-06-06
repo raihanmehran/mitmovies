@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:5130/api/',
   imageUrl: 'https://image.tmdb.org/t/p/w500',
+  videoUrl: 'https://www.youtube.com/watch?v=',
 };
 
 /*

@@ -32,7 +32,13 @@ namespace Infrastructure.v1.Repositories
                 .GetMovieAsync(movieId: movieId, MovieMethods.Credits
                 | MovieMethods.Videos
                 | MovieMethods.Reviews
+                | MovieMethods.Images
+                | MovieMethods.Videos
+                | MovieMethods.Keywords
+                | MovieMethods.Lists
                 | MovieMethods.WatchProviders
+                | MovieMethods.Recommendations
+                | MovieMethods.Changes
                 | MovieMethods.Similar);
 
             return result;

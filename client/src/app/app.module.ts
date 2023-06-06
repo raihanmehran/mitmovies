@@ -23,7 +23,9 @@ import { PopularMoviesComponent } from './components/movies/popular-movies/popul
 import { TrendingMoviesComponent } from './components/home/trending-movies/trending-movies.component';
 import { CommonModule } from '@angular/common';
 import { HomePopularMoviesComponent } from './components/home/home-popular-movies/home-popular-movies.component';
-import { MovieDetailComponent } from './components/movies/movie-detail/movie-detail.component';
+import { MovieDetailComponent } from './components/movies/movie-detail/movie-detail/movie-detail.component';
+import { MediaMovieDetailComponent } from './components/movies/movie-detail/media-movie-detail/media-movie-detail.component';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { MovieDetailComponent } from './components/movies/movie-detail/movie-det
     PopularMoviesComponent,
     HomePopularMoviesComponent,
     MovieDetailComponent,
+    MediaMovieDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +57,7 @@ import { MovieDetailComponent } from './components/movies/movie-detail/movie-det
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
+    YouTubePlayerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

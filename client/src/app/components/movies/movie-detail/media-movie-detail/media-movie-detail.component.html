@@ -1,0 +1,53 @@
+<div class="container-fluid" *ngIf="videos">
+    <div class="p-2">
+        <h4>Media</h4>
+        <tabset>
+            <tab>
+                <ng-template tabHeading>
+                    <h4>
+                        <span class="badge bg-dark">Videos
+                            <span class="text-muted"></span>
+                        </span>
+                    </h4>
+                </ng-template>
+                <div class="media-tab-body">
+                    <div class="scrollable-container">
+                        <div class="scrollable-row" *ngIf="videos">
+                            <div class="col" *ngFor="let video of videos">
+                                <div>
+                                    <div class="card m-0 p-0 rounded">
+                                        <youtube-player videoId="{{video.key}}" suggestedQuality="highres" [width]="500"
+                                            [height]="255">
+                                        </youtube-player>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <tab>
+                <ng-template tabHeading>
+                    <h4>
+                        <span class="badge bg-dark">Backdrops</span>
+                    </h4>
+                </ng-template>
+                <div class="media-tab-body">
+                    <div class="scrollable-container">
+                        <div class="scrollable-row" *ngIf="images">
+                            <div class="col" *ngFor="let image of images.backdrops">
+                                <div class="card m-0 p-0 rounded">
+                                    <img src="{{imageUrl}}{{image.filePath}}" alt="{{image.aspectRatio}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 my-2">
+                            <a class="h4" routerLink="casts" routerLinkActive="active">View All Images</a>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</div>
+
