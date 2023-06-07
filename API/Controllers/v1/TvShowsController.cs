@@ -60,5 +60,19 @@ namespace API.Controllers.v1
             }
             catch (Exception) { throw; }
         }
+
+        [HttpGet("trending/{timeWindow}")]
+        public async Task<ActionResult<ResponseMessage>> GetTrendingTvShows(string timeWindow)
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetTrendingTvShowsQuery { TimeWindow = timeWindow });
+
+                if (result.Data != null) return Ok(result.Data);
+
+                return NotFound();
+            }
+            catch (Exception) { throw; }
+        }
     }
 }

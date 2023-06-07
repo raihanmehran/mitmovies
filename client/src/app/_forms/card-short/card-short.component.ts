@@ -10,4 +10,9 @@ import { environment } from 'src/environments/environment';
 export class CardShortComponent {
   @Input() movie: Movie | undefined;
   imageUrl = environment.imageUrl;
+
+  getPopularity(avgVote: number) {
+    if (avgVote) return Math.floor((avgVote / 10) * 100);
+    return 0;
+  }
 }

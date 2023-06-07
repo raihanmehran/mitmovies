@@ -4,12 +4,12 @@
       <img src="{{imageUrl}}{{movie.posterPath}}" class="" alt="" />
       <div class="position-absolute top-100 start-50 translate-middle">
         <div class="card shadow rounded-pill bg-dark text-white fw-bold p-1 border border-3 bor">
-          {{movie.popularity}}%
+          {{getPopularity(movie.voteAverage)}}%
         </div>
       </div>
       <div class="card-header">
         <p class="fw-bold fs-6 title">{{movie.title}}</p>
-        <p class="text-secondary">{{movie.releaseDate || 'DD/MMM/YYYY'}}</p>
+        <p class="text-secondary">{{movie.releaseDate | date: 'MMM dd, YYYY'}}</p>
       </div>
     </div>
   </div>
