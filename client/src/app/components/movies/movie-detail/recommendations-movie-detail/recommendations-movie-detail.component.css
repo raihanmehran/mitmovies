@@ -1,18 +1,11 @@
 .scrollable-container {
   overflow-x: auto;
-  max-height: 400px;
+  overflow-y: hidden;
+  max-height: 300px;
 }
 
 .scrollable-row {
   display: inline-flex;
-}
-
-a {
-  color: black;
-  text-decoration: none;
-}
-a:hover {
-  color: rgb(12, 136, 245);
 }
 
 .scrollable-container::-webkit-scrollbar {
@@ -27,4 +20,12 @@ a:hover {
 
 .scrollable-container::-webkit-scrollbar-thumb:hover {
   background-color: #555;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(12, 136, 245);
 }

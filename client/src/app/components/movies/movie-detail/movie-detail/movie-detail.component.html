@@ -179,6 +179,9 @@
             <hr />
             <!-- Media Section -->
             <app-media-movie-detail [videos]="movie.videos['results']" [images]="movie.images"></app-media-movie-detail>
+            <!-- Recommendations -->
+            <app-recommendations-movie-detail
+                [recommendations]="movie.recommendations['results']"></app-recommendations-movie-detail>
         </div>
         <div class="col-md-4">Social Media</div>
     </div>

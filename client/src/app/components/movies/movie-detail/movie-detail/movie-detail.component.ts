@@ -14,21 +14,27 @@ export class MovieDetailComponent implements OnInit {
   movie: any;
   imageUrl = environment.imageUrl;
   videoUrl = environment.videoUrl;
+  movieId: string = '';
 
   constructor(
     private moviesService: MoviesService,
     private route: ActivatedRoute,
     private toastr: ToastrService
   ) {}
+  
   ngOnInit(): void {
-    this.getMovie();
+    this.route.params.subscribe((params) => {
+      this.movieId = params['movieid'];
+      this.getMovie();
+    });
   }
 
   getMovie() {
-    const movieId = this.route.snapshot.paramMap.get('movieid');
-    if (!movieId) return;
+    // const movieId = this.route.snapshot.paramMap.get('movieid');
+
+    if (!this.movieId) return;
     this.moviesService
-      .getMovie(movieId)
+      .getMovie(this.movieId)
       .pipe(take(1))
       .subscribe({
         next: (movie) => {
@@ -38,7 +44,7 @@ export class MovieDetailComponent implements OnInit {
             this.movie = movie;
           } else {
             this.toastr.error(
-              'Movie with id ' + movieId + ' not found',
+              'Movie with id ' + this.movieId + ' not found',
               'NOT FOUND'
             );
           }

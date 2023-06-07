@@ -10,17 +10,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'account/auth', component: AuthComponent },
   {
-    path: '',
-    children: [
-      {
-        path: 'user/profile',
-        component: ProfileUserComponent,
-      },
-      {
-        path: 'movies/:movieid',
-        component: MovieDetailComponent,
-      },
-    ],
+    path: 'movies/:movieid',
+    component: MovieDetailComponent,
   },
 ];
 

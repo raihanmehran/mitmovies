@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="p-2">
+        <h4>Recommendations</h4>
+        <div class="media-tab-body">
+            <div class="scrollable-container">
+                <div class="scrollable-row" *ngIf="recommendations">
+                    <div class="col" *ngFor="let recommendation of recommendations">
+                        <a routerLink="/{{getRouterLink(recommendation.mediaType, recommendation.id)}}"
+                            routerLinkActive="active">
+                            <div class="card m-2 border-0" *ngIf="recommendation.backdropPath">
+                                <img src="{{imageUrl}}{{recommendation.backdropPath}}" class="rounded-3" width="350px"
+                                    alt="">
+
+                                <div class="d-inline">
+                                    <div class="float-start">
+                                        <h5>{{recommendation.title}}</h5>
+                                    </div>
+                                    <div class="float-end fw-bold text-muted">
+                                        {{getPopularity(recommendation.voteAverage)}}%</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="m-3" *ngIf="!recommendations">
+                <h4 class="text-muted">No Recommendations Found</h4>
+            </div>
+        </div>
+    </div>
+</div>

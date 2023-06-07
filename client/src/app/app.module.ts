@@ -26,6 +26,7 @@ import { HomePopularMoviesComponent } from './components/home/home-popular-movie
 import { MovieDetailComponent } from './components/movies/movie-detail/movie-detail/movie-detail.component';
 import { MediaMovieDetailComponent } from './components/movies/movie-detail/media-movie-detail/media-movie-detail.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { RecommendationsMovieDetailComponent } from './components/movies/movie-detail/recommendations-movie-detail/recommendations-movie-detail.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     HomePopularMoviesComponent,
     MovieDetailComponent,
     MediaMovieDetailComponent,
+    RecommendationsMovieDetailComponent,
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="videos">
+<div class="container-fluid">
     <div class="p-2">
         <h4>Media</h4>
         <tabset>
@@ -12,16 +12,20 @@
                 </ng-template>
                 <div class="media-tab-body">
                     <div class="scrollable-container">
-                        <div class="scrollable-row" *ngIf="videos">
+                        <div class="scrollable-row mb-3" *ngIf="videos">
                             <div class="col" *ngFor="let video of videos">
                                 <div>
                                     <div class="card m-0 p-0 rounded">
-                                        <youtube-player videoId="{{video.key}}" suggestedQuality="highres" [width]="500"
-                                            [height]="255">
+                                        <youtube-player
+                                            videoId="{{video.key}}'?showinfo=0&enablejsapi=1&origin=https://localhost:4200'"
+                                            suggestedQuality="highres" [width]="500" [height]="255">
                                         </youtube-player>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="m-3" *ngIf="!videos">
+                            <h4 class="text-muted">No Videos Found</h4>
                         </div>
                     </div>
                 </div>
@@ -34,15 +38,20 @@
                 </ng-template>
                 <div class="media-tab-body">
                     <div class="scrollable-container">
-                        <div class="scrollable-row" *ngIf="images">
-                            <div class="col" *ngFor="let image of images.backdrops">
-                                <div class="card m-0 p-0 rounded">
-                                    <img src="{{imageUrl}}{{image.filePath}}" alt="{{image.aspectRatio}}">
+                        <div *ngIf="images">
+                            <div class="scrollable-row">
+                                <div class="col" *ngFor="let image of images.backdrops">
+                                    <div class="card m-0 p-0 rounded">
+                                        <img src="{{imageUrl}}{{image.filePath}}" alt="{{image.aspectRatio}}">
+                                    </div>
                                 </div>
                             </div>
+                            <div class="p-2 my-2">
+                                <a class="h4" routerLink="casts" routerLinkActive="active">View All Images</a>
+                            </div>
                         </div>
-                        <div class="p-2 my-2">
-                            <a class="h4" routerLink="casts" routerLinkActive="active">View All Images</a>
+                        <div class="m-3" *ngIf="!images">
+                            <h4 class="text-muted">No Images Found</h4>
                         </div>
                     </div>
                 </div>
@@ -50,4 +59,3 @@
         </tabset>
     </div>
 </div>
-
