@@ -21,7 +21,7 @@ export class MovieDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: ToastrService
   ) {}
-  
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.movieId = params['movieid'];
@@ -60,21 +60,5 @@ export class MovieDetailComponent implements OnInit {
     // const formattedMins = mins < 10 ? `0${mins}` : `${mins}`;
 
     return `${hours}h ${mins}m`;
-  }
-
-  getReviewDate(url: string) {
-    const urlRegex = /https:\/\/\S+\/(\d{4}\/\d{2}\/\d{2})/;
-    const matches = url.match(urlRegex);
-    if (matches && matches.length > 0) return matches[1];
-    return '';
-  }
-
-  getReviewerAvatarUrl(url: string) {
-    if (url !== '')
-      url.startsWith('/https:')
-        ? (url = url.substring(1))
-        : (url = this.imageUrl + url);
-
-    return url;
   }
 }

@@ -27,6 +27,8 @@ import { MovieDetailComponent } from './components/movies/movie-detail/movie-det
 import { MediaMovieDetailComponent } from './components/movies/movie-detail/media-movie-detail/media-movie-detail.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { RecommendationsMovieDetailComponent } from './components/movies/movie-detail/recommendations-movie-detail/recommendations-movie-detail.component';
+import { CastMovieDetailComponent } from './components/movies/movie-detail/cast-movie-detail/cast-movie-detail.component';
+import { ReviewsMovieDetailComponent } from './components/movies/movie-detail/reviews-movie-detail/reviews-movie-detail.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { RecommendationsMovieDetailComponent } from './components/movies/movie-d
     MovieDetailComponent,
     MediaMovieDetailComponent,
     RecommendationsMovieDetailComponent,
+    CastMovieDetailComponent,
+    ReviewsMovieDetailComponent,
   ],
   imports: [
     CommonModule,

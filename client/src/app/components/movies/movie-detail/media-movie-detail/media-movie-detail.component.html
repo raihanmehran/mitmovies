@@ -6,13 +6,13 @@
                 <ng-template tabHeading>
                     <h4>
                         <span class="badge bg-dark">Videos
-                            <span class="text-muted"></span>
+                            <span class="text-muted">{{videos.length}}</span>
                         </span>
                     </h4>
                 </ng-template>
                 <div class="media-tab-body">
                     <div class="scrollable-container">
-                        <div class="scrollable-row mb-3" *ngIf="videos">
+                        <div class="scrollable-row mb-3" *ngIf="videos.length>0">
                             <div class="col" *ngFor="let video of videos">
                                 <div>
                                     <div class="card m-0 p-0 rounded">
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="m-3" *ngIf="!videos">
+                        <div class="m-3" *ngIf="videos.length===0">
                             <h4 class="text-muted">No Videos Found</h4>
                         </div>
                     </div>
@@ -33,12 +33,14 @@
             <tab>
                 <ng-template tabHeading>
                     <h4>
-                        <span class="badge bg-dark">Backdrops</span>
+                        <span class="badge bg-dark">Backdrops
+                            <span class="text-muted">{{images.backdrops.length}}</span>
+                        </span>
                     </h4>
                 </ng-template>
                 <div class="media-tab-body">
                     <div class="scrollable-container">
-                        <div *ngIf="images">
+                        <div *ngIf="images.backdrops.length>0">
                             <div class="scrollable-row">
                                 <div class="col" *ngFor="let image of images.backdrops">
                                     <div class="card m-0 p-0 rounded">
@@ -50,7 +52,7 @@
                                 <a class="h4" routerLink="casts" routerLinkActive="active">View All Images</a>
                             </div>
                         </div>
-                        <div class="m-3" *ngIf="!images">
+                        <div class="m-3" *ngIf="images.backdrops.length===0">
                             <h4 class="text-muted">No Images Found</h4>
                         </div>
                     </div>

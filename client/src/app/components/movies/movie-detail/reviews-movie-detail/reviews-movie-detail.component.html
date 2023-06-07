@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <div class="col-12">
+        <div class="p-2">
+            <a class="reviews" (click)="getRandomReview()" routerLinkActive="active">
+                <h4> Social Reviews
+                    <span class="badge bg-dark text-white">Total Reviews </span>
+                    <span class="text-muted fw-bold"> {{reviews.length}} </span>
+                </h4>
+            </a>
+            <div class="tab-body p-3">
+                <div class="card shadow border-0 rounded">
+                    <div class="row" *ngIf="reviews.length>0">
+                        <div class="col-2 m-2" *ngIf="review.authorDetails">
+                            <img src="{{getReviewerAvatarUrl(review.authorDetails.avatarPath)}}" class="rounded-circle"
+                                style="width: 6rem;height: 6rem;" alt="">
+                        </div>
+                        <div class="col m-3">
+                            <div class="d-flex">
+                                <h5 class="fw-bold">A review by
+                                    <span *ngIf="review.author"> {{review.author}} </span>
+                                    <span *ngIf="!review.author" class="text-muted">Unknown</span>
+                                </h5>
+                                <span *ngIf="review.authorDetails.rating"
+                                    class="badge bg-dark text-white d-flex justify-content-center align-items-center ms-2 fw-bold">
+                                    <i class="fa fa-star me-1"></i>
+                                    {{review.authorDetails.rating}}
+                                </span>
+                            </div>
+                            <p class="text-muted">Written by
+                                <span *ngIf="review.author"> {{review.author}} </span>
+                                <span *ngIf="!review.author" class="text-muted">Unknown</span>
+                                <span *ngIf="getReviewDate(review.content)"> on {{getReviewDate(review.content) |
+                                    date:'MMM dd, YYYY'}}
+                                </span>
+                            </p>
+                            <div class="review-body">
+                                <div class="my-3">
+                                    <div class="col-md-12">
+                                        <div class="scrollable-container">
+                                            <p *ngIf="review.content">
+                                                {{review.content}}
+                                            </p>
+                                            <p *ngIf="!review.content">Review has no content</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-3" *ngIf="reviews.length===0">
+                        <h4 class="text-muted">No Review Found</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="reviews.length>0">
+    <div class="p-2 mt-3">
+        <a class="h4 reviews" style="text-decoration: none;" routerLink="casts" routerLinkActive="active">Read All
+            Reviews</a>
+    </div>
+</div>
