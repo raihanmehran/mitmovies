@@ -5,34 +5,6 @@
             <tab>
                 <ng-template tabHeading>
                     <h4>
-                        <span class="badge bg-dark">Videos
-                            <span class="text-muted">{{videos.length}}</span>
-                        </span>
-                    </h4>
-                </ng-template>
-                <div class="media-tab-body">
-                    <div class="scrollable-container">
-                        <div class="scrollable-row mb-3" *ngIf="videos.length>0">
-                            <div class="col" *ngFor="let video of videos">
-                                <div>
-                                    <div class="card m-0 p-0 rounded">
-                                        <youtube-player
-                                            videoId="{{video.key}}'?showinfo=0&enablejsapi=1&origin=https://localhost:4200'"
-                                            suggestedQuality="highres" [width]="500" [height]="255">
-                                        </youtube-player>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="m-3" *ngIf="videos.length===0">
-                            <h4 class="text-muted">No Videos Found</h4>
-                        </div>
-                    </div>
-                </div>
-            </tab>
-            <tab>
-                <ng-template tabHeading>
-                    <h4>
                         <span class="badge bg-dark">Backdrops
                             <span class="text-muted">{{images.backdrops.length}}</span>
                         </span>
@@ -54,6 +26,34 @@
                         </div>
                         <div class="m-3" *ngIf="images.backdrops.length===0">
                             <h4 class="text-muted">No Images Found</h4>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <tab>
+                <ng-template tabHeading>
+                    <h4>
+                        <span class="badge bg-dark">Videos
+                            <span class="text-muted">{{videos.length}}</span>
+                        </span>
+                    </h4>
+                </ng-template>
+                <div class="media-tab-body">
+                    <div class="scrollable-container">
+                        <div class="scrollable-row mb-3" *ngIf="videos.length>0">
+                            <div class="col" *ngFor="let video of videos">
+                                <div>
+                                    <div class="card m-0 p-0 rounded">
+                                        <youtube-player
+                                            videoId="{{video.key}}'?showinfo=0&enablejsapi=1&origin=https://localhost:4200'"
+                                            suggestedQuality="highres" [width]="500" [height]="255">
+                                        </youtube-player>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-3" *ngIf="videos.length===0">
+                            <h4 class="text-muted">No Videos Found</h4>
                         </div>
                     </div>
                 </div>

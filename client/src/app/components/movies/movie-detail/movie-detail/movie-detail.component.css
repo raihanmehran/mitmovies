@@ -4,7 +4,7 @@
 
 .scrollable-container {
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 100px;
 }
 
@@ -22,29 +22,17 @@
   background-color: #555;
 }
 
-.container-fluid > .p-2 > .scrollable-container {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  max-height: 480px;
-}
-.container-fluid > .p-2 > .scrollable-container > .scrollable-row {
-  display: inline-flex;
-}
-
-.review-body > .my-3 > .col-md-12 > .scrollable-container {
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.reviews {
+.a {
   color: black;
   text-decoration: none;
 }
-.reviews:hover {
+.a:hover {
   color: rgb(12, 136, 245);
 }
 
-.media-tab-body > .scrollable-container > .scrollable-row {
-  max-height: 400px;
-  overflow-x: auto;
+.social-media-a > i {
+  color: black;
+}
+.social-media-a > i:hover {
+  color: rgb(12, 136, 245);
 }

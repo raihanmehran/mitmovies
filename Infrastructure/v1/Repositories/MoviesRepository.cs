@@ -39,6 +39,7 @@ namespace Infrastructure.v1.Repositories
                 | MovieMethods.WatchProviders
                 | MovieMethods.Recommendations
                 | MovieMethods.Changes
+                | MovieMethods.ExternalIds
                 | MovieMethods.Similar);
 
             return result;

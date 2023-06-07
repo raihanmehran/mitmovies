@@ -7,6 +7,10 @@ export const environment = {
   apiUrl: 'http://localhost:5130/api/',
   imageUrl: 'https://image.tmdb.org/t/p/w500',
   videoUrl: 'https://www.youtube.com/watch?v=',
+  facebookUrl: 'https://www.facebook.com/',
+  instagramUrl: 'https://www.instagram.com/',
+  imdbUrl: 'https://www.imdb.com/title/',
+  twitterUrl: 'https://twitter.com/',
 };
 
 /*
