@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-reviews-movie-detail',
-  templateUrl: './reviews-movie-detail.component.html',
-  styleUrls: ['./reviews-movie-detail.component.css'],
+  selector: 'app-reviews-detail',
+  templateUrl: './reviews-detail.component.html',
+  styleUrls: ['./reviews-detail.component.css'],
 })
-export class ReviewsMovieDetailComponent implements OnInit {
+export class ReviewsDetailComponent implements OnInit {
   @Input() reviews: any;
   imageUrl = environment.imageUrl;
   review: any;
