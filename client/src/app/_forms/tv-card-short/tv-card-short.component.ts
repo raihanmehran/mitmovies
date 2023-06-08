@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { Movie } from 'src/app/_models/movie';
+import { TvShow } from 'src/app/_models/tvshow';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-card-short',
-  templateUrl: './card-short.component.html',
-  styleUrls: ['./card-short.component.css'],
+  selector: 'app-tv-card-short',
+  templateUrl: './tv-card-short.component.html',
+  styleUrls: ['./tv-card-short.component.css'],
 })
-export class CardShortComponent {
-  @Input() movie: Movie | undefined;
+export class TvCardShortComponent {
+  @Input() tvShow: TvShow | undefined;
   imageUrl = environment.imageUrl;
 
   getPopularity(avgVote: number) {

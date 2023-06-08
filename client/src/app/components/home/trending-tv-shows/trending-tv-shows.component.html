@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="p-2">
+        <h4 class="text-white my-4">TRENDING TV SHOWS</h4>
+        <tabset type="pills">
+            <tab heading="Today" (selectTab)="getTodayTrendingTvShows()" class="m-2">
+                <div class="scrollable-container">
+                    <div class="scrollable-row" *ngIf="todayTrendingTvShows">
+                        <div class="col" *ngFor="let tvShow of todayTrendingTvShows">
+                            <app-tv-card-short [tvShow]="tvShow"></app-tv-card-short>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <tab heading="This Week" (selectTab)="getThisWeekTrendingTvShows()" class="m-2">
+                <div class="scrollable-container">
+                    <div class="scrollable-row" *ngIf="thisWeekTrendingTvShows">
+                        <div class="col" *ngFor="let tvShow of thisWeekTrendingTvShows">
+                            <app-tv-card-short [tvShow]="tvShow"></app-tv-card-short>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</div>

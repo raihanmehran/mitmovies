@@ -33,7 +33,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     trigger('slideFromBottom', [
       transition(':enter', [
         style({ transform: 'translateY(40%)', opacity: 0 }),
-        animate('300ms', style({ transform: 'translateY(40px)', opacity: 1 })),
+        animate('400ms', style({ transform: 'translateY(40px)', opacity: 1 })),
       ]),
     ]),
   ],

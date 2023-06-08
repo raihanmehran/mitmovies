@@ -17,7 +17,7 @@ import { FooterHomeComponent } from './components/home/footer-home/footer-home.c
 import { HeaderHomeComponent } from './components/home/header-home/header-home.component';
 import { ProfileUserComponent } from './components/user/profile-user/profile-user.component';
 import { CardLongComponent } from './_forms/card-long/card-long.component';
-import { CardShortComponent } from './_forms/card-short/card-short.component';
+import { MovieCardShortComponent } from './_forms/movie-card-short/movie-card-short.component';
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
 import { PopularMoviesComponent } from './components/movies/popular-movies/popular-movies.component';
 import { TrendingMoviesComponent } from './components/home/trending-movies/trending-movies.component';
@@ -29,6 +29,8 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 import { RecommendationsMovieDetailComponent } from './components/movies/movie-detail/recommendations-movie-detail/recommendations-movie-detail.component';
 import { CastMovieDetailComponent } from './components/movies/movie-detail/cast-movie-detail/cast-movie-detail.component';
 import { ReviewsMovieDetailComponent } from './components/movies/movie-detail/reviews-movie-detail/reviews-movie-detail.component';
+import { TrendingTvShowsComponent } from './components/home/trending-tv-shows/trending-tv-shows.component';
+import { TvCardShortComponent } from './_forms/tv-card-short/tv-card-short.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import { ReviewsMovieDetailComponent } from './components/movies/movie-detail/re
     HeaderHomeComponent,
     ProfileUserComponent,
     CardLongComponent,
-    CardShortComponent,
+    MovieCardShortComponent,
     EditUserComponent,
     TrendingMoviesComponent,
     PopularMoviesComponent,
@@ -53,6 +55,8 @@ import { ReviewsMovieDetailComponent } from './components/movies/movie-detail/re
     RecommendationsMovieDetailComponent,
     CastMovieDetailComponent,
     ReviewsMovieDetailComponent,
+    TrendingTvShowsComponent,
+    TvCardShortComponent,
   ],
   imports: [
     CommonModule,

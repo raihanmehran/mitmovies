@@ -1,12 +1,15 @@
 a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 .title {
-  color: black;
+  color: white;
 }
 
 .title:hover {
   color: rgb(0, 162, 255);
+}
+.bg-darkblue {
+  background-color: rgb(6, 34, 51);
 }

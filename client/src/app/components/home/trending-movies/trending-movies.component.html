@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <div class="p-2">
-    <h4>TRENDING</h4>
+    <h4 class="fw-bold my-4">TRENDING MOVIES</h4>
     <tabset type="pills">
       <tab heading="Today" (selectTab)="getTodayTrendingMovies()" class="m-2">
         <div class="scrollable-container">
           <div class="scrollable-row" *ngIf="todayTrendingMovies">
             <div class="col" *ngFor="let movie of todayTrendingMovies">
-              <app-card-short [movie]="movie"></app-card-short>
+              <app-movie-card-short [movie]="movie"></app-movie-card-short>
             </div>
           </div>
         </div>
@@ -15,7 +15,7 @@
         <div class="scrollable-container">
           <div class="scrollable-row" *ngIf="thisWeekTrendingMovies">
             <div class="col" *ngFor="let movie of thisWeekTrendingMovies">
-              <app-card-short [movie]="movie"></app-card-short>
+              <app-movie-card-short [movie]="movie"></app-movie-card-short>
             </div>
           </div>
         </div>
