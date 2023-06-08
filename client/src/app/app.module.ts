@@ -32,6 +32,7 @@ import { MediaDetailComponent } from './_forms/media-detail/media-detail.compone
 import { ReviewsDetailComponent } from './_forms/reviews-detail/reviews-detail.component';
 import { RecommendationsDetailComponent } from './_forms/recommendations-detail/recommendations-detail.component';
 import { CastDetailComponent } from './_forms/cast-detail/cast-detail.component';
+import { SeasonsTvDetailComponent } from './components/tv/tv-detail/seasons-tv-detail/seasons-tv-detail.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { CastDetailComponent } from './_forms/cast-detail/cast-detail.component'
     ReviewsDetailComponent,
     RecommendationsDetailComponent,
     CastDetailComponent,
+    SeasonsTvDetailComponent,
   ],
   imports: [
     CommonModule,

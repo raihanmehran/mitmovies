@@ -78,7 +78,8 @@
             <div [@slideFromBottom]>
                 <app-cast-detail [credits]="tvShow.credits"></app-cast-detail>
             </div>
-            <hr />
+            <!-- SEASONS -->
+            <app-seasons-tv-detail [seasons]="tvShow.seasons"></app-seasons-tv-detail>
             <!-- SOCIAL REVIEWS -->
             <app-reviews-detail [reviews]="tvShow.reviews['results']"></app-reviews-detail>
             <hr />
