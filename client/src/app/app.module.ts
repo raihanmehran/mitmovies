@@ -24,13 +24,16 @@ import { TrendingMoviesComponent } from './components/home/trending-movies/trend
 import { CommonModule } from '@angular/common';
 import { HomePopularMoviesComponent } from './components/home/home-popular-movies/home-popular-movies.component';
 import { MovieDetailComponent } from './components/movies/movie-detail/movie-detail/movie-detail.component';
-import { MediaMovieDetailComponent } from './components/movies/movie-detail/media-movie-detail/media-movie-detail.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { RecommendationsMovieDetailComponent } from './components/movies/movie-detail/recommendations-movie-detail/recommendations-movie-detail.component';
 import { CastMovieDetailComponent } from './components/movies/movie-detail/cast-movie-detail/cast-movie-detail.component';
 import { ReviewsMovieDetailComponent } from './components/movies/movie-detail/reviews-movie-detail/reviews-movie-detail.component';
 import { TrendingTvShowsComponent } from './components/home/trending-tv-shows/trending-tv-shows.component';
 import { TvCardShortComponent } from './_forms/tv-card-short/tv-card-short.component';
+import { TvDetailComponent } from './components/tv/tv-detail/tv-detail/tv-detail.component';
+import { CastTvDetailComponent } from './components/tv/tv-detail/cast-tv-detail/cast-tv-detail.component';
+import { ReviewsTvDetailComponent } from './components/tv/tv-detail/reviews-tv-detail/reviews-tv-detail.component';
+import { MediaDetailComponent } from './_forms/media-detail/media-detail.component';
 
 @NgModule({
   declarations: [
@@ -51,12 +54,15 @@ import { TvCardShortComponent } from './_forms/tv-card-short/tv-card-short.compo
     PopularMoviesComponent,
     HomePopularMoviesComponent,
     MovieDetailComponent,
-    MediaMovieDetailComponent,
     RecommendationsMovieDetailComponent,
     CastMovieDetailComponent,
     ReviewsMovieDetailComponent,
     TrendingTvShowsComponent,
     TvCardShortComponent,
+    TvDetailComponent,
+    CastTvDetailComponent,
+    ReviewsTvDetailComponent,
+    MediaDetailComponent,
   ],
   imports: [
     CommonModule,

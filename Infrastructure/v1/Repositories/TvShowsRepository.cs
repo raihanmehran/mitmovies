@@ -49,7 +49,21 @@ namespace Infrastructure.v1.Repositories
             var result = new ResponseMessage();
 
             result.Data = await _tmdbContext.client
-                .GetTvShowAsync(id: tvShowId);
+                .GetTvShowAsync(id: tvShowId, TvShowMethods.Credits
+                | TvShowMethods.Images
+                | TvShowMethods.ExternalIds
+                | TvShowMethods.ContentRatings
+                | TvShowMethods.AlternativeTitles
+                | TvShowMethods.Keywords
+                | TvShowMethods.Similar
+                | TvShowMethods.Videos
+                | TvShowMethods.Translations
+                | TvShowMethods.Changes
+                | TvShowMethods.Recommendations
+                | TvShowMethods.Reviews
+                | TvShowMethods.WatchProviders
+                | TvShowMethods.EpisodeGroups
+                | TvShowMethods.CreditsAggregate);
 
             return result;
         }

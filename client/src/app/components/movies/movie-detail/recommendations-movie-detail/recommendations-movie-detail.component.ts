@@ -10,18 +10,30 @@ import { environment } from 'src/environments/environment';
 export class RecommendationsMovieDetailComponent implements OnInit {
   @Input() recommendations: any;
   imageUrl = environment.imageUrl;
+  mediaTypeId: number | undefined;
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setMediaType();
+  }
 
   getPopularity(avgVote: number) {
     if (avgVote) return Math.floor((avgVote / 10) * 100);
     return 0;
   }
 
-  getRouterLink(mediaType: number, id: number) {
-    if (mediaType === 1) return 'movies/' + id;
-    return 'tv/' + id;
+  setMediaType() {
+    if (this.recommendations.length > 0)
+      this.mediaTypeId = this.recommendations.mediaType;
+  }
+
+  getMediaType() {
+    return this.mediaTypeId;
+  }
+
+  getRouterLink() {
+    if (this.mediaTypeId === 1) return 'movies/';
+    return 'tv/';
   }
 }

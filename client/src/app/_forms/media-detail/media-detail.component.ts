@@ -2,12 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 let apiLoaded = false;
+
 @Component({
-  selector: 'app-media-movie-detail',
-  templateUrl: './media-movie-detail.component.html',
-  styleUrls: ['./media-movie-detail.component.css'],
+  selector: 'app-media-detail',
+  templateUrl: './media-detail.component.html',
+  styleUrls: ['./media-detail.component.css'],
 })
-export class MediaMovieDetailComponent implements OnInit {
+export class MediaDetailComponent implements OnInit {
   @Input() videos: any;
   @Input() images: any;
 

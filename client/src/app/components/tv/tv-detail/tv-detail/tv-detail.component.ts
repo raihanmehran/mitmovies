@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { take } from 'rxjs';
-import { MoviesService } from 'src/app/_services/movies.service';
-import { environment } from 'src/environments/environment';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { TvService } from 'src/app/_services/tv.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
+import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-movie-detail',
-  templateUrl: './movie-detail.component.html',
-  styleUrls: ['./movie-detail.component.css'],
+  selector: 'app-tv-detail',
+  templateUrl: './tv-detail.component.html',
+  styleUrls: ['./tv-detail.component.css'],
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -38,65 +38,58 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ]),
   ],
 })
-export class MovieDetailComponent implements OnInit {
-  movie: any;
+export class TvDetailComponent implements OnInit {
+  tvShow: any;
+  tvShowId: string = '';
   imageUrl = environment.imageUrl;
-  videoUrl = environment.videoUrl;
-  movieId: string = '';
   facebookUrl = environment.facebookUrl;
   instagramUrl = environment.instagramUrl;
   imdbUrl = environment.imdbUrl;
   twitterUrl = environment.twitterUrl;
 
   constructor(
-    private moviesService: MoviesService,
+    private tvService: TvService,
     private route: ActivatedRoute,
     private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.movieId = params['movieid'];
-      this.getMovie();
+      this.tvShowId = params['tvshowid'];
+      this.getTvShow();
     });
   }
 
-  getMovie() {
-    // const movieId = this.route.snapshot.paramMap.get('movieid');
-
-    if (!this.movieId) return;
-    this.moviesService
-      .getMovie(this.movieId)
+  getTvShow() {
+    if (!this.tvShowId) return;
+    this.tvService
+      .getTvShow(this.tvShowId)
       .pipe(take(1))
       .subscribe({
-        next: (movie) => {
-          console.log(movie);
-          if (movie) {
-            this.movie = movie;
+        next: (tvShow) => {
+          console.log(tvShow);
+          if (tvShow) {
+            this.tvShow = tvShow;
             this.scrollToTop();
           } else {
             this.toastr.error(
-              'Movie with id ' + this.movieId + ' not found',
-              'NOT FOUND'
+              'Tv Show with id ' + this.tvShowId + ' not found',
+              'TV SHOW NOT FOUND'
             );
-            this.movie = null;
+            this.tvShow = null;
           }
         },
       });
   }
 
-  convertMinutesToTime(minutes: number) {
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-
-    // const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
-    // const formattedMins = mins < 10 ? `0${mins}` : `${mins}`;
-
-    return `${hours}h ${mins}m`;
-  }
-
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  getTvShowType(typeId: number) {
+    if (typeId === 2) return 'Drama';
+    if (typeId === 3) return 'Documentary';
+    return 'TV Series';
   }
 
   getLanguageName(lgCode: string) {
