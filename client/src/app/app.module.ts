@@ -25,14 +25,13 @@ import { CommonModule } from '@angular/common';
 import { HomePopularMoviesComponent } from './components/home/home-popular-movies/home-popular-movies.component';
 import { MovieDetailComponent } from './components/movies/movie-detail/movie-detail/movie-detail.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
-import { CastMovieDetailComponent } from './components/movies/movie-detail/cast-movie-detail/cast-movie-detail.component';
 import { TrendingTvShowsComponent } from './components/home/trending-tv-shows/trending-tv-shows.component';
 import { TvCardShortComponent } from './_forms/tv-card-short/tv-card-short.component';
 import { TvDetailComponent } from './components/tv/tv-detail/tv-detail/tv-detail.component';
-import { CastTvDetailComponent } from './components/tv/tv-detail/cast-tv-detail/cast-tv-detail.component';
 import { MediaDetailComponent } from './_forms/media-detail/media-detail.component';
 import { ReviewsDetailComponent } from './_forms/reviews-detail/reviews-detail.component';
 import { RecommendationsDetailComponent } from './_forms/recommendations-detail/recommendations-detail.component';
+import { CastDetailComponent } from './_forms/cast-detail/cast-detail.component';
 
 @NgModule({
   declarations: [
@@ -53,14 +52,13 @@ import { RecommendationsDetailComponent } from './_forms/recommendations-detail/
     PopularMoviesComponent,
     HomePopularMoviesComponent,
     MovieDetailComponent,
-    CastMovieDetailComponent,
     TrendingTvShowsComponent,
     TvCardShortComponent,
     TvDetailComponent,
-    CastTvDetailComponent,
     MediaDetailComponent,
     ReviewsDetailComponent,
     RecommendationsDetailComponent,
+    CastDetailComponent,
   ],
   imports: [
     CommonModule,
