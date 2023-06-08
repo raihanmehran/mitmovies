@@ -5,15 +5,16 @@
             <div class="scrollable-container">
                 <div class="scrollable-row" *ngIf="recommendations">
                     <div class="col" *ngFor="let recommendation of recommendations">
-                        <a routerLink="/{{getRouterLink()}}/{{recommendation.id}}" routerLinkActive="active">
+                        <a routerLink="/{{getRouterLink(recommendation.mediaType)}}/{{recommendation.id}}"
+                            routerLinkActive="active">
                             <div class="card m-2 border-0" *ngIf="recommendation.backdropPath">
                                 <img src="{{imageUrl}}{{recommendation.backdropPath}}" class="rounded-3" width="350px"
                                     alt="">
 
                                 <div class="d-inline">
                                     <div class="float-start">
-                                        <h5 *ngIf="mediaTypeId === 1">{{recommendation.title}}</h5>
-                                        <h5 *ngIf="mediaTypeId !== 1">{{recommendation.name}}</h5>
+                                        <h5 *ngIf="recommendation.mediaType === 1">{{recommendation.title}}</h5>
+                                        <h5 *ngIf="recommendation.mediaType !== 1">{{recommendation.name}}</h5>
                                     </div>
                                     <div class="float-end fw-bold text-muted">
                                         {{getPopularity(recommendation.voteAverage)}}%</div>

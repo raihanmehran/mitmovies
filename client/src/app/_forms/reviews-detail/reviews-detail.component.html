@@ -10,9 +10,13 @@
             <div class="tab-body p-3">
                 <div class="card shadow border-0 rounded">
                     <div class="row" *ngIf="reviews.length>0">
-                        <div class="col-2 m-2" *ngIf="review.authorDetails">
+                        <div class="col-2 m-2" *ngIf="review.authorDetails !== null">
                             <img src="{{getReviewerAvatarUrl(review.authorDetails.avatarPath)}}" class="rounded-circle"
                                 style="width: 6rem;height: 6rem;" alt="">
+                        </div>
+                        <div class="col-2 m-2" *ngIf="review.authorDetails === null">
+                            <img src="./assets/user.png" class="rounded-circle" style="width: 6rem;height: 6rem;"
+                                alt="">
                         </div>
                         <div class="col m-3">
                             <div class="d-flex">
