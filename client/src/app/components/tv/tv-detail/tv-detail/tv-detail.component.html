@@ -145,27 +145,29 @@
                     <p *ngIf="!tvShow.originalLanguage" class="h5 text-muted fw-bold">--</p>
                 </div>
                 <div class="mb-4">
-                    <div class="h5 fw-bold">Budget</div>
-                    <p *ngIf="tvShow.budget" class="h5">{{tvShow.budget | currency: 'USD':'symbol'}}</p>
-                    <p *ngIf="!tvShow.budget" class="h5 text-muted fw-bold">--</p>
+                    <div class="h5 fw-bold">Network</div>
+                    <div *ngIf="tvShow.networks">
+                        <div *ngFor="let network of tvShow.networks">
+                            <img src="{{imageUrl}}{{network.logoPath}}" class="mb-2" style="width: 8rem;"
+                                alt="{{network.name}}">
+                        </div>
+                        <p *ngIf="!tvShow.networks" class="h5 text-muted fw-bold">--</p>
+                    </div>
                 </div>
-                <div class="mb-4">
-                    <div class="h5 fw-bold">Revenue</div>
-                    <p *ngIf="tvShow.revenue" class="h5">{{tvShow.revenue| currency: 'USD':'symbol'}}</p>
-                    <p *ngIf="!tvShow.revenue" class="h5 text-muted fw-bold">--</p>
-                </div>
-            </div>
-            <!-- Keywords -->
-            <div>
-                <div class="h4">Keywords</div>
-                <div *ngIf="tvShow.keywords.results">
-                    <div class="d-inline" *ngFor="let keyword of tvShow.keywords.results">
-                        <button class="btn btn-outline-secondary m-1" *ngIf="keyword.name">{{keyword.name}}</button>
+                <!-- Keywords -->
+                <div>
+                    <div class="h4">Keywords</div>
+                    <div *ngIf="tvShow.keywords.results">
+                        <div class="d-inline" *ngFor="let keyword of tvShow.keywords.results">
+                            <button class="btn btn-outline-secondary m-1" *ngIf="keyword.name">{{keyword.name}}</button>
+                        </div>
+                    </div>
+                    <div *ngIf="tvShow.keywords.results.length===0">
+                        <span class="h5 text-muted fst-italic">No keywords added</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- FOOTER -->
-<app-footer-home></app-footer-home>
+    <!-- FOOTER -->
+    <app-footer-home></app-footer-home>

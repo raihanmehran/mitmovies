@@ -1,0 +1,18 @@
+.bg-darkblue {
+  background-color: rgb(6, 34, 51);
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: rgb(12, 136, 245);
+}
+
+.h1 {
+  font-size: 72px;
+  background: -webkit-linear-gradient(#e9e9e9, #72ffb9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

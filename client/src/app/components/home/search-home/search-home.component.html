@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="container pt-3">
+        <div class="text-white">
+            <div class="h1 fw-bold mt-5">Welcome.</div>
+            <span class="h2">Millions of movies and TV shows to discover. </span>
+            <span class="h2 mb-4"> Explore now.</span>
+        </div>
+    </div>
+    <div class="container py-4">
+        <form [formGroup]="searchForm" (ngSubmit)="search()">
+            <div class="input-group input-group-lg mb-2">
+                <input formControlName="searchValue" id="searchValue" placeholder="Search movies and TV shows"
+                    type="text" class="form-control" aria-describedby="btnSearch">
+                <button class="btn btn-success" type="submit" id="searchValue">
+                    <div class="d-flex d-inline">
+                        <span class="me-2 h5 d-none d-md-block">Search</span>
+                        <i class="fa fa-search"></i>
+                    </div>
+                </button>
+            </div>
+            <div *ngIf="searchForm.controls['searchValue'].touched">
+                <div class="card shadow rounded-4 bg-warning p-2 mb-1"
+                    *ngIf="searchForm.controls['searchValue'].errors?.['required']">
+                    <div class="fw-bold">
+                        <i class="fa fa-exclamation-circle ms-2 me-4"></i>
+                        Please enter something to search!
+                    </div>
+                </div>
+                <div class="card shadow rounded-4 bg-warning p-2 mb-1"
+                    *ngIf="searchForm.controls['searchValue'].errors?.['maxlength']">
+                    <div class="fw-bold">
+                        <i class="fa fa-exclamation-circle ms-2 me-4"></i>
+                        Search text maximum length exceeded
+                    </div>
+                </div>
+            </div>
+            <div class="invalid-feedback" *ngIf="searchForm.controls['searchValue'].errors?.['minlength']">
+                input must be at least
+                {{searchForm.controls['searchValue'].errors?.['minlength'].requiredLength}} characters
+            </div>
+            <div class="invalid-feedback" *ngIf="searchForm.controls['searchValue'].errors?.['maxlength']">
+                input must be at most
+                {{searchForm.controls['searchValue'].errors?.['maxlength'].requiredLength}} characters
+            </div>
+        </form>
+    </div>
+</div>

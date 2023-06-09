@@ -33,6 +33,7 @@ import { ReviewsDetailComponent } from './_forms/reviews-detail/reviews-detail.c
 import { RecommendationsDetailComponent } from './_forms/recommendations-detail/recommendations-detail.component';
 import { CastDetailComponent } from './_forms/cast-detail/cast-detail.component';
 import { SeasonsTvDetailComponent } from './components/tv/tv-detail/seasons-tv-detail/seasons-tv-detail.component';
+import { SearchHomeComponent } from './components/home/search-home/search-home.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { SeasonsTvDetailComponent } from './components/tv/tv-detail/seasons-tv-d
     RecommendationsDetailComponent,
     CastDetailComponent,
     SeasonsTvDetailComponent,
+    SearchHomeComponent,
   ],
   imports: [
     CommonModule,
