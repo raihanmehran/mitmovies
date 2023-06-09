@@ -1,6 +1,4 @@
-.bg-darkblue {
-  background-color: rgb(6, 34, 51);
-}
+
 
 a {
   color: black;
@@ -8,6 +6,10 @@ a {
 
 a:hover {
   color: rgb(12, 136, 245);
+}
+
+.bg-darkblue {
+  background-color: rgb(6, 34, 51);
 }
 
 .h1 {

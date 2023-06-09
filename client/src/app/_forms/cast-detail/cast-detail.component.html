@@ -5,7 +5,7 @@
             <div class="scrollable-row">
                 <div class="col" *ngFor="let cast of credits.cast">
                     <div *ngIf="cast.profilePath">
-                        <a routerLink="" routerLinkActive="active">
+                        <a routerLinkActive="active">
                             <div class="m-2 mb-4" style="width: 12rem">
                                 <div class="card rounded-3 shadow border-0">
                                     <img src="{{imageUrl}}{{cast.profilePath}}" class="rounded-top" alt="" />

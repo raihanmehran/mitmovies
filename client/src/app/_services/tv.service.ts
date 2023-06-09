@@ -14,7 +14,7 @@ export class TvService {
     return this.http.get<any>(this.baseUrl + 'tvshows/' + id);
   }
 
-  searchTvShwos(query: string) {
+  searchTvShows(query: string) {
     return this.http.get<any>(this.baseUrl + 'tvShows/search?query=' + query);
   }
 }

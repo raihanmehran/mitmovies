@@ -79,8 +79,8 @@ namespace Infrastructure.v1.Repositories
         {
             ResponseMessage result = new ResponseMessage();
 
-            SearchContainer<SearchMovie> response = _tmdbContext.client
-                .SearchMovieAsync(query: payload, page: default, includeAdult: false).Result;
+            var response = await _tmdbContext.client
+                .SearchMovieAsync(query: payload, page: default, includeAdult: false);
 
             result.Data = response.Results;
 

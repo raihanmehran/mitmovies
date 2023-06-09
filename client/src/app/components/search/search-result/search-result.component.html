@@ -1,3 +1,35 @@
+<div class="container-fluid bg-darkblue">
+    <div class="container py-4">
+        <form [formGroup]="searchForm" (ngSubmit)="search()">
+            <div class="input-group input-group-lg">
+                <input formControlName="searchValue" id="searchValue" placeholder="Search movies and TV shows"
+                    type="text" class="form-control" aria-describedby="btnSearch">
+                <button class="btn btn-success" type="submit" id="searchValue">
+                    <div class="d-flex d-inline">
+                        <span class="me-2 h5 d-none d-md-block">Search</span>
+                        <i class="fa fa-search"></i>
+                    </div>
+                </button>
+            </div>
+            <div *ngIf="searchForm.controls['searchValue'].touched">
+                <div class="card shadow rounded-4 bg-warning p-2 mb-1"
+                    *ngIf="searchForm.controls['searchValue'].errors?.['required']">
+                    <div class="fw-bold">
+                        <i class="fa fa-exclamation-circle ms-2 me-4"></i>
+                        Please enter something to search!
+                    </div>
+                </div>
+                <div class="card shadow rounded-4 bg-warning p-2 mb-1"
+                    *ngIf="searchForm.controls['searchValue'].errors?.['maxlength']">
+                    <div class="fw-bold">
+                        <i class="fa fa-exclamation-circle ms-2 me-4"></i>
+                        Search text maximum length exceeded
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="fluid-container">
     <div class="row p-3">
         <div class="col-md-4 mb-2">
@@ -23,6 +55,10 @@
         </div>
         <div class="col-md-8">
             <div *ngIf="selectedTab === 'movies'">
+                <div class="h3 mb-3">
+                    <span class="me-3">Movies </span>
+                    <span class="text-muted">{{movies.length}} </span>
+                </div>
                 <div *ngIf="movies.length>0">
                     <div *ngFor="let movie of movies" class="mb-4">
                         <div class="card shadow border-0 rounded-4">
@@ -51,6 +87,10 @@
                 </div>
             </div>
             <div *ngIf="selectedTab === 'tv'">
+                <div class="h3 mb-3">
+                    <span class="me-3">TV Shows </span>
+                    <span class="text-muted">{{tvShows.length}} </span>
+                </div>
                 <div *ngIf="tvShows.length>0">
                     <div *ngFor="let tvShow of tvShows" class="mb-4">
                         <div class="card shadow border-0 rounded-4">
@@ -64,10 +104,10 @@
                                 <div class="col-8 col-sm-9 col-md-8 col-lg-9 col-xl-10">
                                     <div class="description">
                                         <a routerLink="/tv/{{tvShow.id}}" routerLinkActive="active">
-                                            <div class="mt-2 h3">{{tvShow.name}}</div>
+                                            <div class="mt-2 h4">{{tvShow.name}}</div>
                                         </a>
                                         <span class="text-muted">{{tvShow.firstAirDate |date: 'MMM dd, YYYY'}}</span>
-                                        <p class="mt-3 overview h5">{{tvShow.overview}}</p>
+                                        <p class="mt-3 overview">{{tvShow.overview}}</p>
                                     </div>
                                 </div>
                             </div>

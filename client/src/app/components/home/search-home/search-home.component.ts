@@ -20,10 +20,6 @@ export class SearchHomeComponent implements OnInit {
     this.initializeForm();
   }
 
-  writeValue(obj: any): void {}
-  registerOnChange(fn: any): void {}
-  registerOnTouched(fn: any): void {}
-
   initializeForm() {
     this.searchForm = this.fb.group({
       searchValue: [
@@ -38,13 +34,10 @@ export class SearchHomeComponent implements OnInit {
   }
 
   search() {
-    this.router.navigateByUrl(
-      'search/' + this.searchForm.controls['searchValue'].value
-    );
-    if (this.searchForm.invalid) this.toastr.warning('Invalid');
-    else
-      this.toastr.success(
-        'Clicked : value = ' + this.searchForm.controls['searchValue'].value
+    if (this.searchForm.valid)
+      this.router.navigateByUrl(
+        'search/' + this.searchForm.controls['searchValue'].value
       );
+    else if (this.searchForm.invalid) this.toastr.warning('Invalid');
   }
 }
