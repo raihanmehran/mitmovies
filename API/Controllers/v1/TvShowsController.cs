@@ -74,5 +74,19 @@ namespace API.Controllers.v1
             }
             catch (Exception) { throw; }
         }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<ResponseMessage>> SearchTvShows(string query)
+        {
+            try
+            {
+                var result = await _mediator.Send(new SearchTvShowsQuery { Query = query });
+
+                if (result.Data != null) return Ok(result.Data);
+
+                return NotFound();
+            }
+            catch (Exception) { throw; }
+        }
     }
 }

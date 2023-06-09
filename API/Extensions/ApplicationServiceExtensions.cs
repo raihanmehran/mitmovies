@@ -85,6 +85,7 @@ namespace API.Extensions
             services.AddScoped<IRequestHandler<GetTopRatedTvShowsQuery, ResponseMessage>, GetTopRatedTvShowsQueryHandler>();
             services.AddScoped<IRequestHandler<GetTvShowByIdQuery, ResponseMessage>, GetTvShowByIdQueryHandler>();
             services.AddScoped<IRequestHandler<GetTrendingTvShowsQuery, ResponseMessage>, GetTrendingTvShowsQueryHandler>();
+            services.AddScoped<IRequestHandler<SearchTvShowsQuery, ResponseMessage>, SearchTvShowsQueryHandler>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRequestHandler<GetUserByUsernameQuery, AppUser>, GetUserByUsernameQueryHandler>();

@@ -8,5 +8,6 @@ namespace Application.v1.Interfaces
         Task<ResponseMessage> GetPopularTvShows();
         Task<ResponseMessage> GetTopRatedTvShows();
         Task<ResponseMessage> GetTrendingTvShows(string timeWindow);
+        Task<ResponseMessage> SearchTvShowsAsync(string query);
     }
 }

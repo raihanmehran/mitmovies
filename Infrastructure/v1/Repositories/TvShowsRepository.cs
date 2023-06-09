@@ -3,6 +3,7 @@ using Application.v1.Interfaces;
 using Infrastructure.v1.Contexts;
 using TMDbLib.Objects.TvShows;
 using TMDbLib.Objects.Trending;
+using TMDbLib.Objects.General;
 
 namespace Infrastructure.v1.Repositories
 {
@@ -64,6 +65,16 @@ namespace Infrastructure.v1.Repositories
                 | TvShowMethods.WatchProviders
                 | TvShowMethods.EpisodeGroups
                 | TvShowMethods.CreditsAggregate);
+
+            return result;
+        }
+
+        public async Task<ResponseMessage> SearchTvShowsAsync(string query)
+        {
+            var result = new ResponseMessage();
+
+            result.Data = await _tmdbContext.client
+                .SearchTvShowAsync(query: query, page: default, includeAdult: false);
 
             return result;
         }
