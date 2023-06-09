@@ -10,7 +10,7 @@
       <ng-container>
         <ul class="navbar-nav ml-auto">
           <li>
-            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="home">Home</a>
           </li>
           <li>
             <div class="dropdown" dropdown>
@@ -49,14 +49,14 @@
           </li>
         </ul>
       </ng-container>
-      <div *ngIf="user">
+      <div *ngIf="(accountService.currentUser$ | async) as user">
         <div class="d-flex justify-content-end">
           <div class="dropdown" dropdown>
             <img src="{{ profileUrl || './assets/user.png' }}" class="rounded-circle" alt="user photo" />
             <a class="dropdown-toggle text-light text-decoration-none ms-1" dropdownToggle><span class="fw-bold">{{
                 user.firstName }} {{ user.lastName }}</span></a>
             <div class="dropdown-menu mt-3" *dropdownMenu>
-              <a class="dropdown-item" routerLink="/user/edit">Edit Profile</a>
+              <a class="dropdown-item" routerLink="/user/profile">Profile</a>
               <a (click)="logout()" class="dropdown-item">Logout</a>
             </div>
           </div>
