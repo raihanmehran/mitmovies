@@ -13,4 +13,8 @@ export class TvService {
   getTvShow(id: string) {
     return this.http.get<any>(this.baseUrl + 'tvshows/' + id);
   }
+
+  searchTvShwos(query: string) {
+    return this.http.get<any>(this.baseUrl + 'tvShows/search?query=' + query);
+  }
 }

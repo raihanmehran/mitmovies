@@ -34,14 +34,6 @@
                     </div>
                 </div>
             </div>
-            <div class="invalid-feedback" *ngIf="searchForm.controls['searchValue'].errors?.['minlength']">
-                input must be at least
-                {{searchForm.controls['searchValue'].errors?.['minlength'].requiredLength}} characters
-            </div>
-            <div class="invalid-feedback" *ngIf="searchForm.controls['searchValue'].errors?.['maxlength']">
-                input must be at most
-                {{searchForm.controls['searchValue'].errors?.['maxlength'].requiredLength}} characters
-            </div>
         </form>
     </div>
 </div>

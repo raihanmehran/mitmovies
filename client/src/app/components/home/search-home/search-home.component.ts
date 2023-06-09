@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -10,7 +11,11 @@ import { ToastrService } from 'ngx-toastr';
 export class SearchHomeComponent implements OnInit {
   searchForm: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder, private toastr: ToastrService) {}
+  constructor(
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.initializeForm();
   }
@@ -33,6 +38,9 @@ export class SearchHomeComponent implements OnInit {
   }
 
   search() {
+    this.router.navigateByUrl(
+      'search/' + this.searchForm.controls['searchValue'].value
+    );
     if (this.searchForm.invalid) this.toastr.warning('Invalid');
     else
       this.toastr.success(

@@ -48,11 +48,11 @@ namespace API.Controllers.v1
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<ResponseMessage>> SearchMovie(string payload)
+        public async Task<ActionResult<ResponseMessage>> SearchMovie(string query)
         {
             try
             {
-                var result = await _mediator.Send(new SearchMovieQuery { Payload = payload });
+                var result = await _mediator.Send(new SearchMovieQuery { Payload = query });
 
                 if (result.Data == null) return NotFound(result.Data);
 

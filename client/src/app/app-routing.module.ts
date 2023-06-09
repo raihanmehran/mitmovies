@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home/home.component';
 import { ProfileUserComponent } from './components/user/profile-user/profile-user.component';
 import { MovieDetailComponent } from './components/movies/movie-detail/movie-detail/movie-detail.component';
 import { TvDetailComponent } from './components/tv/tv-detail/tv-detail/tv-detail.component';
+import { SearchResultComponent } from './components/search/search-result/search-result.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'tv/:tvshowid',
     component: TvDetailComponent,
+  },
+  {
+    path: 'search/:query',
+    component: SearchResultComponent,
   },
 ];
 

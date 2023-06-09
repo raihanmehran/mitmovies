@@ -14,4 +14,8 @@ export class MoviesService {
   getMovie(movieId: any) {
     return this.http.get<any>(this.baseUrl + 'movies/details/' + movieId);
   }
+
+  searchMovies(query: string) {
+    return this.http.get<any>(this.baseUrl + 'movies/search?query=' + query);
+  }
 }
