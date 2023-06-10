@@ -26,22 +26,23 @@
                             <span>{{ convertMinutesToTime(movie.runtime) }}</span>
                         </div>
                         <div class="d-flex d-inline mt-4 justify-content-left align-items-center">
-                            <div class="card bg-darkblue text-white rounded-circle border-0 p-2 me-3">
+                            <div class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-user fa-1x"></i>
                             </div>
-                            <div class="card bg-darkblue text-white rounded-circle border-0 p-2 me-3">
+                            <div class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-list fa-1x"></i>
                             </div>
-                            <div class="card bg-darkblue text-white rounded-circle border-0 p-2 me-3">
+                            <div (click)="addToFavoriteMovies(movie.id)"
+                                class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-heart fa-1x"></i>
                             </div>
-                            <div class="card bg-darkblue text-white rounded-circle border-0 p-2 me-3">
+                            <div class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-bookmark fa-1x"></i>
                             </div>
-                            <div class="card bg-darkblue text-white rounded-circle border-0 p-2 me-3">
+                            <div class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-star fa-1x"></i>
                             </div>
-                            <div class="card text-dark rounded-circle border-0 p-2 me-3">
+                            <div class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
                                 <div class="fw-bold">
                                     <i class="fa fa-play fa-1x"></i>
                                     <span> Play Trailer </span>

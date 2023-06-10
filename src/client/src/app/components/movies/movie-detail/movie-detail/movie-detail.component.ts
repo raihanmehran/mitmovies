@@ -5,6 +5,9 @@ import { take } from 'rxjs';
 import { MoviesService } from 'src/app/_services/movies.service';
 import { environment } from 'src/environments/environment';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { FavoriteMoviesService } from 'src/app/_services/favorite-movies.service';
+import { User } from 'src/app/_models/user';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-movie-detail',
@@ -47,14 +50,18 @@ export class MovieDetailComponent implements OnInit {
   instagramUrl = environment.instagramUrl;
   imdbUrl = environment.imdbUrl;
   twitterUrl = environment.twitterUrl;
+  user: User | undefined;
 
   constructor(
+    private accountService: AccountService,
     private moviesService: MoviesService,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private favoriteMovieService: FavoriteMoviesService
   ) {}
 
   ngOnInit(): void {
+    this.getUser();
     this.route.params.subscribe((params) => {
       this.movieId = params['movieid'];
       this.getMovie();
@@ -101,5 +108,26 @@ export class MovieDetailComponent implements OnInit {
 
   getLanguageName(lgCode: string) {
     return lgCode === 'en' ? 'English' : lgCode;
+  }
+
+  getUser() {
+    this.accountService.currentUser$.subscribe({
+      next: (user) => {
+        if (user) {
+          this.user = user;
+        }
+      },
+    });
+  }
+
+  addToFavoriteMovies(id: number) {
+    if (this.user) {
+      if (id) {
+        this.favoriteMovieService.addToFavoriteMovies(id);
+        this.toastr.success('Movied Added To Favorites');
+      }
+    } else {
+      this.toastr.warning('Please log in first', 'Not Authenticated!');
+    }
   }
 }

@@ -35,6 +35,8 @@ import { CastDetailComponent } from './_forms/cast-detail/cast-detail.component'
 import { SeasonsTvDetailComponent } from './components/tv/tv-detail/seasons-tv-detail/seasons-tv-detail.component';
 import { SearchHomeComponent } from './components/home/search-home/search-home.component';
 import { SearchResultComponent } from './components/search/search-result/search-result.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { PlacementForBs5 } from 'ngx-bootstrap/positioning';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,7 @@ import { SearchResultComponent } from './components/search/search-result/search-
     HttpClientModule,
     SharedModule,
     YouTubePlayerModule,
+    TooltipModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
