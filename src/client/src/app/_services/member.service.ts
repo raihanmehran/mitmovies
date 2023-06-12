@@ -38,4 +38,18 @@ export class MemberService {
       error: (error) => console.log(error),
     });
   }
+
+  removeFavoriteMovie(id: number) {
+    this.member$.subscribe({
+      next: (member) => {
+        if (member) {
+          if (member.favouriteMovies) {
+            member.favouriteMovies = member.favouriteMovies.filter(
+              (movie) => movie.movieId === id
+            );
+          }
+        }
+      },
+    });
+  }
 }

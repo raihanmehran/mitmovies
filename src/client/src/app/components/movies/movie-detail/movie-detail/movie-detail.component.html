@@ -33,7 +33,7 @@
                                 class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-list fa-1x"></i>
                             </div>
-                            <div (click)="addToFavoriteMovies(movie.id)"
+                            <div (click)="handleFavorite(movie.id)"
                                 [ngClass]="{'text-danger': isFavorite, 'text-white':!isFavorite}"
                                 class="card bg-dark rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-heart fa-1x"></i>

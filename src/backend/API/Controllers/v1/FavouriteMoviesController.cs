@@ -34,7 +34,7 @@ namespace API.Controllers.v1
                     User = user
                 });
 
-                if (result.StatusCode != 200) return BadRequest(result.Message);
+                if (result.StatusCode != 200) return BadRequest(new { result.Message });
 
                 return Ok(new { result.Message });
             }
@@ -57,7 +57,7 @@ namespace API.Controllers.v1
                     User = user
                 });
 
-                if (result.StatusCode != 200) return BadRequest(result.Message);
+                if (result.StatusCode != 200) return BadRequest(new { result.Message });
 
                 return Ok(new { result.Message });
             }
@@ -81,7 +81,7 @@ namespace API.Controllers.v1
 
                 if (result.StatusCode == 200) return Ok(result.Data);
 
-                return BadRequest(result.Message);
+                return BadRequest(new { result.Message });
             }
             catch (Exception) { throw; }
         }

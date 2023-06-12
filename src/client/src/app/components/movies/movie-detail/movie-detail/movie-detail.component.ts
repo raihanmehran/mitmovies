@@ -127,27 +127,47 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
-  addToFavoriteMovies(id: number) {
+  handleFavorite(id: number) {
     if (this.member) {
       if (id) {
-        this.favoriteMovieService.addToFavoriteMovies(id).subscribe({
-          next: (movie) => {
-            console.log('added:');
-            console.log(movie);
-            const favoriteMovie = {
-              movieId: id,
-            };
-            this.memberService.addFavoriteMovie(
-              favoriteMovie as FavouriteMovie
-            );
-            this.checkMovie();
-            this.toastr.success('Movied Added To Favorites');
-          },
-        });
+        if (!this.isFavorite) {
+          this.addToFavoriteMovies(id);
+        } else {
+          this.removeFromFavoriteMovies(id);
+        }
+      } else {
+        this.toastr.warning(
+          'Please refresh the page to load the movie',
+          'NO MOVIE FOUND!'
+        );
       }
     } else {
       this.toastr.warning('Please log in first', 'Not Authenticated!');
     }
+  }
+
+  addToFavoriteMovies(id: number) {
+    this.favoriteMovieService.addToFavoriteMovies(id).subscribe({
+      next: (movie) => {
+        const favoriteMovie = {
+          movieId: id,
+        };
+        this.memberService.addFavoriteMovie(favoriteMovie as FavouriteMovie);
+        this.isFavorite = true;
+        this.toastr.success('Movied Added To Favorites');
+      },
+      error: (error) => this.toastr.error(error.error, 'ERROR'),
+    });
+  }
+
+  removeFromFavoriteMovies(id: number) {
+    this.favoriteMovieService.removeFromFavoriteMovies(id).subscribe({
+      next: (movie) => {
+        this.memberService.removeFavoriteMovie(id);
+        this.isFavorite = false;
+        this.toastr.success('Movie Removed From Favorites', 'REMOVED');
+      },
+    });
   }
 
   checkMovie() {
