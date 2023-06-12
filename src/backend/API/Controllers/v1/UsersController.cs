@@ -74,6 +74,23 @@ namespace API.Controllers.v1
             }
         }
 
+        [Authorize]
+        [HttpGet("member-self")]
+        public async Task<ActionResult<ResponseMessage>> GetLoggedMember()
+        {
+            try
+            {
+                var userId = User.GetUserId();
+
+                var result = await _mediator.Send(new GetMemberByUserIdQuery { UserId = userId });
+
+                if (result.StatusCode == 200) return Ok(result.Data);
+
+                return NotFound(result.Message);
+            }
+            catch (Exception) { throw; }
+        }
+
         [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("member/id/{userId}")]
         public async Task<ActionResult<ResponseMessage>> GetMemberById(int userId)

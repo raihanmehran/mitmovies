@@ -8,6 +8,9 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { FavoriteMoviesService } from 'src/app/_services/favorite-movies.service';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
+import { Member } from 'src/app/_models/member';
+import { MemberService } from 'src/app/_services/member.service';
+import { FavouriteMovie } from 'src/app/_models/favouriteMovie';
 
 @Component({
   selector: 'app-movie-detail',
@@ -51,17 +54,22 @@ export class MovieDetailComponent implements OnInit {
   imdbUrl = environment.imdbUrl;
   twitterUrl = environment.twitterUrl;
   user: User | undefined;
+  member: Member | undefined;
+  isFavorite: boolean = false;
+  isWatched: boolean = false;
+  isWatchLater: boolean = false;
+  isRated: boolean = false;
 
   constructor(
-    private accountService: AccountService,
     private moviesService: MoviesService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private favoriteMovieService: FavoriteMoviesService
+    private favoriteMovieService: FavoriteMoviesService,
+    private memberService: MemberService
   ) {}
 
   ngOnInit(): void {
-    this.getUser();
+    this.getMember();
     this.route.params.subscribe((params) => {
       this.movieId = params['movieid'];
       this.getMovie();
@@ -81,6 +89,7 @@ export class MovieDetailComponent implements OnInit {
           if (movie) {
             this.movie = movie;
             this.scrollToTop();
+            this.checkMovie();
           } else {
             this.toastr.error(
               'Movie with id ' + this.movieId + ' not found',
@@ -110,24 +119,57 @@ export class MovieDetailComponent implements OnInit {
     return lgCode === 'en' ? 'English' : lgCode;
   }
 
-  getUser() {
-    this.accountService.currentUser$.subscribe({
-      next: (user) => {
-        if (user) {
-          this.user = user;
-        }
+  getMember() {
+    this.memberService.member$.pipe().subscribe({
+      next: (member) => {
+        if (member) this.member = member;
       },
     });
   }
 
   addToFavoriteMovies(id: number) {
-    if (this.user) {
+    if (this.member) {
       if (id) {
-        this.favoriteMovieService.addToFavoriteMovies(id);
-        this.toastr.success('Movied Added To Favorites');
+        this.favoriteMovieService.addToFavoriteMovies(id).subscribe({
+          next: (movie) => {
+            console.log('added:');
+            console.log(movie);
+            const favoriteMovie = {
+              movieId: id,
+            };
+            this.memberService.addFavoriteMovie(
+              favoriteMovie as FavouriteMovie
+            );
+            this.checkMovie();
+            this.toastr.success('Movied Added To Favorites');
+          },
+        });
       }
     } else {
       this.toastr.warning('Please log in first', 'Not Authenticated!');
+    }
+  }
+
+  checkMovie() {
+    if (this.member) {
+      if (this.movie) {
+        this.checkIsFavorite();
+      }
+    }
+  }
+
+  private checkIsFavorite() {
+    if (this.member?.favouriteMovies) {
+      this.member.favouriteMovies.forEach((movie) => {
+        if (movie.movieId === this.movie.id) this.isFavorite = true;
+      });
+    }
+  }
+  private checkIsWatched() {
+    if (this.member?.watchedMovies) {
+      this.member.watchedMovies.forEach((movie) => {
+        if (movie.movieId === this.movie.id) this.isWatched = false;
+      });
     }
   }
 }

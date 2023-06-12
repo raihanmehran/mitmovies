@@ -8,31 +8,24 @@ import { environment } from 'src/environments/environment';
 })
 export class FavoriteMoviesService {
   baseUrl = environment.apiUrl;
-  favoriteMovies: any[] = [];
 
   constructor(private http: HttpClient) {}
 
   addToFavoriteMovies(id: number) {
-    this.http
-      .post(this.baseUrl + 'favouritemovies/add/' + id, id)
-      .pipe(map((response) => response));
+    return this.http.post(this.baseUrl + 'favouritemovies/add/' + id, id);
   }
 
   removeFromFavoriteMovies(id: number) {
-    this.http
-      .post(this.baseUrl + 'favouritemovies/remove/' + id, id)
-      .pipe(map((response) => response));
+    return this.http.post(this.baseUrl + 'favouritemovies/remove/' + id, id);
   }
 
   getFavoriteMovies() {
-    this.http
+    return this.http
       .get<any[]>(this.baseUrl + 'favouritemovies')
       .pipe()
       .subscribe({
         next: (movies) => {
-          console.log(movies);
-
-          this.favoriteMovies = movies;
+          return movies;
         },
         error: (error) => console.log(error.error),
       });

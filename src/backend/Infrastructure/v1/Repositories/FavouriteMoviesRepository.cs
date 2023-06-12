@@ -37,7 +37,7 @@ namespace Infrastructure.v1.Repositories
             if (await SaveAllAsync()) return Response(
                 statusCode: 200, message: "Movie Added To Favourites");
 
-            return Response(statusCode: 400,
+            return Response(statusCode: 500,
                 message: "Error While Adding Movie to Favourites");
         }
 

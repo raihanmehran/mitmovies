@@ -36,7 +36,7 @@ namespace API.Controllers.v1
 
                 if (result.StatusCode != 200) return BadRequest(result.Message);
 
-                return Ok(result.Message);
+                return Ok(new { result.Message });
             }
             catch (Exception) { throw; }
         }
@@ -59,7 +59,7 @@ namespace API.Controllers.v1
 
                 if (result.StatusCode != 200) return BadRequest(result.Message);
 
-                return Ok(result.Message);
+                return Ok(new { result.Message });
             }
             catch (Exception) { throw; }
         }

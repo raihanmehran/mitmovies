@@ -30,10 +30,12 @@ export class NavComponent implements OnInit {
       next: (user) => {
         if (user) {
           this.user = user;
-          this.user.photos.forEach((photo) => {
-            if (photo.isProfile) this.profileUrl = photo.url;
-            if (photo.isCover) this.coverUrl = photo.url;
-          });
+          if (this.user.photos) {
+            this.user.photos.forEach((photo) => {
+              if (photo.isProfile) this.profileUrl = photo.url;
+              if (photo.isCover) this.coverUrl = photo.url;
+            });
+          }
         }
       },
     });

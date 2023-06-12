@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './components/user/auth/auth.component';
 import { HomeComponent } from './components/home/home/home.component';
-import { ProfileUserComponent } from './components/user/profile-user/profile-user.component';
+import { ProfileUserComponent } from './components/member/profile-user/profile-user.component';
 import { MovieDetailComponent } from './components/movies/movie-detail/movie-detail/movie-detail.component';
 import { TvDetailComponent } from './components/tv/tv-detail/tv-detail/tv-detail.component';
 import { SearchResultComponent } from './components/search/search-result/search-result.component';

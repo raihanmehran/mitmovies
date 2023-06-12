@@ -12,10 +12,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './components/user/auth/auth.component';
 import { NavComponent } from './components/home/nav/nav.component';
 import { HomeComponent } from './components/home/home/home.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FooterHomeComponent } from './components/home/footer-home/footer-home.component';
 import { HeaderHomeComponent } from './components/home/header-home/header-home.component';
-import { ProfileUserComponent } from './components/user/profile-user/profile-user.component';
+import { ProfileUserComponent } from './components/member/profile-user/profile-user.component';
 import { CardLongComponent } from './_forms/card-long/card-long.component';
 import { MovieCardShortComponent } from './_forms/movie-card-short/movie-card-short.component';
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
@@ -37,6 +37,7 @@ import { SearchHomeComponent } from './components/home/search-home/search-home.c
 import { SearchResultComponent } from './components/search/search-result/search-result.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { PlacementForBs5 } from 'ngx-bootstrap/positioning';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,9 @@ import { PlacementForBs5 } from 'ngx-bootstrap/positioning';
     YouTubePlayerModule,
     TooltipModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
