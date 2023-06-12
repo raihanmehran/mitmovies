@@ -1,6 +1,8 @@
 import { FavouriteMovie } from './favouriteMovie';
 import { FavouritePerson } from './favouritePerson';
+import { FavouriteTvShow } from './favouriteTvShow';
 import { Photo } from './photo';
+import { WatchedMovie } from './watchedMovie';
 
 export interface Member {
   id: number;
@@ -14,8 +16,8 @@ export interface Member {
   photos: Photo[];
   favouriteMovies: FavouriteMovie[];
   favouritePeople: FavouritePerson[];
-  favouriteTvShows: any[];
-  watchedMovies: any[];
+  favouriteTvShows: FavouriteTvShow[];
+  watchedMovies: WatchedMovie[];
   watchedTvShows: any[];
   userGenres: any[];
 }

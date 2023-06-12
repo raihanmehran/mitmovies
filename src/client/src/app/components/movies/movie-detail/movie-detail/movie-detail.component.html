@@ -29,12 +29,13 @@
                             <div class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-user fa-1x"></i>
                             </div>
-                            <div [ngClass]="{'text-success': isWatched, 'text-white':!isWatched}"
+                            <div (click)="handleWatched(movie.id)"
+                                [ngClass]="{'text-warning': isWatched, 'text-white':!isWatched}"
                                 class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-list fa-1x"></i>
                             </div>
                             <div (click)="handleFavorite(movie.id)"
-                                [ngClass]="{'text-danger': isFavorite, 'text-white':!isFavorite}"
+                                [ngClass]="{'text-warning': isFavorite, 'text-white':!isFavorite}"
                                 class="card bg-dark rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-heart fa-1x"></i>
                             </div>
@@ -42,7 +43,7 @@
                                 class="card bg-dark rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-bookmark fa-1x"></i>
                             </div>
-                            <div [ngClass]="{'text-danger': isRated, 'text-white':!isRated}"
+                            <div [ngClass]="{'text-warning': isRated, 'text-white':!isRated}"
                                 class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-star fa-1x"></i>
                             </div>

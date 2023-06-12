@@ -11,6 +11,8 @@ import { AccountService } from 'src/app/_services/account.service';
 import { Member } from 'src/app/_models/member';
 import { MemberService } from 'src/app/_services/member.service';
 import { FavouriteMovie } from 'src/app/_models/favouriteMovie';
+import { WatchedMoviesService } from 'src/app/_services/watched-movies.service';
+import { WatchedMovie } from 'src/app/_models/watchedMovie';
 
 @Component({
   selector: 'app-movie-detail',
@@ -64,8 +66,9 @@ export class MovieDetailComponent implements OnInit {
     private moviesService: MoviesService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private favoriteMovieService: FavoriteMoviesService,
-    private memberService: MemberService
+    private favoriteMoviesService: FavoriteMoviesService,
+    private memberService: MemberService,
+    private watchedMoviesService: WatchedMoviesService
   ) {}
 
   ngOnInit(): void {
@@ -147,7 +150,7 @@ export class MovieDetailComponent implements OnInit {
   }
 
   addToFavoriteMovies(id: number) {
-    this.favoriteMovieService.addToFavoriteMovies(id).subscribe({
+    this.favoriteMoviesService.addToFavoriteMovies(id).subscribe({
       next: (movie) => {
         const favoriteMovie = {
           movieId: id,
@@ -161,7 +164,7 @@ export class MovieDetailComponent implements OnInit {
   }
 
   removeFromFavoriteMovies(id: number) {
-    this.favoriteMovieService.removeFromFavoriteMovies(id).subscribe({
+    this.favoriteMoviesService.removeFromFavoriteMovies(id).subscribe({
       next: (movie) => {
         this.memberService.removeFavoriteMovie(id);
         this.isFavorite = false;
@@ -170,10 +173,54 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
+  handleWatched(id: number) {
+    if (this.member) {
+      if (id) {
+        if (!this.isWatched) {
+          this.addToWatchedMovies(id);
+        } else if (this.isWatched) {
+          this.removeFromWatchedMovies(id);
+        }
+      } else {
+        this.toastr.warning(
+          'Please refresh the page to load the movie',
+          'NO MOVIE FOUND!'
+        );
+      }
+    } else {
+      this.toastr.warning('Please log in first', 'Not Authenticated!');
+    }
+  }
+
+  addToWatchedMovies(id: number) {
+    this.watchedMoviesService.addToWatchedMovies(id).subscribe({
+      next: (movie) => {
+        const watchedMovie = {
+          movieId: id,
+        };
+        this.memberService.addWatchedMovie(watchedMovie as WatchedMovie);
+        this.isWatched = true;
+        this.toastr.success('Movied Added To Watched', 'ADDED');
+      },
+      error: (error) => this.toastr.error(error.error, 'ERROR'),
+    });
+  }
+
+  removeFromWatchedMovies(id: number) {
+    this.watchedMoviesService.removeFromWatchedMovies(id).subscribe({
+      next: (movie) => {
+        this.memberService.removeWatchedMovie(id);
+        this.isWatched = false;
+        this.toastr.success('Movie Removed From Watched', 'REMOVED');
+      },
+    });
+  }
+
   checkMovie() {
     if (this.member) {
       if (this.movie) {
         this.checkIsFavorite();
+        this.checkIsWatched();
       }
     }
   }
@@ -188,7 +235,7 @@ export class MovieDetailComponent implements OnInit {
   private checkIsWatched() {
     if (this.member?.watchedMovies) {
       this.member.watchedMovies.forEach((movie) => {
-        if (movie.movieId === this.movie.id) this.isWatched = false;
+        if (movie.movieId === this.movie.id) this.isWatched = true;
       });
     }
   }
