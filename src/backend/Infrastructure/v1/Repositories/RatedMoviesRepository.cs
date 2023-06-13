@@ -19,17 +19,22 @@ namespace Infrastructure.v1.Repositories
             if (ratedMovieDto is null || user is null) return Response(
                             statusCode: 404, message: "Data Not Provided");
 
-            if (IsRatedMovieExist(movieId: ratedMovieDto.MovieId, user: user)) return Response(
-                   statusCode: 400, message: "You already rated this movie");
-
-            var ratedMovie = new RatedMovie
+            var newRatedMovie = new RatedMovie
             {
                 MovieId = ratedMovieDto.MovieId,
                 Rating = ratedMovieDto.Rating,
                 AppUserId = user.Id
             };
 
-            user.RatedMovies.Add(ratedMovie);
+            if (IsRatedMovieExist(movieId: ratedMovieDto.MovieId, user: user))
+            {
+                var ratedMovie = user.RatedMovies.SingleOrDefault(x =>
+                    x.MovieId == newRatedMovie.MovieId);
+
+                user.RatedMovies.Remove(ratedMovie);
+            }
+
+            user.RatedMovies.Add(newRatedMovie);
 
             if (await SaveAllAsync()) return Response(
                 statusCode: 200, message: "Rated Movie Added");
@@ -42,6 +47,31 @@ namespace Infrastructure.v1.Repositories
         {
             return (user.RatedMovies.Any(x =>
                 x.MovieId == movieId)) ? true : false;
+        }
+
+        public async Task<ResponseMessage> RemoveMovieRatingAsync(int movieId, AppUser user)
+        {
+            if (movieId <= 0 || user is null) return Response(
+                statusCode: 401, message: "Data Not Provided");
+
+            if (!IsRatedMovieExist(movieId: movieId, user: user)) return Response(
+                statusCode: 400, message: "The movie already removed");
+
+            var ratedMovie = GetRatedMovie(movieId: movieId, user: user);
+            user.RatedMovies.Remove(ratedMovie);
+
+            if (await SaveAllAsync()) return Response(
+                statusCode: 200, message: "Rated Movie Removed");
+
+            return Response(statusCode: 500,
+                message: "Error While Removing Rated Movie");
+
+        }
+
+        public RatedMovie GetRatedMovie(int movieId, AppUser user)
+        {
+            return user.RatedMovies.SingleOrDefault(x =>
+                x.MovieId == movieId);
         }
 
         public async Task<bool> SaveAllAsync()

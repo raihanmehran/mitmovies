@@ -8,5 +8,6 @@ namespace Application.v1.Interfaces
         Task<bool> SaveAllAsync();
         Task<ResponseMessage> AddMovieRatingAsync(
             RatedMovieDto ratedMovieDto, AppUser user);
+        Task<ResponseMessage> RemoveMovieRatingAsync(int movieId, AppUser user);
     }
 }

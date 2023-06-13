@@ -136,6 +136,7 @@ namespace API.Extensions
 
             services.AddScoped<IRatedMoviesRepository, RatedMoviesRepository>();
             services.AddScoped<IRequestHandler<AddMovieRatingCommand, ResponseMessage>, AddMovieRatingCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveMovieRatingCommand, ResponseMessage>, RemoveMovieRatingCommandHandler>();
 
             return services;
         }
