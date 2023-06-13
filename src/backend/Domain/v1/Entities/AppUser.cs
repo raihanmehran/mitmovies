@@ -19,5 +19,6 @@ namespace Domain.v1.Entities
         public ICollection<WatchedMovie> WatchedMovies { get; set; }
         public ICollection<WatchedTvShow> WatchedTvShows { get; set; }
         public ICollection<UserGenre> UserGenres { get; set; }
+        public ICollection<RatedMovie> RatedMovies { get; set; }
     }
 }

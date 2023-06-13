@@ -29,6 +29,7 @@ namespace Infrastructure.v1.Repositories
                 .Include(x => x.WatchedMovies)
                 .Include(x => x.WatchedTvShows)
                 .Include(x => x.UserGenres)
+                .Include(x => x.RatedMovies)
                 .SingleOrDefaultAsync(x => x.Id == userId);
         }
 
@@ -67,6 +68,7 @@ namespace Infrastructure.v1.Repositories
                 .Include(x => x.WatchedMovies)
                 .Include(x => x.WatchedTvShows)
                 .Include(x => x.UserGenres)
+                .Include(x => x.RatedMovies)
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
 
@@ -87,7 +89,7 @@ namespace Infrastructure.v1.Repositories
         {
             var query = _context.Users.AsQueryable();
             query = query.Where(u => u.UserName != userParams.CurrentUsername);
-            
+
             query = userParams.OrderBy switch
             {
                 "created" => query.OrderByDescending(u => u.Created),

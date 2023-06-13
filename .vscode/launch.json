@@ -9,9 +9,9 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/API/bin/Debug/net7.0/API.dll",
+      "program": "${workspaceFolder}/src/backend/API/bin/Debug/net7.0/API.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/API",
+      "cwd": "${workspaceFolder}/src/backend/API",
       "stopAtEntry": false,
       "serverReadyAction": {
         "action": "openExternally",
