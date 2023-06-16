@@ -36,8 +36,8 @@ import { SeasonsTvDetailComponent } from './components/tv/tv-detail/seasons-tv-d
 import { SearchHomeComponent } from './components/home/search-home/search-home.component';
 import { SearchResultComponent } from './components/search/search-result/search-result.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { PlacementForBs5 } from 'ngx-bootstrap/positioning';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { RatingModule } from 'ngx-bootstrap/rating';
 
 @NgModule({
   declarations: [
@@ -80,6 +80,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     SharedModule,
     YouTubePlayerModule,
     TooltipModule.forRoot(),
+    RatingModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

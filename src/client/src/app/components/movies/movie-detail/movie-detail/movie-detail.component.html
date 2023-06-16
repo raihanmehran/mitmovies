@@ -43,7 +43,8 @@
                                 class="card bg-dark rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-bookmark fa-1x"></i>
                             </div>
-                            <div [ngClass]="{'text-warning': isRated, 'text-white':!isRated}"
+                            <div (click)="openRatingModal(ratingTemplate)"
+                                [ngClass]="{'text-warning': isRated, 'text-white':!isRated}"
                                 class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-star fa-1x"></i>
                             </div>
@@ -183,3 +184,35 @@
 </div>
 <!-- FOOTER -->
 <app-footer-home></app-footer-home>
+
+<!-- RATING MODAL -->
+<ng-template #ratingTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left" id="my-modal-title">
+            Movie Rating
+        </h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div id="my-modal-description">
+            <div class="container">
+                <h5>Rate Movie <span *ngIf="isRated" class="me-2 text-muted">{{userRating}}</span> </h5>
+                <div class="text-center">
+                    <rating [max]="10" (ngModelChange)="handleRating('add', $event)" [(ngModel)]="userRating"
+                        [customTemplate]="tt" class="rating">
+                    </rating>
+                    <ng-template #tt let-i="index" let-v="value">
+                        <button class="btn btn-{{i < v ? 'warning' : 'default'}}">
+                            {{i < v ? '&#9733;' : '&#9734;' }} </button>
+                    </ng-template>
+                </div>
+                <div class="mt-3" *ngIf="isRated">
+                    <button (click)="handleRating('remove')" class="btn btn-secondary">Remove Rating</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ng-template>

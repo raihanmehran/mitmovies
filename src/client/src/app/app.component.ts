@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AccountService } from './_services/account.service';
 import { User } from './_models/user';
-import { MemberService } from './_services/member.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +9,7 @@ import { MemberService } from './_services/member.service';
 })
 export class AppComponent {
   title = 'client';
-  constructor(
-    private accountService: AccountService,
-    private memberService: MemberService
-  ) {}
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
     this.setCurrentUser();
@@ -24,10 +20,5 @@ export class AppComponent {
     if (!userString) return;
     const user: User = JSON.parse(userString);
     this.accountService.setCurrentUser(user);
-    this.fetchMember();
-  }
-
-  fetchMember() {
-    this.memberService.getMember();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
@@ -7,12 +7,14 @@ import { environment } from 'src/environments/environment';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { FavoriteMoviesService } from 'src/app/_services/favorite-movies.service';
 import { User } from 'src/app/_models/user';
-import { AccountService } from 'src/app/_services/account.service';
 import { Member } from 'src/app/_models/member';
 import { MemberService } from 'src/app/_services/member.service';
 import { FavouriteMovie } from 'src/app/_models/favouriteMovie';
 import { WatchedMoviesService } from 'src/app/_services/watched-movies.service';
 import { WatchedMovie } from 'src/app/_models/watchedMovie';
+import { MovieRatingService } from 'src/app/_services/movie-rating.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { RatedMovie } from 'src/app/_models/ratedMovie';
 
 @Component({
   selector: 'app-movie-detail',
@@ -61,6 +63,8 @@ export class MovieDetailComponent implements OnInit {
   isWatched: boolean = false;
   isWatchLater: boolean = false;
   isRated: boolean = false;
+  userRating: number = 0;
+  modalRef?: BsModalRef;
 
   constructor(
     private moviesService: MoviesService,
@@ -68,7 +72,9 @@ export class MovieDetailComponent implements OnInit {
     private toastr: ToastrService,
     private favoriteMoviesService: FavoriteMoviesService,
     private memberService: MemberService,
-    private watchedMoviesService: WatchedMoviesService
+    private watchedMoviesService: WatchedMoviesService,
+    private movieRatingService: MovieRatingService,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -76,6 +82,13 @@ export class MovieDetailComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.movieId = params['movieid'];
       this.getMovie();
+    });
+  }
+
+  openRatingModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {
+      ariaDescribedby: 'my-modal-description',
+      ariaLabelledBy: 'my-modal-title',
     });
   }
 
@@ -173,6 +186,39 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
+  handleRating(predicate: string, rating?: any) {
+    if (this.movie) {
+      console.log(rating);
+
+      if (predicate === 'add') this.addMovieRating(rating);
+      else if (predicate === 'remove') this.removeMovieRating();
+    }
+  }
+
+  addMovieRating(rating: any) {
+    const ratedMovie: RatedMovie = {
+      movieId: this.movie.id,
+      rating: parseInt(rating),
+    };
+    this.movieRatingService.addRatedMovie(ratedMovie).subscribe({
+      next: (_) => {
+        this.isRated = true;
+        this.toastr.success('You rate this movie: ' + this.userRating, 'RATED');
+      },
+      error: (error) => this.toastr.error(error.error),
+    });
+  }
+
+  removeMovieRating() {
+    this.movieRatingService.removeRatedMovie(this.movie.id).subscribe({
+      next: (_) => {
+        this.isRated = false;
+        this.toastr.warning('Your rating has been removed', 'REMOVED');
+      },
+      error: (error) => this.toastr.error(error.error),
+    });
+  }
+
   handleWatched(id: number) {
     if (this.member) {
       if (id) {
@@ -191,7 +237,6 @@ export class MovieDetailComponent implements OnInit {
       this.toastr.warning('Please log in first', 'Not Authenticated!');
     }
   }
-
   addToWatchedMovies(id: number) {
     this.watchedMoviesService.addToWatchedMovies(id).subscribe({
       next: (movie) => {
@@ -221,6 +266,7 @@ export class MovieDetailComponent implements OnInit {
       if (this.movie) {
         this.checkIsFavorite();
         this.checkIsWatched();
+        this.checkIsRated();
       }
     }
   }
@@ -236,6 +282,16 @@ export class MovieDetailComponent implements OnInit {
     if (this.member?.watchedMovies) {
       this.member.watchedMovies.forEach((movie) => {
         if (movie.movieId === this.movie.id) this.isWatched = true;
+      });
+    }
+  }
+  private checkIsRated() {
+    if (this.member?.ratedMovies) {
+      this.member.ratedMovies.forEach((movie) => {
+        if (movie.movieId === this.movie.id) {
+          this.isRated = true;
+          this.userRating = movie.rating;
+        }
       });
     }
   }
