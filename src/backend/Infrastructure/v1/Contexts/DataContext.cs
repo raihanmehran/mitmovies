@@ -80,6 +80,13 @@ namespace Infrastructure.v1.Contexts
                 .IsRequired(required: false)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<AppUser>()
+                .HasMany(u => u.WatchLaters)
+                .WithOne(wl => wl.User)
+                .HasForeignKey(wl => wl.AppUserId)
+                .IsRequired(required: false)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<UserGenre>()
                 .HasKey(ug => new { ug.AppUserId, ug.GenreId });
 

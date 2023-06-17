@@ -138,6 +138,9 @@ namespace API.Extensions
             services.AddScoped<IRequestHandler<AddMovieRatingCommand, ResponseMessage>, AddMovieRatingCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveMovieRatingCommand, ResponseMessage>, RemoveMovieRatingCommandHandler>();
 
+            services.AddScoped<IWatchLaterRepository, WatchedLaterRepository>();
+            services.AddScoped<IRequestHandler<AddMovieToWatchedCommand, ResponseMessage>, AddMovieToWatchedCommandHandler>();
+
             return services;
         }
     }
