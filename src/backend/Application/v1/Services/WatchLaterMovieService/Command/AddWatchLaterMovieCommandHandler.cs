@@ -6,8 +6,8 @@ namespace Application.v1.Services.WatchLaterMovieService.Command
 {
     public class AddWatchLaterMovieCommandHandler : IRequestHandler<AddWatchLaterMovieCommand, ResponseMessage>
     {
-        private readonly IWatchLaterRepository _watchLaterRepository;
-        public AddWatchLaterMovieCommandHandler(IWatchLaterRepository watchLaterRepository)
+        private readonly IWatchLaterMoviesRepository _watchLaterRepository;
+        public AddWatchLaterMovieCommandHandler(IWatchLaterMoviesRepository watchLaterRepository)
         {
             _watchLaterRepository = watchLaterRepository;
         }

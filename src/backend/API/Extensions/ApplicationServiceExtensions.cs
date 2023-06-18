@@ -27,6 +27,7 @@ using Application.v1.Services.WatchedMovieService.Command;
 using Application.v1.Services.WatchedMovieService.Query;
 using Application.v1.Services.WatchedTvShowService.Command;
 using Application.v1.Services.WatchedTvShowService.Query;
+using Application.v1.Services.WatchLaterMovieService.Command;
 using Application.v1.Utils;
 using Domain.v1.Entities;
 using Domain.v1.Utils;
@@ -138,8 +139,8 @@ namespace API.Extensions
             services.AddScoped<IRequestHandler<AddMovieRatingCommand, ResponseMessage>, AddMovieRatingCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveMovieRatingCommand, ResponseMessage>, RemoveMovieRatingCommandHandler>();
 
-            services.AddScoped<IWatchLaterRepository, WatchedLaterRepository>();
-            services.AddScoped<IRequestHandler<AddMovieToWatchedCommand, ResponseMessage>, AddMovieToWatchedCommandHandler>();
+            services.AddScoped<IWatchLaterMoviesRepository, WatchLaterMoviesRepository>();
+            services.AddScoped<IRequestHandler<AddWatchLaterMovieCommand, ResponseMessage>, AddWatchLaterMovieCommandHandler>();
 
             return services;
         }

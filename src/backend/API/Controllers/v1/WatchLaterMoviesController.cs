@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.v1
 {
-    public class WatchLaterMovies : BaseApiController
+    public class WatchLaterMoviesController : BaseApiController
     {
         private readonly IMediator _mediator;
 
-        public WatchLaterMovies(IMediator mediator)
+        public WatchLaterMoviesController(IMediator mediator)
         {
             _mediator = mediator;
         }

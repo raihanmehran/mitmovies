@@ -5,11 +5,11 @@ using Infrastructure.v1.Contexts;
 
 namespace Infrastructure.v1.Repositories
 {
-    public class WatchedLaterRepository : IWatchLaterRepository
+    public class WatchLaterMoviesRepository : IWatchLaterMoviesRepository
     {
         private readonly DataContext _context;
 
-        public WatchedLaterRepository(DataContext context)
+        public WatchLaterMoviesRepository(DataContext context)
         {
             _context = context;
         }
@@ -50,21 +50,10 @@ namespace Infrastructure.v1.Repositories
                 x.TvShowId == tvShowId)) ? true : false;
         }
 
-        public Task<ResponseMessage> AddWatchLaterTvShowAsync(WatchLaterDto watchLaterDto, AppUser user)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<ResponseMessage> RemoveWatchLaterMovieAsync(int movieId, AppUser user)
         {
             throw new NotImplementedException();
         }
-
-        public Task<ResponseMessage> RemoveWatchLaterTvShowAsync(int tvShowId, AppUser user)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
