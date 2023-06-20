@@ -40,5 +40,29 @@ namespace API.Controllers.v1
             }
             catch (Exception) { throw; }
         }
+
+        [Authorize]
+        [HttpDelete("remove/{movieId}")]
+        public async Task<ActionResult<ResponseMessage>> RemoveWatchLaterMovie(int movieId)
+        {
+            try
+            {
+                var user = await _mediator.Send(new GetUserByUserIdQuery
+                {
+                    UserId = User.GetUserId()
+                });
+
+                var result = await _mediator.Send(new RemoveWatchLaterMovieCommand
+                {
+                    MovieId = movieId,
+                    User = user
+                });
+
+                if (result.StatusCode == 200) return Ok(new { result.Message });
+
+                return BadRequest(new { result.Message });
+            }
+            catch (Exception) { throw; }
+        }
     }
 }

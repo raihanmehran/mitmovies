@@ -141,6 +141,7 @@ namespace API.Extensions
 
             services.AddScoped<IWatchLaterMoviesRepository, WatchLaterMoviesRepository>();
             services.AddScoped<IRequestHandler<AddWatchLaterMovieCommand, ResponseMessage>, AddWatchLaterMovieCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveWatchLaterMovieCommand, ResponseMessage>, RemoveWatchLaterMovieCommandHandler>();
 
             return services;
         }

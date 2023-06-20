@@ -50,9 +50,27 @@ namespace Infrastructure.v1.Repositories
                 x.TvShowId == tvShowId)) ? true : false;
         }
 
-        public Task<ResponseMessage> RemoveWatchLaterMovieAsync(int movieId, AppUser user)
+        public async Task<ResponseMessage> RemoveWatchLaterMovieAsync(int movieId, AppUser user)
         {
-            throw new NotImplementedException();
+            if (movieId <= 0 || user is null) return Response(
+                statusCode: 401, message: "Data Not Provided");
+
+            if (!IsWatchLaterMovieExist(movieId: movieId, user: user)) return Response(
+                statusCode: 403, message: "The movie already removed");
+
+            var watchLaterMovie = GetWatchLaterMovie(movieId: movieId, user: user);
+            user.WatchLaters.Remove(watchLaterMovie);
+
+            if (await SaveAllAsync()) return Response(
+                statusCode: 200, message: "Movie Removed From Watch Laters");
+
+            return Response(statusCode: 500,
+                message: "Error While Removing Movie from Watch Laters");
+        }
+
+        private WatchLater GetWatchLaterMovie(int movieId, AppUser user)
+        {
+            return user.WatchLaters.SingleOrDefault(x => x.MovieId == movieId);
         }
         public async Task<bool> SaveAllAsync()
         {
