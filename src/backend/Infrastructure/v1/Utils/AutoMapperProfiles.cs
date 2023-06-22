@@ -33,6 +33,7 @@ namespace Infrastructure.v1.Utils
             CreateMap<UserGenre, UserGenreDto>();
             CreateMap<UserGenreDto, UserGenre>();
             CreateMap<RatedMovie, RatedMovieDto>();
+            CreateMap<WatchLater, WatchLaterDto>();
         }
     }
 }

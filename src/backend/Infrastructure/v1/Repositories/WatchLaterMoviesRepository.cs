@@ -16,7 +16,7 @@ namespace Infrastructure.v1.Repositories
 
         public async Task<ResponseMessage> AddWatchLaterMovieAsync(WatchLaterDto watchLaterDto, AppUser user)
         {
-            if (watchLaterDto is null || user is null) return Response(
+            if (watchLaterDto.MovieId is 0 || user is null) return Response(
                 statusCode: 404, message: "Data Not Provided");
 
             if (IsWatchLaterMovieExist(movieId: watchLaterDto.MovieId, user: user))
@@ -43,11 +43,6 @@ namespace Infrastructure.v1.Repositories
         {
             return (user.WatchLaters.Any(x =>
                 x.MovieId == movieId)) ? true : false;
-        }
-        public bool IsWatchLaterTvShowExist(int tvShowId, AppUser user)
-        {
-            return (user.WatchLaters.Any(x =>
-                x.TvShowId == tvShowId)) ? true : false;
         }
 
         public async Task<ResponseMessage> RemoveWatchLaterMovieAsync(int movieId, AppUser user)
