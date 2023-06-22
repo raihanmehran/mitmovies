@@ -16,6 +16,7 @@ using Application.v1.Services.MovieService.Query;
 using Application.v1.Services.PersonService.Query;
 using Application.v1.Services.PhotoService.Command;
 using Application.v1.Services.RatedMovieService.Command;
+using Application.v1.Services.RatedTvShowService.Command;
 using Application.v1.Services.TokenService.Command;
 using Application.v1.Services.TrendingMoviesService.Query;
 using Application.v1.Services.TvShowService.Query;
@@ -139,6 +140,10 @@ namespace API.Extensions
             services.AddScoped<IRatedMoviesRepository, RatedMoviesRepository>();
             services.AddScoped<IRequestHandler<AddMovieRatingCommand, ResponseMessage>, AddMovieRatingCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveMovieRatingCommand, ResponseMessage>, RemoveMovieRatingCommandHandler>();
+
+            services.AddScoped<IRatedTvShowsRepository, RatedTvShowsRepository>();
+            services.AddScoped<IRequestHandler<AddTvShowRatingCommand, ResponseMessage>, AddTvShowRatingCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveTvShowRatingCommand, ResponseMessage>, RemoveTvShowRatingCommandHandler>();
 
             services.AddScoped<IWatchLaterMoviesRepository, WatchLaterMoviesRepository>();
             services.AddScoped<IRequestHandler<AddWatchLaterMovieCommand, ResponseMessage>, AddWatchLaterMovieCommandHandler>();

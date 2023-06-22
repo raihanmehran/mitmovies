@@ -16,7 +16,7 @@ namespace Infrastructure.v1.Repositories
 
         public async Task<ResponseMessage> AddMovieRatingAsync(RatedMovieDto ratedMovieDto, AppUser user)
         {
-            if (ratedMovieDto is null || user is null) return Response(
+            if (ratedMovieDto.MovieId is 0 || user is null) return Response(
                             statusCode: 404, message: "Data Not Provided");
 
             var newRatedMovie = new RatedMovie
