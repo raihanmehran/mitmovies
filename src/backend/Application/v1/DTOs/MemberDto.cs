@@ -20,6 +20,7 @@ namespace Application.v1.DTOs
         public ICollection<WatchedTvShowDto> WatchedTvShows { get; set; }
         public ICollection<UserGenreDto> UserGenres { get; set; }
         public ICollection<RatedMovieDto> RatedMovies { get; set; }
+        public ICollection<RatedTvShowDto> RatedTvShows { get; set; }
         public ICollection<WatchLaterDto> WatchLaters { get; set; }
     }
 }

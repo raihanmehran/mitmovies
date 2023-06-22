@@ -30,6 +30,7 @@ namespace Infrastructure.v1.Repositories
                 .Include(x => x.WatchedTvShows)
                 .Include(x => x.UserGenres)
                 .Include(x => x.RatedMovies)
+                .Include(x => x.RatedTvShows)
                 .Include(x => x.WatchLaters)
                 .SingleOrDefaultAsync(x => x.Id == userId);
         }
@@ -70,6 +71,7 @@ namespace Infrastructure.v1.Repositories
                 .Include(x => x.WatchedTvShows)
                 .Include(x => x.UserGenres)
                 .Include(x => x.RatedMovies)
+                .Include(x => x.RatedTvShows)
                 .Include(x => x.WatchLaters)
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }

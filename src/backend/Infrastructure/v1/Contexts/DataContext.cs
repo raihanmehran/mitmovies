@@ -81,6 +81,13 @@ namespace Infrastructure.v1.Contexts
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<AppUser>()
+                .HasMany(u => u.RatedTvShows)
+                .WithOne(rm => rm.User)
+                .HasForeignKey(rm => rm.AppUserId)
+                .IsRequired(required: false)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<AppUser>()
                 .HasMany(u => u.WatchLaters)
                 .WithOne(wl => wl.User)
                 .HasForeignKey(wl => wl.AppUserId)

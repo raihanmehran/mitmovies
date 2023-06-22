@@ -19,6 +19,8 @@ namespace Infrastructure.v1.Utils
                     .MapFrom(src => src.FavouritePeople))
                 .ForMember(dest => dest.RatedMovies, opt => opt
                     .MapFrom(src => src.RatedMovies))
+                .ForMember(dest => dest.RatedTvShows, opt => opt
+                    .MapFrom(src => src.RatedTvShows))
                 .ForMember(dest => dest.WatchLaters, opt => opt
                     .MapFrom(src => src.WatchLaters));
             CreateMap<UserUpdateDto, AppUser>();
@@ -33,6 +35,7 @@ namespace Infrastructure.v1.Utils
             CreateMap<UserGenre, UserGenreDto>();
             CreateMap<UserGenreDto, UserGenre>();
             CreateMap<RatedMovie, RatedMovieDto>();
+            CreateMap<RatedTvShow, RatedTvShowDto>();
             CreateMap<WatchLater, WatchLaterDto>();
         }
     }
