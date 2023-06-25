@@ -1,16 +1,17 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { TvService } from 'src/app/_services/tv.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { take } from 'rxjs';
-import { User } from 'src/app/_models/user';
 import { Member } from 'src/app/_models/member';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { RatedTvShow } from 'src/app/_models/ratedTvShow';
 import { MemberService } from 'src/app/_services/member.service';
 import { TvRatingService } from 'src/app/_services/tv-rating.service';
+import { FavoriteTvService } from 'src/app/_services/favorite-tv.service';
+import { FavouriteTvShow } from 'src/app/_models/favouriteTvShow';
 
 @Component({
   selector: 'app-tv-detail',
@@ -66,7 +67,8 @@ export class TvDetailComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: BsModalService,
     private memberService: MemberService,
-    private tvRatingService: TvRatingService
+    private tvRatingService: TvRatingService,
+    private favoriteTvService: FavoriteTvService
   ) {}
 
   ngOnInit(): void {
@@ -151,7 +153,6 @@ export class TvDetailComponent implements OnInit {
       else if (predicate === 'remove') this.removeRating();
     }
   }
-
   addRating(rating: any) {
     const ratedTvShow: RatedTvShow = {
       tvShowId: this.tvShow.id,
@@ -168,7 +169,6 @@ export class TvDetailComponent implements OnInit {
       error: (error) => this.toastr.error(error.error, 'ERROR'),
     });
   }
-
   removeRating() {
     this.tvRatingService.removeRatedTvShow(this.tvShow.id).subscribe({
       next: (_) => {
@@ -177,6 +177,47 @@ export class TvDetailComponent implements OnInit {
         this.toastr.warning('Your rating removed', 'RATING REMOVED');
       },
       error: (error) => this.toastr.error(error.error, 'ERROR'),
+    });
+  }
+
+  // FAVORITE
+  handleFavorite(id: number) {
+    if (this.member) {
+      if (id) {
+        if (!this.isFavorite) {
+          this.addToFavoriteTvShow(id);
+        } else {
+          this.removeFromFavoriteTvShow(id);
+        }
+      } else {
+        this.toastr.warning(
+          'Please refresh the page to load the movie',
+          'NO MOVIE FOUND!'
+        );
+      }
+    } else {
+      this.toastr.warning('Please log in first', 'Not Authenticated!');
+    }
+  }
+
+  addToFavoriteTvShow(id: number) {
+    this.favoriteTvService.addToFavoriteTvShows(id).subscribe({
+      next: (_) => {
+        // this.memberService.addFavoriteMovie(favoriteTvShow as FavouriteTvShow);
+        this.isFavorite = true;
+        this.toastr.success('Tv Show Added To Favorites');
+      },
+      error: (error) => this.toastr.error(error.error, 'ERROR'),
+    });
+  }
+
+  removeFromFavoriteTvShow(id: number) {
+    this.favoriteTvService.removeFromFavoriteTvShows(id).subscribe({
+      next: (_) => {
+        // this.memberService.removeFavoriteMovie(id);
+        this.isFavorite = false;
+        this.toastr.success('TvShow Removed From Favorites', 'REMOVED');
+      },
     });
   }
 
