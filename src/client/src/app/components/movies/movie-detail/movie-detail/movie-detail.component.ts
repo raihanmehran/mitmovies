@@ -150,7 +150,10 @@ export class MovieDetailComponent implements OnInit {
   getMember() {
     this.memberService.member$.pipe().subscribe({
       next: (member) => {
-        if (member) this.member = member;
+        if (member) {
+          this.member = member;
+          this.checkMovie();
+        }
       },
     });
   }

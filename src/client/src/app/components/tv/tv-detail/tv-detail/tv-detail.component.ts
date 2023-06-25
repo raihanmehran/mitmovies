@@ -70,11 +70,9 @@ export class TvDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getMember();
     this.route.params.subscribe((params) => {
       this.tvShowId = params['tvshowid'];
       this.getTvShow();
-      console.log(this.member);
     });
   }
 
@@ -92,7 +90,12 @@ export class TvDetailComponent implements OnInit {
   getMember() {
     this.memberService.member$.pipe().subscribe({
       next: (member) => {
-        if (member) this.member = member;
+        if (member) {
+          this.member = member;
+          console.log(this.member);
+
+          this.checkTvShow();
+        }
       },
     });
   }
@@ -108,7 +111,7 @@ export class TvDetailComponent implements OnInit {
           if (tvShow) {
             this.tvShow = tvShow;
             this.scrollToTop();
-            this.checkTvShow();
+            this.getMember();
           } else {
             this.toastr.error(
               'Tv Show with id ' + this.tvShowId + ' not found',
@@ -169,6 +172,7 @@ export class TvDetailComponent implements OnInit {
   removeRating() {
     this.tvRatingService.removeRatedTvShow(this.tvShow.id).subscribe({
       next: (_) => {
+        this.userRating = 0;
         this.isRated = false;
         this.toastr.warning('Your rating removed', 'RATING REMOVED');
       },
@@ -201,8 +205,8 @@ export class TvDetailComponent implements OnInit {
     }
   }
   private checkIsRated() {
-    if (this.member?.rateTvShows) {
-      this.member.rateTvShows.forEach((tvShow) => {
+    if (this.member?.ratedTvShows) {
+      this.member.ratedTvShows.forEach((tvShow) => {
         if (tvShow.tvShowId === this.tvShow.id) {
           this.isRated = true;
           this.userRating = tvShow.rating;

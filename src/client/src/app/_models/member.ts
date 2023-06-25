@@ -24,6 +24,6 @@ export interface Member {
   watchedTvShows: any[];
   userGenres: any[];
   ratedMovies: RatedMovie[];
-  rateTvShows: RatedTvShow[];
+  ratedTvShows: RatedTvShow[];
   watchLaters: WatchLater[];
 }
