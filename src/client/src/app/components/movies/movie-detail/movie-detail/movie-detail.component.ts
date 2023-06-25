@@ -89,10 +89,14 @@ export class MovieDetailComponent implements OnInit {
   }
 
   openRatingModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, {
-      ariaDescribedby: 'my-modal-description',
-      ariaLabelledBy: 'my-modal-title',
-    });
+    if (this.member) {
+      this.modalRef = this.modalService.show(template, {
+        ariaDescribedby: 'my-modal-description',
+        ariaLabelledBy: 'my-modal-title',
+      });
+    } else {
+      this.toastr.warning('Please log in first', 'Not Authenticated!');
+    }
   }
 
   getMovie() {

@@ -70,16 +70,30 @@ export class TvDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getMember();
     this.route.params.subscribe((params) => {
       this.tvShowId = params['tvshowid'];
       this.getTvShow();
+      console.log(this.member);
     });
   }
 
   openRatingModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, {
-      ariaDescribedby: 'my-modal-description',
-      ariaLabelledBy: 'my-modal-title',
+    if (this.member) {
+      this.modalRef = this.modalService.show(template, {
+        ariaDescribedby: 'my-modal-description',
+        ariaLabelledBy: 'my-modal-title',
+      });
+    } else {
+      this.toastr.warning('Please log in first', 'Not Authenticated!');
+    }
+  }
+
+  getMember() {
+    this.memberService.member$.pipe().subscribe({
+      next: (member) => {
+        if (member) this.member = member;
+      },
     });
   }
 
