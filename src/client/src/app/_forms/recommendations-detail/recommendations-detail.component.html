@@ -3,7 +3,7 @@
         <h4>Recommendations</h4>
         <div class="media-tab-body">
             <div class="scrollable-container">
-                <div class="scrollable-row" *ngIf="recommendations">
+                <div class="scrollable-row" *ngIf="recommendations.length>0">
                     <div class="col" *ngFor="let recommendation of recommendations">
                         <a routerLink="/{{getRouterLink(recommendation.mediaType)}}/{{recommendation.id}}"
                             routerLinkActive="active">
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div class="m-3" *ngIf="!recommendations">
+            <div class="m-3" *ngIf="recommendations.length===0">
                 <h4 class="text-muted">No Recommendations Found</h4>
             </div>
         </div>

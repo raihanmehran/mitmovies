@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { take } from 'rxjs';
+import { User } from 'src/app/_models/user';
+import { Member } from 'src/app/_models/member';
 
 @Component({
   selector: 'app-tv-detail',
@@ -46,6 +48,12 @@ export class TvDetailComponent implements OnInit {
   instagramUrl = environment.instagramUrl;
   imdbUrl = environment.imdbUrl;
   twitterUrl = environment.twitterUrl;
+  member: Member | undefined;
+  isFavorite: boolean = false;
+  isWatched: boolean = false;
+  isWatchLater: boolean = false;
+  isRated: boolean = false;
+  userRating: number = 0;
 
   constructor(
     private tvService: TvService,
@@ -71,6 +79,7 @@ export class TvDetailComponent implements OnInit {
           if (tvShow) {
             this.tvShow = tvShow;
             this.scrollToTop();
+            this.checkTvShow();
           } else {
             this.toastr.error(
               'Tv Show with id ' + this.tvShowId + ' not found',
@@ -94,5 +103,52 @@ export class TvDetailComponent implements OnInit {
 
   getLanguageName(lgCode: string) {
     return lgCode === 'en' ? 'English' : lgCode;
+  }
+
+  getPopularity(avgVote: number) {
+    if (avgVote) return Math.floor((avgVote / 10) * 100);
+    return 0;
+  }
+
+  checkTvShow() {
+    if (this.member) {
+      if (this.tvShow) {
+        this.checkIsFavorite();
+        this.checkIsWatched();
+        this.checkIsRated();
+        this.checkIsWatchLater();
+      }
+    }
+  }
+  private checkIsFavorite() {
+    if (this.member?.favouriteTvShows) {
+      this.member.favouriteTvShows.forEach((tvShow) => {
+        if (tvShow.tvShowId === this.tvShow.id) this.isFavorite = true;
+      });
+    }
+  }
+  private checkIsWatched() {
+    if (this.member?.watchedTvShows) {
+      this.member.watchedTvShows.forEach((tvShow) => {
+        if (tvShow.tvShowId === this.tvShow.id) this.isWatched = true;
+      });
+    }
+  }
+  private checkIsRated() {
+    if (this.member?.rateTvShows) {
+      this.member.rateTvShows.forEach((tvShow) => {
+        if (tvShow.tvShowId === this.tvShow.id) {
+          this.isRated = true;
+          this.userRating = tvShow.rating;
+        }
+      });
+    }
+  }
+  private checkIsWatchLater() {
+    if (this.member?.watchLaters) {
+      this.member.watchLaters.forEach((tvShow) => {
+        if (tvShow.tvShowId === this.tvShow.id) this.isWatchLater = true;
+      });
+    }
   }
 }
