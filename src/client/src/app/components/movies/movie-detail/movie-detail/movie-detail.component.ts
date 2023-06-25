@@ -220,6 +220,7 @@ export class MovieDetailComponent implements OnInit {
   removeMovieRating() {
     this.movieRatingService.removeRatedMovie(this.movie.id).subscribe({
       next: (_) => {
+        this.userRating = 0;
         this.isRated = false;
         this.toastr.warning('Your rating has been removed', 'REMOVED');
       },

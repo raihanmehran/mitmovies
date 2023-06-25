@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { TvService } from 'src/app/_services/tv.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,6 +7,10 @@ import { environment } from 'src/environments/environment';
 import { take } from 'rxjs';
 import { User } from 'src/app/_models/user';
 import { Member } from 'src/app/_models/member';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { RatedTvShow } from 'src/app/_models/ratedTvShow';
+import { MemberService } from 'src/app/_services/member.service';
+import { TvRatingService } from 'src/app/_services/tv-rating.service';
 
 @Component({
   selector: 'app-tv-detail',
@@ -54,17 +58,28 @@ export class TvDetailComponent implements OnInit {
   isWatchLater: boolean = false;
   isRated: boolean = false;
   userRating: number = 0;
+  modalRef?: BsModalRef;
 
   constructor(
     private tvService: TvService,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private modalService: BsModalService,
+    private memberService: MemberService,
+    private tvRatingService: TvRatingService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.tvShowId = params['tvshowid'];
       this.getTvShow();
+    });
+  }
+
+  openRatingModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {
+      ariaDescribedby: 'my-modal-description',
+      ariaLabelledBy: 'my-modal-title',
     });
   }
 
@@ -108,6 +123,43 @@ export class TvDetailComponent implements OnInit {
   getPopularity(avgVote: number) {
     if (avgVote) return Math.floor((avgVote / 10) * 100);
     return 0;
+  }
+
+  // RATING:
+  handleRating(predicate: string, rating?: any) {
+    if (this.tvShow) {
+      this.toastr.show('Kudos!');
+
+      if (predicate === 'add') this.addRating(rating);
+      else if (predicate === 'remove') this.removeRating();
+    }
+  }
+
+  addRating(rating: any) {
+    const ratedTvShow: RatedTvShow = {
+      tvShowId: this.tvShow.id,
+      rating: parseInt(rating),
+    };
+    this.tvRatingService.addRatedTvShow(ratedTvShow).subscribe({
+      next: (_) => {
+        this.isRated = true;
+        this.toastr.success(
+          'You rate this Tv Show : ' + this.userRating,
+          'RATED'
+        );
+      },
+      error: (error) => this.toastr.error(error.error, 'ERROR'),
+    });
+  }
+
+  removeRating() {
+    this.tvRatingService.removeRatedTvShow(this.tvShow.id).subscribe({
+      next: (_) => {
+        this.isRated = false;
+        this.toastr.warning('Your rating removed', 'RATING REMOVED');
+      },
+      error: (error) => this.toastr.error(error.error, 'ERROR'),
+    });
   }
 
   checkTvShow() {
