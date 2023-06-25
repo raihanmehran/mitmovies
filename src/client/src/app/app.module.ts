@@ -38,6 +38,7 @@ import { SearchResultComponent } from './components/search/search-result/search-
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { RatingModule } from 'ngx-bootstrap/rating';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { RatingModule } from 'ngx-bootstrap/rating';
     YouTubePlayerModule,
     TooltipModule.forRoot(),
     RatingModule.forRoot(),
+    CarouselModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -1,3 +1,6 @@
+.bg-darkblue {
+  background-color: rgb(6, 34, 51);
+}
 .scrollable-container {
   overflow-x: auto;
   max-height: 400px;
@@ -27,4 +30,8 @@ a:hover {
 
 .scrollable-container::-webkit-scrollbar-thumb:hover {
   background-color: #555;
+}
+
+img {
+  cursor: zoom-in;
 }

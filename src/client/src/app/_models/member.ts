@@ -3,6 +3,8 @@ import { FavouritePerson } from './favouritePerson';
 import { FavouriteTvShow } from './favouriteTvShow';
 import { Photo } from './photo';
 import { RatedMovie } from './ratedMovie';
+import { RatedTvShow } from './ratedTvShow';
+import { WatchLater } from './watchLater';
 import { WatchedMovie } from './watchedMovie';
 
 export interface Member {
@@ -22,4 +24,6 @@ export interface Member {
   watchedTvShows: any[];
   userGenres: any[];
   ratedMovies: RatedMovie[];
+  rateTvShows: RatedTvShow[];
+  watchLaters: WatchLater[];
 }

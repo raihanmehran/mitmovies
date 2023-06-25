@@ -17,7 +17,7 @@ namespace Infrastructure.v1.Repositories
         public async Task<ResponseMessage> AddTvShowRatingAsync(RatedTvShowDto ratedTvShowDto, AppUser user)
         {
             if (ratedTvShowDto.TvShowId is 0 || user is null) return Response(
-                            statusCode: 404, message: "Data Not Provided");
+                statusCode: 404, message: "Data Not Provided");
 
             var newRatedTvShow = new RatedTvShow
             {

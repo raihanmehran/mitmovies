@@ -6,6 +6,7 @@ import { BehaviorSubject, take } from 'rxjs';
 import { FavouriteMovie } from '../_models/favouriteMovie';
 import { FavouriteTvShow } from '../_models/favouriteTvShow';
 import { WatchedMovie } from '../_models/watchedMovie';
+import { WatchLater } from '../_models/watchLater';
 
 @Injectable({
   providedIn: 'root',
@@ -58,7 +59,7 @@ export class MemberService {
     });
   }
 
-  // WATCH LATER MOVIES:
+  // WATCHED MOVIES:
   addWatchedMovie(movie: WatchedMovie) {
     this.member$.subscribe({
       next: (member) => {
@@ -80,6 +81,31 @@ export class MemberService {
               (movie) => movie.movieId !== id
             );
             console.log(member.watchedMovies);
+          }
+        }
+      },
+    });
+  }
+
+  // Watch Later Movies:
+  addWatchLaterMovie(movie: WatchLater) {
+    this.member$.subscribe({
+      next: (member) => {
+        if (member) {
+          member.watchLaters.push(movie);
+        }
+      },
+    });
+  }
+
+  removeWatchLater(id: number) {
+    this.member$.subscribe({
+      next: (member) => {
+        if (member) {
+          if (member.watchLaters) {
+            member.watchLaters = member.watchLaters.filter((movie) => {
+              return movie.id !== id;
+            });
           }
         }
       },

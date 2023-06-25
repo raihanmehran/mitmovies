@@ -16,12 +16,14 @@
                             <div class="scrollable-row">
                                 <div class="col" *ngFor="let image of images.backdrops">
                                     <div class="card m-0 p-0 rounded">
-                                        <img src="{{imageUrl}}{{image.filePath}}" alt="{{image.aspectRatio}}">
+                                        <img (click)="pictureModalTemplate.show()" src="{{imageUrl}}{{image.filePath}}"
+                                            alt="{{image.aspectRatio}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="p-2 my-2">
-                                <a class="h4" routerLink="casts" routerLinkActive="active">View All Images</a>
+                                <a class="h4" (click)="pictureModalTemplate.show()" routerLink="casts"
+                                    routerLinkActive="active">View All Images</a>
                             </div>
                         </div>
                         <div class="m-3" *ngIf="images.backdrops.length===0">
@@ -30,7 +32,7 @@
                     </div>
                 </div>
             </tab>
-            <tab>
+            <!-- <tab>
                 <ng-template tabHeading>
                     <h4>
                         <span class="badge bg-dark">Videos
@@ -57,7 +59,42 @@
                         </div>
                     </div>
                 </div>
-            </tab>
+            </tab> -->
         </tabset>
+    </div>
+</div>
+
+<!-- View Picture Model -->
+<!-- <p>Small modal window have small width on screens only above 768px(boostrap3) and 576px(bootstrap4)</p>
+<button class="btn btn-primary" (click)="lgModal.show()">Large modal</button> -->
+
+<div bsModal #pictureModalTemplate="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content bg-darkblue">
+            <div class="modal-header">
+                <h4 id="dialog-sizes-name1" class="modal-title pull-left text-white">Backdrops</h4>
+                <button type="button" class="btn-close close pull-right" (click)="pictureModalTemplate.hide()"
+                    aria-label="Close">
+                    <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="images.backdrops.length>0">
+                    <carousel>
+                        <div class="col" *ngFor="let image of images.backdrops">
+                            <slide>
+                                <div class="card m-0 p-0">
+                                    <img src="{{imageUrl}}{{image.filePath}}" alt="{{image.aspectRatio}}">
+                                </div>
+                            </slide>
+                        </div>
+                    </carousel>
+                </div>
+                <div class="m-3" *ngIf="images.backdrops.length===0">
+                    <h4 class="text-muted">No Images Found</h4>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

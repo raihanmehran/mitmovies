@@ -26,8 +26,10 @@
                             <span>{{ convertMinutesToTime(movie.runtime) }}</span>
                         </div>
                         <div class="d-flex d-inline mt-4 justify-content-left align-items-center">
-                            <div class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
-                                <i class="fa fa-user fa-1x"></i>
+                            <div style="width: 35px; height: 35px;"
+                                class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
+                                <!-- <i class="fa fa-user fa-1x"></i> -->
+                                <span class="fw-bold">{{getPopularity(movie.voteAverage)}}%</span>
                             </div>
                             <div (click)="handleWatched(movie.id)"
                                 [ngClass]="{'text-warning': isWatched, 'text-white':!isWatched}"
@@ -39,7 +41,8 @@
                                 class="card bg-dark rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-heart fa-1x"></i>
                             </div>
-                            <div [ngClass]="{'text-warning': isWatchLater, 'text-white':!isWatchLater}"
+                            <div (click)="handleWatchLater(movie.id)"
+                                [ngClass]="{'text-warning': isWatchLater, 'text-white':!isWatchLater}"
                                 class="card bg-dark rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-bookmark fa-1x"></i>
                             </div>
@@ -99,7 +102,7 @@
             <app-reviews-detail [reviews]="movie.reviews['results']"></app-reviews-detail>
             <hr />
             <!-- Media Section -->
-            <!-- <app-media-detail [videos]="movie.videos['results']" [images]="movie.images"></app-media-detail> -->
+            <app-media-detail [videos]="movie.videos['results']" [images]="movie.images"></app-media-detail>
             <!-- Recommendations -->
             <app-recommendations-detail
                 [recommendations]="movie.recommendations['results']"></app-recommendations-detail>

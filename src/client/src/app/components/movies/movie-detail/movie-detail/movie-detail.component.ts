@@ -15,6 +15,8 @@ import { WatchedMovie } from 'src/app/_models/watchedMovie';
 import { MovieRatingService } from 'src/app/_services/movie-rating.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { RatedMovie } from 'src/app/_models/ratedMovie';
+import { WatchLaterMovieService } from 'src/app/_services/watch-later-movie.service';
+import { WatchLater } from 'src/app/_models/watchLater';
 
 @Component({
   selector: 'app-movie-detail',
@@ -74,7 +76,8 @@ export class MovieDetailComponent implements OnInit {
     private memberService: MemberService,
     private watchedMoviesService: WatchedMoviesService,
     private movieRatingService: MovieRatingService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private watchLaterMovieService: WatchLaterMovieService
   ) {}
 
   ngOnInit(): void {
@@ -129,6 +132,11 @@ export class MovieDetailComponent implements OnInit {
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  getPopularity(avgVote: number) {
+    if (avgVote) return Math.floor((avgVote / 10) * 100);
+    return 0;
   }
 
   getLanguageName(lgCode: string) {
@@ -261,12 +269,55 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
+  handleWatchLater(id: number) {
+    if (this.member) {
+      if (id) {
+        if (!this.isWatchLater) {
+          this.addToWatchLaterMovie(id); // need to change the endpoint to use the id instead of receiving an object or handle it here
+        } else if (this.isWatched) {
+          this.removeFromWatchLaterMovies(id);
+        }
+      } else {
+        this.toastr.warning(
+          'Please refresh the page to load the movie',
+          'NO MOVIE FOUND!'
+        );
+      }
+    } else {
+      this.toastr.warning('Please log in first', 'Not Authenticated!');
+    }
+  }
+  addToWatchLaterMovie(id: number) {
+    const watchLaterMovie = {
+      movieId: id,
+    } as WatchLater;
+    this.watchLaterMovieService.addWatchLaterMovie(watchLaterMovie).subscribe({
+      next: (movie) => {
+        this.memberService.addWatchLaterMovie(watchLaterMovie);
+        this.isWatchLater = true;
+        this.toastr.success('Movied Added To Watch Later', 'ADDED');
+      },
+      error: (error) => this.toastr.error(error.error, 'ERROR'),
+    });
+  }
+
+  removeFromWatchLaterMovies(id: number) {
+    this.watchLaterMovieService.removeWatchLaterMovie(id).subscribe({
+      next: (movie) => {
+        this.memberService.removeWatchLater(id);
+        this.isWatchLater = false;
+        this.toastr.success('Movie Removed From Watch Later', 'REMOVED');
+      },
+    });
+  }
+
   checkMovie() {
     if (this.member) {
       if (this.movie) {
         this.checkIsFavorite();
         this.checkIsWatched();
         this.checkIsRated();
+        this.checkIsWatchLater();
       }
     }
   }
@@ -292,6 +343,13 @@ export class MovieDetailComponent implements OnInit {
           this.isRated = true;
           this.userRating = movie.rating;
         }
+      });
+    }
+  }
+  private checkIsWatchLater() {
+    if (this.member?.watchLaters) {
+      this.member.watchLaters.forEach((movie) => {
+        if (movie.movieId === this.movie.id) this.isWatchLater = true;
       });
     }
   }

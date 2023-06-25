@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { environment } from 'src/environments/environment';
 
 let apiLoaded = false;
@@ -11,13 +12,14 @@ let apiLoaded = false;
 export class MediaDetailComponent implements OnInit {
   @Input() videos: any;
   @Input() images: any;
+  modalRef?: BsModalRef;
 
   imageUrl = environment.imageUrl;
 
-  constructor() {}
+  constructor(private modalService: BsModalService) {}
 
   ngOnInit(): void {
-    if (!apiLoaded) this.loadiFrameAPI();
+    // if (!apiLoaded) this.loadiFrameAPI();
   }
 
   loadiFrameAPI() {
@@ -26,5 +28,12 @@ export class MediaDetailComponent implements OnInit {
     document.body.appendChild(tag);
 
     apiLoaded = true;
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {
+      ariaDescribedby: 'my-modal-description',
+      ariaLabelledBy: 'my-modal-title',
+    });
   }
 }
