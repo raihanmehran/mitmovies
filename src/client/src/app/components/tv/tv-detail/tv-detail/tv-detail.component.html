@@ -39,7 +39,8 @@
                                 class="card bg-dark rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-heart fa-1x"></i>
                             </div>
-                            <div [ngClass]="{'text-warning': isWatchLater, 'text-white':!isWatchLater}"
+                            <div (click)="handleWatchLater(tvShow.id)"
+                                [ngClass]="{'text-warning': isWatchLater, 'text-white':!isWatchLater}"
                                 class="card bg-dark rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-bookmark fa-1x"></i>
                             </div>

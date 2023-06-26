@@ -12,6 +12,8 @@ import { MemberService } from 'src/app/_services/member.service';
 import { TvRatingService } from 'src/app/_services/tv-rating.service';
 import { FavoriteTvService } from 'src/app/_services/favorite-tv.service';
 import { FavouriteTvShow } from 'src/app/_models/favouriteTvShow';
+import { WatchLaterTvService } from 'src/app/_services/watch-later-tv.service';
+import { WatchLater } from 'src/app/_models/watchLater';
 
 @Component({
   selector: 'app-tv-detail',
@@ -68,7 +70,8 @@ export class TvDetailComponent implements OnInit {
     private modalService: BsModalService,
     private memberService: MemberService,
     private tvRatingService: TvRatingService,
-    private favoriteTvService: FavoriteTvService
+    private favoriteTvService: FavoriteTvService,
+    private watchLaterTvService: WatchLaterTvService
   ) {}
 
   ngOnInit(): void {
@@ -199,7 +202,6 @@ export class TvDetailComponent implements OnInit {
       this.toastr.warning('Please log in first', 'Not Authenticated!');
     }
   }
-
   addToFavoriteTvShow(id: number) {
     this.favoriteTvService.addToFavoriteTvShows(id).subscribe({
       next: (_) => {
@@ -210,13 +212,44 @@ export class TvDetailComponent implements OnInit {
       error: (error) => this.toastr.error(error.error, 'ERROR'),
     });
   }
-
   removeFromFavoriteTvShow(id: number) {
     this.favoriteTvService.removeFromFavoriteTvShows(id).subscribe({
       next: (_) => {
         // this.memberService.removeFavoriteMovie(id);
         this.isFavorite = false;
         this.toastr.success('TvShow Removed From Favorites', 'REMOVED');
+      },
+    });
+  }
+
+  // WATCH LATER
+  handleWatchLater(id: number) {
+    if (this.member) {
+      if (id) {
+        if (!this.isWatchLater) {
+          this.addToWatchLater(id);
+        } else if (this.isWatchLater) {
+          this.removeFromWatchLater(id);
+        }
+      }
+    }
+  }
+  addToWatchLater(id: number) {
+    const watchLaterTvShow = {
+      tvShowId: id,
+    } as WatchLater;
+    this.watchLaterTvService.addWatchLaterTvShow(watchLaterTvShow).subscribe({
+      next: () => {
+        this.isWatchLater = true;
+        this.toastr.success('Tv Show Added To Watch Later', 'ADDED');
+      },
+    });
+  }
+  removeFromWatchLater(id: number) {
+    this.watchLaterTvService.removeWatchLaterTvShow(id).subscribe({
+      next: () => {
+        this.isWatchLater = false;
+        this.toastr.success('Tv Show Removed From Watch Later', 'REMOVED');
       },
     });
   }
