@@ -266,7 +266,6 @@ export class MovieDetailComponent implements OnInit {
       error: (error) => this.toastr.error(error.error, 'ERROR'),
     });
   }
-
   removeFromWatchedMovies(id: number) {
     this.watchedMoviesService.removeFromWatchedMovies(id).subscribe({
       next: (movie) => {

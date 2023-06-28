@@ -30,7 +30,8 @@
                                 <!-- <i class="fa fa-user fa-1x"></i> -->
                                 <span class="fw-bold">{{getPopularity(tvShow.voteAverage)}}%</span>
                             </div>
-                            <div [ngClass]="{'text-warning': isWatched, 'text-white':!isWatched}"
+                            <div (click)="handleWatched(tvShow.id)"
+                                [ngClass]="{'text-warning': isWatched, 'text-white':!isWatched}"
                                 class="card bg-dark text-white rounded-circle border-0 p-2 me-3">
                                 <i class="fa fa-list fa-1x"></i>
                             </div>

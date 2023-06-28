@@ -14,6 +14,7 @@ import { FavoriteTvService } from 'src/app/_services/favorite-tv.service';
 import { FavouriteTvShow } from 'src/app/_models/favouriteTvShow';
 import { WatchLaterTvService } from 'src/app/_services/watch-later-tv.service';
 import { WatchLater } from 'src/app/_models/watchLater';
+import { WatchedTvService } from 'src/app/_services/watched-tv.service';
 
 @Component({
   selector: 'app-tv-detail',
@@ -71,7 +72,8 @@ export class TvDetailComponent implements OnInit {
     private memberService: MemberService,
     private tvRatingService: TvRatingService,
     private favoriteTvService: FavoriteTvService,
-    private watchLaterTvService: WatchLaterTvService
+    private watchLaterTvService: WatchLaterTvService,
+    private watchedTvService: WatchedTvService
   ) {}
 
   ngOnInit(): void {
@@ -255,9 +257,35 @@ export class TvDetailComponent implements OnInit {
   }
 
   // WATCHED
-  handleWatched(id: number) {}
-  addWatched(id: number) {}
-  removeWatched(id: number) {}
+  handleWatched(id: number) {
+    if (this.member) {
+      if (id) {
+        if (!this.isWatched) {
+          this.addWatched(id);
+        } else if (this.isWatched) {
+          this.removeWatched(id);
+        }
+      }
+    }
+  }
+  addWatched(id: number) {
+    this.watchedTvService.addToWatchedTvShows(id).subscribe({
+      next: () => {
+        this.isWatched = true;
+        this.toastr.success('Tv Show Added To Watched', 'ADDED');
+      },
+      error: (error) => this.toastr.error(error.error, 'ERROR'),
+    });
+  }
+  removeWatched(id: number) {
+    this.watchedTvService.removeFromWatchedTvShows(id).subscribe({
+      next: () => {
+        this.isWatched = false;
+        this.toastr.warning('Tv Show removed from watched', 'REMOVED');
+      },
+      error: (error) => this.toastr.error(error.error, 'ERROR'),
+    });
+  }
 
   checkTvShow() {
     if (this.member) {
