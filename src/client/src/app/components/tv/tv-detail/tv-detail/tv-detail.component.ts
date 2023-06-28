@@ -254,6 +254,11 @@ export class TvDetailComponent implements OnInit {
     });
   }
 
+  // WATCHED
+  handleWatched(id: number) {}
+  addWatched(id: number) {}
+  removeWatched(id: number) {}
+
   checkTvShow() {
     if (this.member) {
       if (this.tvShow) {
