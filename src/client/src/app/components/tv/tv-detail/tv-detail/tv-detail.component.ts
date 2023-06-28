@@ -11,7 +11,6 @@ import { RatedTvShow } from 'src/app/_models/ratedTvShow';
 import { MemberService } from 'src/app/_services/member.service';
 import { TvRatingService } from 'src/app/_services/tv-rating.service';
 import { FavoriteTvService } from 'src/app/_services/favorite-tv.service';
-import { FavouriteTvShow } from 'src/app/_models/favouriteTvShow';
 import { WatchLaterTvService } from 'src/app/_services/watch-later-tv.service';
 import { WatchLater } from 'src/app/_models/watchLater';
 import { WatchedTvService } from 'src/app/_services/watched-tv.service';
@@ -163,25 +162,31 @@ export class TvDetailComponent implements OnInit {
       tvShowId: this.tvShow.id,
       rating: parseInt(rating),
     };
+    this.isRated = true;
     this.tvRatingService.addRatedTvShow(ratedTvShow).subscribe({
       next: (_) => {
-        this.isRated = true;
         this.toastr.success(
           'You rate this Tv Show : ' + this.userRating,
           'RATED'
         );
       },
-      error: (error) => this.toastr.error(error.error, 'ERROR'),
+      error: (error) => {
+        this.isRated = false;
+        this.toastr.error(error.error, 'ERROR');
+      },
     });
   }
   removeRating() {
+    this.isRated = false;
     this.tvRatingService.removeRatedTvShow(this.tvShow.id).subscribe({
       next: (_) => {
         this.userRating = 0;
-        this.isRated = false;
         this.toastr.warning('Your rating removed', 'RATING REMOVED');
       },
-      error: (error) => this.toastr.error(error.error, 'ERROR'),
+      error: (error) => {
+        this.isRated = true;
+        this.toastr.error(error.error, 'ERROR');
+      },
     });
   }
 
@@ -205,21 +210,28 @@ export class TvDetailComponent implements OnInit {
     }
   }
   addToFavoriteTvShow(id: number) {
+    this.isFavorite = true;
     this.favoriteTvService.addToFavoriteTvShows(id).subscribe({
       next: (_) => {
         // this.memberService.addFavoriteMovie(favoriteTvShow as FavouriteTvShow);
-        this.isFavorite = true;
         this.toastr.success('Tv Show Added To Favorites');
       },
-      error: (error) => this.toastr.error(error.error, 'ERROR'),
+      error: (error) => {
+        this.isFavorite = false;
+        this.toastr.error(error.error, 'ERROR');
+      },
     });
   }
   removeFromFavoriteTvShow(id: number) {
+    this.isFavorite = false;
     this.favoriteTvService.removeFromFavoriteTvShows(id).subscribe({
       next: (_) => {
         // this.memberService.removeFavoriteMovie(id);
-        this.isFavorite = false;
         this.toastr.success('TvShow Removed From Favorites', 'REMOVED');
+      },
+      error: (error) => {
+        this.isFavorite = true;
+        this.toastr.error(error.error, 'ERROR');
       },
     });
   }
@@ -240,18 +252,26 @@ export class TvDetailComponent implements OnInit {
     const watchLaterTvShow = {
       tvShowId: id,
     } as WatchLater;
+    this.isWatchLater = true;
     this.watchLaterTvService.addWatchLaterTvShow(watchLaterTvShow).subscribe({
       next: () => {
-        this.isWatchLater = true;
         this.toastr.success('Tv Show Added To Watch Later', 'ADDED');
+      },
+      error: (error) => {
+        this.isWatchLater = false;
+        this.toastr.error(error.error, 'ERROR');
       },
     });
   }
   removeFromWatchLater(id: number) {
+    this.isWatchLater = false;
     this.watchLaterTvService.removeWatchLaterTvShow(id).subscribe({
       next: () => {
-        this.isWatchLater = false;
         this.toastr.success('Tv Show Removed From Watch Later', 'REMOVED');
+      },
+      error: (error) => {
+        this.isWatchLater = true;
+        this.toastr.error(error.error, 'ERROR');
       },
     });
   }
@@ -269,21 +289,27 @@ export class TvDetailComponent implements OnInit {
     }
   }
   addWatched(id: number) {
+    this.isWatched = true;
     this.watchedTvService.addToWatchedTvShows(id).subscribe({
       next: () => {
-        this.isWatched = true;
         this.toastr.success('Tv Show Added To Watched', 'ADDED');
       },
-      error: (error) => this.toastr.error(error.error, 'ERROR'),
+      error: (error) => {
+        this.isWatched = false;
+        this.toastr.error(error.error, 'ERROR');
+      },
     });
   }
   removeWatched(id: number) {
+    this.isWatched = false;
     this.watchedTvService.removeFromWatchedTvShows(id).subscribe({
       next: () => {
-        this.isWatched = false;
         this.toastr.warning('Tv Show removed from watched', 'REMOVED');
       },
-      error: (error) => this.toastr.error(error.error, 'ERROR'),
+      error: (error) => {
+        this.isWatched = true;
+        this.toastr.error(error.error, 'ERROR');
+      },
     });
   }
 
