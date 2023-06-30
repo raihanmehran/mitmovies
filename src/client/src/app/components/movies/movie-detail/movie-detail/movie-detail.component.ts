@@ -178,60 +178,71 @@ export class MovieDetailComponent implements OnInit {
   }
 
   addToFavoriteMovies(id: number) {
+    this.isFavorite = true;
     this.favoriteMoviesService.addToFavoriteMovies(id).subscribe({
       next: (movie) => {
         const favoriteMovie = {
           movieId: id,
         };
         this.memberService.addFavoriteMovie(favoriteMovie as FavouriteMovie);
-        this.isFavorite = true;
         this.toastr.success('Movied Added To Favorites');
       },
-      error: (error) => this.toastr.error(error.error, 'ERROR'),
+      error: (error) => {
+        this.isFavorite = false;
+        this.toastr.error(error.error, 'ERROR');
+      },
     });
   }
 
   removeFromFavoriteMovies(id: number) {
+    this.isFavorite = false;
     this.favoriteMoviesService.removeFromFavoriteMovies(id).subscribe({
       next: (movie) => {
         this.memberService.removeFavoriteMovie(id);
-        this.isFavorite = false;
         this.toastr.success('Movie Removed From Favorites', 'REMOVED');
+      },
+      error: (error) => {
+        this.isFavorite = true;
+        this.toastr.error(error.error, 'ERROR');
       },
     });
   }
 
   handleRating(predicate: string, rating?: any) {
     if (this.movie) {
-      console.log(rating);
-
       if (predicate === 'add') this.addMovieRating(rating);
       else if (predicate === 'remove') this.removeMovieRating();
     }
   }
 
   addMovieRating(rating: any) {
+    this.isRated = true;
     const ratedMovie: RatedMovie = {
       movieId: this.movie.id,
       rating: parseInt(rating),
     };
     this.movieRatingService.addRatedMovie(ratedMovie).subscribe({
       next: (_) => {
-        this.isRated = true;
         this.toastr.success('You rate this movie: ' + this.userRating, 'RATED');
       },
-      error: (error) => this.toastr.error(error.error),
+      error: (error) => {
+        this.isRated = false;
+        this.toastr.error(error.error, 'ERROR');
+      },
     });
   }
 
   removeMovieRating() {
+    this.isRated = false;
     this.movieRatingService.removeRatedMovie(this.movie.id).subscribe({
       next: (_) => {
         this.userRating = 0;
-        this.isRated = false;
         this.toastr.warning('Your rating has been removed', 'REMOVED');
       },
-      error: (error) => this.toastr.error(error.error),
+      error: (error) => {
+        this.isRated = true;
+        this.toastr.error(error.error, 'ERROR');
+      },
     });
   }
 
@@ -254,24 +265,31 @@ export class MovieDetailComponent implements OnInit {
     }
   }
   addToWatchedMovies(id: number) {
+    this.isWatched = true;
     this.watchedMoviesService.addToWatchedMovies(id).subscribe({
       next: (movie) => {
         const watchedMovie = {
           movieId: id,
         };
         this.memberService.addWatchedMovie(watchedMovie as WatchedMovie);
-        this.isWatched = true;
         this.toastr.success('Movied Added To Watched', 'ADDED');
       },
-      error: (error) => this.toastr.error(error.error, 'ERROR'),
+      error: (error) => {
+        this.isWatched = false;
+        this.toastr.error(error.error, 'ERROR');
+      },
     });
   }
   removeFromWatchedMovies(id: number) {
+    this.isWatched = false;
     this.watchedMoviesService.removeFromWatchedMovies(id).subscribe({
       next: (movie) => {
         this.memberService.removeWatchedMovie(id);
-        this.isWatched = false;
         this.toastr.success('Movie Removed From Watched', 'REMOVED');
+      },
+      error: (error) => {
+        this.isWatched = true;
+        this.toastr.error(error.error, 'ERROR');
       },
     });
   }
@@ -295,25 +313,32 @@ export class MovieDetailComponent implements OnInit {
     }
   }
   addToWatchLaterMovie(id: number) {
+    this.isWatchLater = true;
     const watchLaterMovie = {
       movieId: id,
     } as WatchLater;
     this.watchLaterMovieService.addWatchLaterMovie(watchLaterMovie).subscribe({
       next: (movie) => {
         this.memberService.addWatchLaterMovie(watchLaterMovie);
-        this.isWatchLater = true;
         this.toastr.success('Movied Added To Watch Later', 'ADDED');
       },
-      error: (error) => this.toastr.error(error.error, 'ERROR'),
+      error: (error) => {
+        this.isWatchLater = false;
+        this.toastr.error(error.error, 'ERROR');
+      },
     });
   }
 
   removeFromWatchLaterMovies(id: number) {
+    this.isWatchLater = false;
     this.watchLaterMovieService.removeWatchLaterMovie(id).subscribe({
       next: (movie) => {
         this.memberService.removeWatchLater(id);
-        this.isWatchLater = false;
         this.toastr.success('Movie Removed From Watch Later', 'REMOVED');
+      },
+      error: (error) => {
+        this.isWatchLater = true;
+        this.toastr.error(error.error, 'ERROR');
       },
     });
   }
