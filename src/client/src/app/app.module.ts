@@ -39,6 +39,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { UpcomingMoviesComponent } from './components/movies/upcoming-movies/upcoming-movies.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     SeasonsTvDetailComponent,
     SearchHomeComponent,
     SearchResultComponent,
+    UpcomingMoviesComponent,
   ],
   imports: [
     CommonModule,
