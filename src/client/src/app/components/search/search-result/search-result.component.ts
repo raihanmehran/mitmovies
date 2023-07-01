@@ -31,8 +31,6 @@ export class SearchResultComponent implements OnInit {
     this.route.params.subscribe((params) => {
       const searchQuery = params['query'];
       if (searchQuery) {
-        console.log(searchQuery);
-
         this.getSearchResult(searchQuery);
       } else console.log('Empty');
     });

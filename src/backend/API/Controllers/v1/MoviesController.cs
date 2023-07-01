@@ -20,7 +20,7 @@ namespace API.Controllers.v1
             {
                 var result = await _mediator.Send(new GetMovieByIdQuery { MovieId = movieId });
 
-                if (result.Data == null) return NotFound(result);
+                if (result.Data == null) return NotFound(new { result.Message }); ;
 
                 return Ok(result.Data);
             }
@@ -37,7 +37,7 @@ namespace API.Controllers.v1
             {
                 var result = await _mediator.Send(new GetMovieDetailByIdQuery { MovieId = movieId });
 
-                if (result.Data == null) return NotFound(result);
+                if (result.Data == null) return NotFound(new { result.Message }); ;
 
                 return Ok(result.Data);
             }
@@ -54,7 +54,7 @@ namespace API.Controllers.v1
             {
                 var result = await _mediator.Send(new SearchMovieQuery { Payload = query });
 
-                if (result.Data == null) return NotFound(result.Data);
+                if (result.Data == null) return NotFound(new { result.Message }); ;
 
                 return Ok(result.Data);
             }

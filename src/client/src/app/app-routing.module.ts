@@ -7,11 +7,16 @@ import { MovieDetailComponent } from './components/movies/movie-detail/movie-det
 import { TvDetailComponent } from './components/tv/tv-detail/tv-detail/tv-detail.component';
 import { SearchResultComponent } from './components/search/search-result/search-result.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { UpcomingMoviesComponent } from './components/movies/upcoming-movies/upcoming-movies.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'account/auth', component: AuthComponent },
+  {
+    path: 'movies/upcoming',
+    component: UpcomingMoviesComponent,
+  },
   {
     path: 'movies/:movieid',
     component: MovieDetailComponent,
