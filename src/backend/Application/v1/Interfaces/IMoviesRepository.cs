@@ -8,7 +8,7 @@ namespace Application.v1.Interfaces
         Task<ResponseMessage> GetMovieByIdAsync(int movieId);
         Task<ResponseMessage> GetMovieDetailByIdAsync(int movieId);
         Task<ResponseMessage> SearchMovieAsync(string payload);
-        Task<ResponseMessage> GetUpcomingMoviesAsync();
+        Task<ResponseMessage> GetUpcomingMoviesAsync(int page = 0);
         Task<ResponseMessage> GetPopularMoviesAsync();
         Task<ResponseMessage> GetTopRatedMoviesAsync();
     }

@@ -1,6 +1,6 @@
 <div class="container-fluid bg-darkblue">
     <div class="container py-4">
-        <h1>Upcoming Movies</h1>
+        <h1 class="text-white">Upcoming Movies</h1>
     </div>
 </div>
 <div class="fluid-container">
@@ -8,7 +8,7 @@
         <div class="col-md-4 mb-2">
             <div class="card shadow border-0 rounded-4">
                 <div class="card-header bg-darkblue text-white">
-                    <span class="h4">Search Results</span>
+                    <span class="h4">{{response?.totalResults || 0}} Upcoming Movies Found!</span>
                 </div>
                 <div class="card-body">
                     <div class="border border-4 rounded-4 mb-2 a">
@@ -55,6 +55,17 @@
             </div>
             <div *ngIf="movies.length===0">
                 <h3 class="text-muted">No movies found!</h3>
+            </div>
+            <!-- PAGINATION -->
+            <div class="row">
+                <div class="col-xs-12 col-12">
+                    <div *ngIf="response">
+                        <pagination [(ngModel)]="response.page" (pageChanged)="pageChanged($event)" [itemsPerPage]="20"
+                            [totalItems]="response.totalResults" [rotate]="true" [maxSize]="5" [boundaryLinks]="true"
+                            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+                        </pagination>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

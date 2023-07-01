@@ -65,12 +65,12 @@ namespace Infrastructure.v1.Repositories
             return result;
         }
 
-        public async Task<ResponseMessage> GetUpcomingMoviesAsync()
+        public async Task<ResponseMessage> GetUpcomingMoviesAsync(int page = 1)
         {
             ResponseMessage result = new ResponseMessage();
 
             result.Data = await _tmdbContext.client
-                .GetMovieUpcomingListAsync();
+                .GetMovieUpcomingListAsync(page: page);
 
             return result;
         }

@@ -40,6 +40,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { UpcomingMoviesComponent } from './components/movies/upcoming-movies/upcoming-movies.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { UpcomingMoviesComponent } from './components/movies/upcoming-movies/upc
     TooltipModule.forRoot(),
     RatingModule.forRoot(),
     CarouselModule.forRoot(),
+    PaginationModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

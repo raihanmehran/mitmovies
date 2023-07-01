@@ -65,11 +65,11 @@ namespace API.Controllers.v1
         }
 
         [HttpGet("upcoming")]
-        public async Task<ActionResult<ResponseMessage>> GetUpcomingMovies()
+        public async Task<ActionResult<ResponseMessage>> GetUpcomingMovies([FromQuery] int page)
         {
             try
             {
-                var result = await _mediator.Send(new GetUpcomingMoviesQuery { });
+                var result = await _mediator.Send(new GetUpcomingMoviesQuery { Page = page });
 
                 if (result.Data == null) return NotFound();
 
