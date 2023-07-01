@@ -23,11 +23,11 @@ export class UpcomingMoviesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUpcomingMovies();
+    this.getUpcomingMovies(1);
   }
 
-  getUpcomingMovies() {
-    this.upcomingMoviesService.getUpcomingMovies(1).subscribe({
+  getUpcomingMovies(page: number) {
+    this.upcomingMoviesService.getUpcomingMovies(page).subscribe({
       next: (response: any) => {
         if (response) {
           this.movies = response.results as Movie[];
@@ -37,7 +37,6 @@ export class UpcomingMoviesComponent implements OnInit {
             totalPages: response.totalPages,
             totalResults: response.totalResults,
           };
-          console.log(this.response);
         }
       },
       error: (error) => this.toastr.error(error.error, 'ERROR'),
@@ -45,20 +44,6 @@ export class UpcomingMoviesComponent implements OnInit {
   }
 
   pageChanged(event: PageChangedEvent) {
-    this.upcomingMoviesService.getUpcomingMovies(event.page).subscribe({
-      next: (response: any) => {
-        if (response) {
-          this.movies = response.results as Movie[];
-          this.response = {
-            dates: response.dates,
-            page: response.page,
-            totalPages: response.totalPages,
-            totalResults: response.totalResults,
-          };
-          console.log(this.response);
-        }
-      },
-      error: (error) => this.toastr.error(error.error, 'ERROR'),
-    });
+    this.getUpcomingMovies(event.page);
   }
 }
