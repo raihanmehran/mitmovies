@@ -18,22 +18,14 @@ export class UpcomingMoviesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('God Morgen');
-
     this.getUpcomingMovies();
   }
 
   getUpcomingMovies() {
-    console.log('Hi');
-
     this.upcomingMoviesService.getUpcomingMovies();
-    console.log('bye');
 
     this.upcomingMoviesService.upcomingMovies$.subscribe({
       next: (movies) => {
-        console.log('hi again');
-
-        console.log(movies);
         if (movies) this.movies = movies;
       },
       error: (error) => this.toastr.error(error.error, 'ERROR'),

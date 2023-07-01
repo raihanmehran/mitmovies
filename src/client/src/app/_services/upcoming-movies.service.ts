@@ -16,12 +16,6 @@ export class UpcomingMoviesService {
   constructor(private http: HttpClient) {}
 
   getUpcomingMovies() {
-    // return this.http.get(this.baseUrl + 'movies/upcoming').subscribe({
-    //   next: (response) => this.upcomingMoviesSource.next(response),
-    //   error: (error) => console.log(error.error),
-    // });
-    console.log('Hey');
-
     return this.http.get<any[]>(this.baseUrl + 'movies/upcoming').subscribe({
       next: (response: any) =>
         this.upcomingMoviesSource.next(response.results as Movie[]),
