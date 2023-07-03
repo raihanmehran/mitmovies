@@ -45,5 +45,9 @@ export class UpcomingMoviesComponent implements OnInit {
 
   pageChanged(event: PageChangedEvent) {
     this.getUpcomingMovies(event.page);
+    this.scrollToTop();
+  }
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

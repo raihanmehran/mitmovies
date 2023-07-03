@@ -45,12 +45,12 @@ namespace Infrastructure.v1.Repositories
             return result;
         }
 
-        public async Task<ResponseMessage> GetPopularMoviesAsync()
+        public async Task<ResponseMessage> GetPopularMoviesAsync(int page = 1)
         {
             var result = new ResponseMessage();
 
             result.Data = await _tmdbContext.client
-                .GetMoviePopularListAsync();
+                .GetMoviePopularListAsync(page: page);
 
             return result;
         }

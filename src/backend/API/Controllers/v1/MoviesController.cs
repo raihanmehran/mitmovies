@@ -82,11 +82,11 @@ namespace API.Controllers.v1
         }
 
         [HttpGet("popular")]
-        public async Task<ActionResult<ResponseMessage>> GetPopularMovies()
+        public async Task<ActionResult<ResponseMessage>> GetPopularMovies([FromQuery] int page)
         {
             try
             {
-                var result = await _mediator.Send(new GetPopularMoviesQuery { });
+                var result = await _mediator.Send(new GetPopularMoviesQuery { Page = page });
 
                 if (result.Data == null) return NotFound();
 

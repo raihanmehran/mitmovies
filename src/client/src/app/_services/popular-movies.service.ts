@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Movie } from '../_models/movie';
 
@@ -9,18 +9,17 @@ import { Movie } from '../_models/movie';
 })
 export class PopularMoviesService {
   baseUrl = environment.apiUrl;
-
-  private popularMoviesSource = new BehaviorSubject<Movie[] | null>(null);
-  popularMovies$ = this.popularMoviesSource.asObservable();
+  private cache: { [key: string]: any } = {};
 
   constructor(private http: HttpClient) {}
 
-  getPopularMovies() {
-    this.http.get<any[]>(this.baseUrl + 'movies/popular').subscribe({
-      next: (movies: any) => {
-        this.popularMoviesSource.next(movies.results as Movie[]);
-      },
-      error: (error) => console.log(error.error),
-    });
+  getPopularMovies(page: number): Observable<any> {
+    const cacheKey = `popular${page}`;
+
+    if (this.cache[cacheKey]) return of(this.cache[cacheKey]);
+
+    return this.http
+      .get<any[]>(this.baseUrl + 'movies/popular?page' + page)
+      .pipe(tap((response) => (this.cache[cacheKey] = response)));
   }
 }
