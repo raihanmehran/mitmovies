@@ -55,12 +55,12 @@ namespace Infrastructure.v1.Repositories
             return result;
         }
 
-        public async Task<ResponseMessage> GetTopRatedMoviesAsync()
+        public async Task<ResponseMessage> GetTopRatedMoviesAsync(int page = 1)
         {
             var result = new ResponseMessage();
 
             result.Data = await _tmdbContext.client
-                .GetMovieTopRatedListAsync();
+                .GetMovieTopRatedListAsync(page: page);
 
             return result;
         }

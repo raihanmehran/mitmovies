@@ -100,11 +100,11 @@ namespace API.Controllers.v1
         }
 
         [HttpGet("toprated")]
-        public async Task<ActionResult<ResponseMessage>> GetTopRatedMovies()
+        public async Task<ActionResult<ResponseMessage>> GetTopRatedMovies([FromQuery] int page)
         {
             try
             {
-                var result = await _mediator.Send(new GetTopRatedMoviesQuery { });
+                var result = await _mediator.Send(new GetTopRatedMoviesQuery { Page = page });
 
                 if (result.Data == null) return NotFound();
 
