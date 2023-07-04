@@ -41,6 +41,7 @@ import { RatingModule } from 'ngx-bootstrap/rating';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { UpcomingMoviesComponent } from './components/movies/upcoming-movies/upcoming-movies.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TopratedMoviesComponent } from './components/movies/toprated-movies/toprated-movies.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     SearchHomeComponent,
     SearchResultComponent,
     UpcomingMoviesComponent,
+    TopratedMoviesComponent,
   ],
   imports: [
     CommonModule,

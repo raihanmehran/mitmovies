@@ -9,6 +9,7 @@ import { SearchResultComponent } from './components/search/search-result/search-
 import { AuthGuard } from './_guards/auth.guard';
 import { UpcomingMoviesComponent } from './components/movies/upcoming-movies/upcoming-movies.component';
 import { PopularMoviesComponent } from './components/movies/popular-movies/popular-movies.component';
+import { TopratedMoviesComponent } from './components/movies/toprated-movies/toprated-movies.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'movies/popular',
     component: PopularMoviesComponent,
+  },
+  {
+    path: 'movies/toprated',
+    component: TopratedMoviesComponent,
   },
   {
     path: 'movies/:movieid',
