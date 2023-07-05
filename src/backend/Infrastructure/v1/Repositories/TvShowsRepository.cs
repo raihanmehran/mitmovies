@@ -14,22 +14,22 @@ namespace Infrastructure.v1.Repositories
         {
             _tmdbContext = tmdbContext;
         }
-        public async Task<ResponseMessage> GetPopularTvShows()
+        public async Task<ResponseMessage> GetPopularTvShows(int page)
         {
             var result = new ResponseMessage();
 
             result.Data = await _tmdbContext.client
-                .GetTvShowListAsync(TvShowListType.Popular);
+                .GetTvShowPopularAsync(page: page);
 
             return result;
         }
 
-        public async Task<ResponseMessage> GetTopRatedTvShows()
+        public async Task<ResponseMessage> GetTopRatedTvShows(int page)
         {
             var result = new ResponseMessage();
 
             result.Data = await _tmdbContext.client
-                .GetTvShowListAsync(TvShowListType.TopRated);
+                .GetTvShowListAsync(list: TvShowListType.TopRated, page: page);
 
             return result;
         }

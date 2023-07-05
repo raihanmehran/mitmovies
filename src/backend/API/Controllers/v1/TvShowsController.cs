@@ -14,11 +14,11 @@ namespace API.Controllers.v1
         }
 
         [HttpGet("popular")]
-        public async Task<ActionResult<ResponseMessage>> GetPopularTvShows()
+        public async Task<ActionResult<ResponseMessage>> GetPopularTvShows([FromQuery] int page)
         {
             try
             {
-                var result = await _mediator.Send(new GetPopularTvShowsQuery { });
+                var result = await _mediator.Send(new GetPopularTvShowsQuery { Page = page });
 
                 if (result.Data == null) return NotFound();
 
@@ -31,11 +31,11 @@ namespace API.Controllers.v1
         }
 
         [HttpGet("toprated")]
-        public async Task<ActionResult<ResponseMessage>> GetTopRatedTvShows()
+        public async Task<ActionResult<ResponseMessage>> GetTopRatedTvShows([FromQuery] int page)
         {
             try
             {
-                var result = await _mediator.Send(new GetTopRatedTvShowsQuery { });
+                var result = await _mediator.Send(new GetTopRatedTvShowsQuery { Page = page });
 
                 if (result.Data == null) return NotFound();
 

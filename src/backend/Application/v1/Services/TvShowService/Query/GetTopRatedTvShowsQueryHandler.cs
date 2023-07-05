@@ -13,7 +13,7 @@ namespace Application.v1.Services.TvShowService.Query
         }
         public async Task<ResponseMessage> Handle(GetTopRatedTvShowsQuery request, CancellationToken cancellationToken)
         {
-            return await _tvShowsRepository.GetTopRatedTvShows();
+            return await _tvShowsRepository.GetTopRatedTvShows(page: request.Page);
         }
     }
 }

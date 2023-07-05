@@ -14,7 +14,7 @@ namespace Application.v1.Services.TvShowService.Query
 
         public async Task<ResponseMessage> Handle(GetPopularTvShowsQuery request, CancellationToken cancellationToken)
         {
-            return await _tvShowsRepository.GetPopularTvShows();
+            return await _tvShowsRepository.GetPopularTvShows(page: request.Page);
         }
     }
 }
