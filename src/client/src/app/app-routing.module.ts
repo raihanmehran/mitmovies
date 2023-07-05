@@ -10,6 +10,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { UpcomingMoviesComponent } from './components/movies/upcoming-movies/upcoming-movies.component';
 import { PopularMoviesComponent } from './components/movies/popular-movies/popular-movies.component';
 import { TopratedMoviesComponent } from './components/movies/toprated-movies/toprated-movies.component';
+import { PopularTvComponent } from './components/tv/popular-tv/popular-tv.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'movies/:movieid',
     component: MovieDetailComponent,
+  },
+  {
+    path: 'tv/popular',
+    component: PopularTvComponent,
   },
   {
     path: 'tv/:tvshowid',
