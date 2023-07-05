@@ -11,6 +11,7 @@ import { UpcomingMoviesComponent } from './components/movies/upcoming-movies/upc
 import { PopularMoviesComponent } from './components/movies/popular-movies/popular-movies.component';
 import { TopratedMoviesComponent } from './components/movies/toprated-movies/toprated-movies.component';
 import { PopularTvComponent } from './components/tv/popular-tv/popular-tv.component';
+import { TopratedTvComponent } from './components/tv/toprated-tv/toprated-tv.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'tv/popular',
     component: PopularTvComponent,
+  },
+  {
+    path: 'tv/toprated',
+    component: TopratedTvComponent,
   },
   {
     path: 'tv/:tvshowid',
