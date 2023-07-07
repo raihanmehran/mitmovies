@@ -15,7 +15,7 @@ import { TopratedTvComponent } from './components/tv/toprated-tv/toprated-tv.com
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
+  // { path: 'home', component: HomeComponent },
   { path: 'account/auth', component: AuthComponent },
   {
     path: 'movies/upcoming',
