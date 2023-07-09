@@ -14,7 +14,6 @@ namespace Infrastructure.v1.Contexts
         {
         }
         public DbSet<Genre> Genres { get; set; }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder: builder);

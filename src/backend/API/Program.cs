@@ -1,5 +1,6 @@
 using API.Extensions;
 using API.Middlewares;
+using API.Resolvers.Queries;
 using Domain.v1.Entities;
 using Infrastructure.v1.Contexts;
 using Infrastructure.v1.Utils;
@@ -11,6 +12,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddHttpContextAccessor();
+
+// GraphQL
+builder.Services
+    .AddGraphQLServer()
+    .AddQueryType<UserDetailQueires>()
+    .AddProjections()
+    .AddFiltering()
+    .AddSorting();
 
 var app = builder.Build();
 
@@ -25,7 +35,9 @@ app.UseCors(builder => builder
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapGraphQL("/graphql");
 app.MapControllers();
+
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
