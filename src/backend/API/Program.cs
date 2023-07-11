@@ -12,15 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
-builder.Services.AddHttpContextAccessor();
-
-// GraphQL
-builder.Services
-    .AddGraphQLServer()
-    .AddQueryType<UserDetailQueires>()
-    .AddProjections()
-    .AddFiltering()
-    .AddSorting();
+builder.Services.AddGraphQLServices(builder.Configuration);
 
 var app = builder.Build();
 

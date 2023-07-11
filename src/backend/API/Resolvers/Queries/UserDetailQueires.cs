@@ -23,7 +23,10 @@ namespace API.Resolvers.Queries
         // [UseFiltering]
         // [UseSorting]
         [Authorize(Policy = "RequireAuthenticated")]
-        public async ValueTask<List<Movie>> GetFavoriteMovies([Service] DataContext context, [Service] IHttpContextAccessor httpContextAccessor)
+        public async ValueTask<List<Movie>> GetFavoriteMovies(
+            [Service] DataContext context,
+            [Service] IHttpContextAccessor httpContextAccessor
+            )
         {
             try
             {
