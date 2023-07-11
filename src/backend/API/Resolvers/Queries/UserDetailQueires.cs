@@ -41,7 +41,7 @@ namespace API.Resolvers.Queries
                     {
                         UserId = x.Id,
                         FavoriteMovies = x.FavouriteMovies
-                    })
+                    }).AsNoTracking()
                     .SingleOrDefaultAsync();
 
                 if (user.FavoriteMovies.Count == 0) return movies;
@@ -49,6 +49,44 @@ namespace API.Resolvers.Queries
                 foreach (var movie in user.FavoriteMovies)
                 {
 
+                    var result = await _moviesRepository.GetMovieByIdAsync(
+                        movieId: movie.MovieId);
+
+                    if (result.Data is not null) movies.Add(result.Data as Movie);
+                }
+
+                return movies;
+            }
+            catch (Exception) { throw; }
+        }
+
+        [Authorize(Policy = "RequireAuthenticated")]
+        public async ValueTask<List<Movie>> GetWatchedMovies(
+            [Service] DataContext context,
+            [Service] IHttpContextAccessor httpContextAccessor
+        )
+        {
+            try
+            {
+                var movies = new List<Movie>();
+                var userId = httpContextAccessor.HttpContext.User.GetUserId();
+
+                if (userId <= 0) return movies;
+
+                var user = await context.Users
+                    .Where(x => x.Id == userId)
+                    .Select(x => new
+                    {
+                        userId = x.Id,
+                        x.WatchedMovies
+                    })
+                    .AsNoTracking()
+                    .SingleOrDefaultAsync();
+
+                if (user.WatchedMovies.Count == 0) return movies;
+
+                foreach (var movie in user.WatchedMovies)
+                {
                     var result = await _moviesRepository.GetMovieByIdAsync(
                         movieId: movie.MovieId);
 
