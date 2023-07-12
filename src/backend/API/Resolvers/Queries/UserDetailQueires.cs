@@ -380,6 +380,67 @@ namespace API.Resolvers.Queries
 
         }
 
+        [Authorize(Policy = "RequireAuthenticated")]
+        public async ValueTask<List<TvShowDto>> GetRatedTvShows(
+            [Service] DataContext context,
+            [Service] IHttpContextAccessor httpContextAccessor
+        )
+        {
+            try
+            {
+                var tvShows = new List<TvShowDto>();
+                var userId = httpContextAccessor.HttpContext.User.GetUserId();
+
+                if (userId <= 0) return tvShows;
+
+                var user = await context.Users
+                    .Where(x => x.Id == userId)
+                    .Select(x => new
+                    {
+                        userId = x.Id,
+                        x.RatedTvShows
+                    })
+                    .AsNoTracking()
+                    .SingleOrDefaultAsync();
+
+                if (user.RatedTvShows.Count <= 0) return tvShows;
+
+                foreach (var ratedTvShow in user.RatedTvShows)
+                {
+                    var result = await _tvShowsRepository
+                        .GetTvShowByIdAsync(tvShowId: ratedTvShow.TvShowId);
+
+                    if (result.Data is not null)
+                    {
+                        var retrievedTvShow = result.Data as TvShow;
+
+                        var tvShow = new TvShowDto
+                        {
+                            Id = retrievedTvShow.Id,
+                            FirstAirDate = retrievedTvShow.FirstAirDate,
+                            InProduction = retrievedTvShow.InProduction,
+                            LastAirDate = retrievedTvShow.LastAirDate,
+                            Name = retrievedTvShow.Name,
+                            NumberOfEpisodes = retrievedTvShow.NumberOfEpisodes,
+                            NumberOfSeasons = retrievedTvShow.NumberOfSeasons,
+                            Overview = retrievedTvShow.Overview,
+                            Popularity = retrievedTvShow.Popularity,
+                            PosterPath = retrievedTvShow.PosterPath,
+                            OriginalLanguage = retrievedTvShow.OriginalLanguage,
+                            OriginalName = retrievedTvShow.Name,
+                            UserRating = ratedTvShow.Rating
+                        };
+
+                        tvShows.Add(tvShow);
+                    }
+                }
+
+                return tvShows;
+            }
+            catch (Exception) { throw; }
+
+        }
+
         public string Hello()
         {
             return "Hello";

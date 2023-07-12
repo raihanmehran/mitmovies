@@ -18,6 +18,7 @@ namespace Application.v1.DTOs
         public float VoteAverage { get; set; }
         public int VoteCount { get; set; }
         public double Popularity { get; set; }
+        public int UserRating { get; set; }
     }
 
 
