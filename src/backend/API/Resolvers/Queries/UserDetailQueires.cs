@@ -7,6 +7,8 @@ using Application.v1.Interfaces;
 using API.Extensions;
 using HotChocolate.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization;
+using TMDbLib.Objects.TvShows;
+using Application.v1.DTOs;
 
 namespace API.Resolvers.Queries
 {
@@ -17,6 +19,8 @@ namespace API.Resolvers.Queries
         {
             _moviesRepository = moviesRepository;
         }
+
+        // MOVIES
 
         // TO BE CONFIGURED!!!!
         // [UseProjection]
@@ -145,6 +149,49 @@ namespace API.Resolvers.Queries
                 return movies;
             }
             catch (Exception) { throw; }
+        }
+
+        [Authorize(Policy = "RequireAuthenticated")]
+        public async ValueTask<List<RatedMovieDetailDto>> GetRatedMovies(
+            [Service] DataContext context,
+            [Service] IHttpContextAccessor httpContextAccessor
+        )
+        {
+            var movies = new List<RatedMovieDetailDto>();
+            var userId = httpContextAccessor.HttpContext.User.GetUserId();
+
+            if (userId <= 0) return movies;
+
+            var user = await context.Users
+                .Where(x => x.Id == userId)
+                .Select(x => new
+                {
+                    userId = x.Id,
+                    x.RatedMovies
+                })
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
+
+            if (user.RatedMovies.Count == 0) return movies;
+
+            foreach (var movie in user.RatedMovies)
+            {
+                var result = await _moviesRepository
+                    .GetMovieByIdAsync(movieId: movie.MovieId);
+
+                if (result.Data is not null)
+                {
+                    var movieWithRating = new RatedMovieDetailDto
+                    {
+                        Rating = movie.Rating,
+                        Movie = result.Data as Movie
+                    };
+
+                    movies.Add(movieWithRating);
+                }
+            }
+
+            return movies;
         }
 
         public string Hello()
