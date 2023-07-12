@@ -251,7 +251,68 @@ namespace API.Resolvers.Queries
                         tvShows.Add(tvShow);
                     }
                 }
-                
+
+                return tvShows;
+            }
+            catch (Exception) { throw; }
+
+        }
+
+        [Authorize(Policy = "RequireAuthenticated")]
+        public async ValueTask<List<TvShowDto>> GetWatchedTvShows(
+            [Service] DataContext context,
+            [Service] IHttpContextAccessor httpContextAccessor
+        )
+        {
+            try
+            {
+                var tvShows = new List<TvShowDto>();
+                var userId = httpContextAccessor.HttpContext.User.GetUserId();
+
+                if (userId <= 0) return tvShows;
+
+                var user = await context.Users
+                    .Where(x => x.Id == userId)
+                    .Select(x => new
+                    {
+                        userId = x.Id,
+                        x.WatchedTvShows
+                    })
+                    .AsNoTracking()
+                    .SingleOrDefaultAsync();
+
+                if (user.WatchedTvShows.Count <= 0) return tvShows;
+
+                foreach (var watchedTvShow in user.WatchedTvShows)
+                {
+                    var result = await _tvShowsRepository
+                        .GetTvShowByIdAsync(tvShowId: watchedTvShow.TvShowId);
+
+                    if (result.Data is not null)
+                    {
+                        var retrievedTvShow = result.Data as TvShow;
+
+                        var tvShow = new TvShowDto
+                        {
+                            Id = retrievedTvShow.Id,
+                            FirstAirDate = retrievedTvShow.FirstAirDate,
+                            InProduction = retrievedTvShow.InProduction,
+                            LastAirDate = retrievedTvShow.LastAirDate,
+                            Name = retrievedTvShow.Name,
+                            NumberOfEpisodes = retrievedTvShow.NumberOfEpisodes,
+                            NumberOfSeasons = retrievedTvShow.NumberOfSeasons,
+                            Overview = retrievedTvShow.Overview,
+                            Popularity = retrievedTvShow.Popularity,
+                            PosterPath = retrievedTvShow.PosterPath,
+                            OriginalLanguage = retrievedTvShow.OriginalLanguage,
+                            OriginalName = retrievedTvShow.Name
+
+                        };
+
+                        tvShows.Add(tvShow);
+                    }
+                }
+
                 return tvShows;
             }
             catch (Exception) { throw; }
