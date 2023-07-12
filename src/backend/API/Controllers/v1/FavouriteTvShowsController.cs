@@ -79,7 +79,7 @@ namespace API.Controllers.v1
                     User = user
                 });
 
-                if (result.StatusCode == 200) return Ok(new { result.Message });
+                if (result.StatusCode == 200) return Ok(result.Data);
 
                 return BadRequest(new { result.Message });
             }
