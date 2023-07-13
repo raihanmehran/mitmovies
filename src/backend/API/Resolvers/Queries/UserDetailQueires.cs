@@ -155,14 +155,14 @@ namespace API.Resolvers.Queries
         }
 
         [Authorize(Policy = "RequireAuthenticated")]
-        public async ValueTask<List<RatedMovieDetailDto>> GetRatedMovies(
+        public async ValueTask<List<Movie>> GetRatedMovies(
             [Service] DataContext context,
             [Service] IHttpContextAccessor httpContextAccessor
         )
         {
             var userId = httpContextAccessor.HttpContext.User.GetUserId();
 
-            if (userId <= 0) return new List<RatedMovieDetailDto>();
+            if (userId <= 0) return new List<Movie>();
 
             var user = await context.Users
                 .Where(x => x.Id == userId)
@@ -174,25 +174,16 @@ namespace API.Resolvers.Queries
                 .AsNoTracking()
                 .SingleOrDefaultAsync();
 
-            if (user.RatedMovies.Count == 0) return new List<RatedMovieDetailDto>();
+            if (user.RatedMovies.Count == 0) return new List<Movie>();
 
-            var movies = new List<RatedMovieDetailDto>();
+            var movies = new List<Movie>();
 
             foreach (var movie in user.RatedMovies)
             {
                 var result = await _moviesRepository
                     .GetMovieByIdAsync(movieId: movie.MovieId);
 
-                if (result.Data is not null)
-                {
-                    var movieWithRating = new RatedMovieDetailDto
-                    {
-                        Rating = movie.Rating,
-                        Movie = result.Data as Movie
-                    };
-
-                    movies.Add(movieWithRating);
-                }
+                if (result.Data is not null) movies.Add(result.Data as Movie);
             }
 
             // MultiThreaded way to do it

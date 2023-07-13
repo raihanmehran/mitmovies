@@ -47,18 +47,15 @@ export class UserInteractionsService {
             budget
           }
           ratedMovies {
-            rating
-            movie {
-              id
-              title
-              overview
-              originalLanguage
-              posterPath
-              releaseDate
-              status
-              revenue
-              budget
-            }
+            id
+            title
+            overview
+            originalLanguage
+            posterPath
+            releaseDate
+            status
+            revenue
+            budget
           }
           favoriteTvShows {
             id
