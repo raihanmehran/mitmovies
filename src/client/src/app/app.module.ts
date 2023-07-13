@@ -44,6 +44,10 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TopratedMoviesComponent } from './components/movies/toprated-movies/toprated-movies.component';
 import { PopularTvComponent } from './components/tv/popular-tv/popular-tv.component';
 import { TopratedTvComponent } from './components/tv/toprated-tv/toprated-tv.component';
+import { GraphQLModule } from './graphql.module';
+import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
+import { InMemoryCache } from '@apollo/client';
+import { HttpLink } from 'apollo-angular/http';
 
 @NgModule({
   declarations: [
@@ -93,9 +97,23 @@ import { TopratedTvComponent } from './components/tv/toprated-tv/toprated-tv.com
     RatingModule.forRoot(),
     CarouselModule.forRoot(),
     PaginationModule.forRoot(),
+    GraphQLModule,
+    ApolloModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory(httpLink: HttpLink) {
+        return {
+          cache: new InMemoryCache(),
+          link: httpLink.create({
+            uri: 'http://localhost:5130/graphql',
+          }),
+        };
+      },
+      deps: [HttpLink],
+    },
   ],
   bootstrap: [AppComponent],
 })

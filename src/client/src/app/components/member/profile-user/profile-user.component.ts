@@ -7,6 +7,7 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { FavoriteMoviesService } from 'src/app/_services/favorite-movies.service';
 import { MemberService } from 'src/app/_services/member.service';
+import { UserInteractionsService } from 'src/app/_services/user-interactions.service';
 
 @Component({
   selector: 'app-profile-user',
@@ -22,11 +23,13 @@ export class ProfileUserComponent implements OnInit {
     private route: ActivatedRoute,
     private memberService: MemberService,
     private accountService: AccountService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userInteractionsService: UserInteractionsService
   ) {}
 
   ngOnInit(): void {
     this.getMember();
+    this.userInteractionsService.getUserData();
   }
 
   onTabActivated(data: TabDirective) {

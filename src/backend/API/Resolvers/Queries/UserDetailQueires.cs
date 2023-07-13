@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using TMDbLib.Objects.TvShows;
 using Application.v1.DTOs;
 using System.Reflection.Metadata.Ecma335;
+using System.Collections.Concurrent;
 
 namespace API.Resolvers.Queries
 {
@@ -160,10 +161,9 @@ namespace API.Resolvers.Queries
             [Service] IHttpContextAccessor httpContextAccessor
         )
         {
-            var movies = new List<RatedMovieDetailDto>();
             var userId = httpContextAccessor.HttpContext.User.GetUserId();
 
-            if (userId <= 0) return movies;
+            if (userId <= 0) return new List<RatedMovieDetailDto>();
 
             var user = await context.Users
                 .Where(x => x.Id == userId)
@@ -175,7 +175,9 @@ namespace API.Resolvers.Queries
                 .AsNoTracking()
                 .SingleOrDefaultAsync();
 
-            if (user.RatedMovies.Count == 0) return movies;
+            if (user.RatedMovies.Count == 0) return new List<RatedMovieDetailDto>();
+
+            var movies = new List<RatedMovieDetailDto>();
 
             foreach (var movie in user.RatedMovies)
             {
@@ -193,6 +195,27 @@ namespace API.Resolvers.Queries
                     movies.Add(movieWithRating);
                 }
             }
+
+            // MultiThreaded way to do it
+            // var movies = new ConcurrentBag<RatedMovieDetailDto>();
+            // var movieIds = user.RatedMovies.Select(movie => movie.MovieId).ToList();
+            // await Task.WhenAll(movieIds.Select(async movieId =>
+            // {
+            //     var result = await _moviesRepository
+            //         .GetMovieByIdAsync(movieId: movieId);
+
+            //     if (result.Data is not null)
+            //     {
+            //         var movieWithRating = new RatedMovieDetailDto
+            //         {
+            //             Rating = 1,
+            //             Movie = result.Data as Movie
+            //         };
+
+            //         movies.Add(item: movieWithRating);
+            //     }
+            // }));
+            // return movies.ToList();
 
             return movies;
         }
