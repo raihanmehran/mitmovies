@@ -46,7 +46,8 @@
                     [movies]="userInteractions.favoriteMovies"></app-member-movie-interactions>
                 </tab>
                 <tab heading="Tv Shows" class="mb-2">
-                  <h5>Favorite Tv Shows Goes here</h5>
+                  <app-member-tv-interactions [title]="'Favorite Tv Shows'"
+                    [tvShows]="userInteractions.favoriteTvShows"></app-member-tv-interactions>
                 </tab>
               </tabset>
             </tab>
@@ -58,7 +59,8 @@
                     [movies]="userInteractions.watchedMovies"></app-member-movie-interactions>
                 </tab>
                 <tab heading="Tv Shows">
-                  <h5>Watched Tv Shows Goes here</h5>
+                  <app-member-tv-interactions [title]="'Watched Tv Shows'"
+                    [tvShows]="userInteractions.watchedTvShows"></app-member-tv-interactions>
                 </tab>
               </tabset>
             </tab>
@@ -70,7 +72,8 @@
                     [movies]="userInteractions.ratedMovies"></app-member-movie-interactions>
                 </tab>
                 <tab heading="Tv Shows">
-                  <h5>Rated Tv Shows Goes here</h5>
+                  <app-member-tv-interactions [title]="'Rated Tv Shows'"
+                    [tvShows]="userInteractions.ratedTvShows"></app-member-tv-interactions>
                 </tab>
               </tabset>
             </tab>
@@ -82,7 +85,8 @@
                     [movies]="userInteractions.watchLaterMovies"></app-member-movie-interactions>
                 </tab>
                 <tab heading="Tv Shows">
-                  <h5>Watch Later Shows Goes here</h5>
+                  <app-member-tv-interactions [title]="'Watch Later Tv Shows'"
+                    [tvShows]="userInteractions.watchLaterTvShows"></app-member-tv-interactions>
                 </tab>
               </tabset>
               <hr />
