@@ -8,15 +8,15 @@
         <div class="col-md-12">
             <div class="h3 mb-3">
                 <span class="me-3">{{title}} </span>
-                <span class="text-muted">{{movies.length}} </span>
+                <span class="text-muted">{{tvShows.length}} </span>
             </div>
-            <div *ngIf="movies.length>0">
-                <div *ngFor="let movie of movies" class="mb-4">
-                    <app-movie-card-long [movie]="movie"></app-movie-card-long>
+            <div *ngIf="tvShows.length>0">
+                <div *ngFor="let tvShow of tvShows" class="mb-4">
+                    <app-tv-card-long [tvShow]="tvShow"></app-tv-card-long>
                 </div>
             </div>
-            <div *ngIf="movies.length===0">
-                <h3 class="text-muted">No movies found!</h3>
+            <div *ngIf="tvShows.length===0">
+                <h3 class="text-muted">No {{title}} found!</h3>
             </div>
         </div>
     </div>

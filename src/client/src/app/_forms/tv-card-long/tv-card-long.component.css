@@ -1,24 +1,3 @@
-/* img {
-  height: 260px;
-  width: 170px;
-  overflow: hidden;
-  object-fit: cover;
-}
-
-.action-button:hover {
-  color: green;
-  cursor: pointer;
-}
-
-#action-button:hover > i,
-span {
-  color: green;
-}
-#action-button > i,
-span {
-  color: rgb(131, 131, 131);
-} */
-
 .bg-darkblue {
   background-color: rgb(6, 34, 51);
 }
@@ -51,7 +30,7 @@ a:hover {
   -webkit-line-clamp: 3;
 }
 .overview::after {
-  content: "..."; /* Add the ellipsis (...) */
+  content: "..."; 
 }
 
 img {

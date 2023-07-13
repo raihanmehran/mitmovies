@@ -16,7 +16,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FooterHomeComponent } from './components/home/footer-home/footer-home.component';
 import { HeaderHomeComponent } from './components/home/header-home/header-home.component';
 import { ProfileUserComponent } from './components/member/profile-user/profile-user.component';
-import { CardLongComponent } from './_forms/card-long/card-long.component';
+import { MovieCardLongComponent } from './_forms/movie-card-long/movie-card-long.component';
 import { MovieCardShortComponent } from './_forms/movie-card-short/movie-card-short.component';
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
 import { PopularMoviesComponent } from './components/movies/popular-movies/popular-movies.component';
@@ -49,6 +49,8 @@ import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { InMemoryCache } from '@apollo/client';
 import { HttpLink } from 'apollo-angular/http';
 import { MemberMovieInteractionsComponent } from './components/member/member-movie-interactions/member-movie-interactions.component';
+import { TvCardLongComponent } from './_forms/tv-card-long/tv-card-long.component';
+import { MemberTvInteractionsComponent } from './components/member/member-tv-interactions/member-tv-interactions.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,7 @@ import { MemberMovieInteractionsComponent } from './components/member/member-mov
     FooterHomeComponent,
     HeaderHomeComponent,
     ProfileUserComponent,
-    CardLongComponent,
+    MovieCardLongComponent,
     MovieCardShortComponent,
     EditUserComponent,
     TrendingMoviesComponent,
@@ -84,6 +86,8 @@ import { MemberMovieInteractionsComponent } from './components/member/member-mov
     PopularTvComponent,
     TopratedTvComponent,
     MemberMovieInteractionsComponent,
+    TvCardLongComponent,
+    MemberTvInteractionsComponent,
   ],
   imports: [
     CommonModule,

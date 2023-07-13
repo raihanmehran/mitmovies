@@ -1,0 +1,19 @@
+<div *ngIf="tvShow">
+    <div class="card shadow border-0 rounded-4">
+        <div class="row">
+            <div class="col-4 col-sm-3 col-md-4 col-lg-3 col-xl-2">
+                <img *ngIf="tvShow.posterPath" src="{{imageUrl}}{{tvShow.posterPath}}" class="rounded-4 rounded-end">
+                <img *ngIf="!tvShow.posterPath" src="./assets/image.png" class="rounded-4 rounded-end">
+            </div>
+            <div class="col-8 col-sm-9 col-md-8 col-lg-9 col-xl-10">
+                <div class="description">
+                    <a routerLink="/tv/{{tvShow.id}}" routerLinkActive="active">
+                        <div class="mt-2 h4">{{tvShow.name}}</div>
+                    </a>
+                    <span class="text-muted">{{tvShow.firstAirDate |date: 'MMM dd, YYYY'}}</span>
+                    <p class="mt-3 overview">{{tvShow.overview}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
