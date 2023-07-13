@@ -14,9 +14,9 @@
     <div class="col-12">
       <div class="col-12 card mt-2">
         <div class="col-12 p-2">
-          <!-- TABSET GOES HERE -->
+          <!-- TABSET -->
           <tabset class="member-tabset" #memberTabs>
-            <tab heading="About">
+            <tab heading="About" class="mt-3">
               <div class="col">
                 <div class="row">
                   <div class="col">
@@ -40,21 +40,18 @@
               <h5>Favourite Generes also goes here</h5>
               <h3>IMPORT & EXPORT CSV</h3>
             </tab>
-            <tab heading="Favourites">
-              <h4>This is Favorites Tab</h4>
+            <tab heading="Favourites" class="mt-3">
               <tabset #favoriteTabs>
-                <tab heading="Movies">
-                  <h5>Favorite Movies Goes Here</h5>
+                <tab heading="Movies" class="mb-2">
+                  <app-member-movie-interactions [title]="'Favorite Movies'"
+                    [movies]="userInteractions.favoriteMovies"></app-member-movie-interactions>
                 </tab>
-                <tab heading="Tv Shows">
+                <tab heading="Tv Shows" class="mb-2">
                   <h5>Favorite Tv Shows Goes here</h5>
-                </tab>
-                <tab heading="People">
-                  <h5>Favorite People Goes here</h5>
                 </tab>
               </tabset>
             </tab>
-            <tab heading="Watched">
+            <tab heading="Watched" class="mt-3">
               <h4>This is Watched Tab</h4>
               <tabset #watchedTabs>
                 <tab heading="Movies">
@@ -65,7 +62,7 @@
                 </tab>
               </tabset>
             </tab>
-            <tab heading="Ratings">
+            <tab heading="Ratings" class="mt-3">
               <h4>This is Rating's Tab</h4>
               <tabset #ratingsTabs>
                 <tab heading="Movies">
@@ -76,7 +73,7 @@
                 </tab>
               </tabset>
             </tab>
-            <tab heading="Watch Later">
+            <tab heading="Watch Later" class="mt-3">
               <h4>This is Watch Later Tab</h4>
               <tabset #watchLaterTabs>
                 <tab heading="Movies">

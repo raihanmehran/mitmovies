@@ -4,6 +4,7 @@ import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
+import { UserInteractions } from 'src/app/_models/userInteractions';
 import { AccountService } from 'src/app/_services/account.service';
 import { FavoriteMoviesService } from 'src/app/_services/favorite-movies.service';
 import { MemberService } from 'src/app/_services/member.service';
@@ -18,6 +19,20 @@ export class ProfileUserComponent implements OnInit {
   @ViewChild('memberTabs', { static: true }) memberTabs?: TabsetComponent;
   member: Member = {} as Member;
   activeTab?: TabDirective;
+  // userInteractionsData: any[] = [];
+
+  userInteractions: UserInteractions = {
+    favoriteMovies: [],
+    watchLaterMovies: [],
+    watchedMovies: [],
+    ratedMovies: [],
+    favoriteTvShows: [],
+    watchLaterTvShows: [],
+    watchedTvShows: [],
+    ratedTvShows: [],
+  };
+  loading = true;
+  error: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +44,7 @@ export class ProfileUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMember();
-    this.userInteractionsService.getUserData();
+    this.getUserInteractionsData();
   }
 
   onTabActivated(data: TabDirective) {
@@ -42,6 +57,16 @@ export class ProfileUserComponent implements OnInit {
 
   fetchMember() {
     this.memberService.getMember();
+  }
+
+  getUserInteractionsData() {
+    this.userInteractionsService
+      .getUserData()
+      .valueChanges.subscribe((result: any) => {
+        this.userInteractions = result.data;
+        this.loading = result.loading;
+        this.error = result.error;
+      });
   }
 
   getMember() {

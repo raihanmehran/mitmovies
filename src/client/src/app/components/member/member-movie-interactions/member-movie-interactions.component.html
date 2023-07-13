@@ -1,0 +1,23 @@
+<div class="container-fluid bg-darkblue">
+    <div class="container py-4">
+        <h1 class="text-white">{{title}}</h1>
+    </div>
+</div>
+<div class="fluid-container">
+    <div class="row p-3">
+        <div class="col-md-12">
+            <div class="h3 mb-3">
+                <span class="me-3">{{title}} </span>
+                <span class="text-muted">{{movies.length}} </span>
+            </div>
+            <div *ngIf="movies.length>0">
+                <div *ngFor="let movie of movies" class="mb-4">
+                    <app-card-long [movie]="movie"></app-card-long>
+                </div>
+            </div>
+            <div *ngIf="movies.length===0">
+                <h3 class="text-muted">No movies found!</h3>
+            </div>
+        </div>
+    </div>
+</div>

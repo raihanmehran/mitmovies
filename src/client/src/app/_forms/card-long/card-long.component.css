@@ -1,4 +1,4 @@
-img {
+/* img {
   height: 260px;
   width: 170px;
   overflow: hidden;
@@ -17,4 +17,59 @@ span {
 #action-button > i,
 span {
   color: rgb(131, 131, 131);
+} */
+
+.bg-darkblue {
+  background-color: rgb(6, 34, 51);
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(12, 136, 245);
+}
+
+.a {
+  color: black;
+  background-color: white;
+}
+
+.a:hover {
+  color: white;
+  background-color: rgb(6, 34, 51);
+}
+
+.overview {
+  line-height: 1.2em;
+  height: 3.6em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.overview::after {
+  content: "..."; /* Add the ellipsis (...) */
+}
+
+img {
+  width: 10rem;
+}
+
+@media (max-width: 768px) {
+  img {
+    width: 6rem;
+  }
+
+  .overview {
+    line-height: 1.2em;
+    height: 2.4em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
 }

@@ -56,7 +56,6 @@ namespace API.Resolvers.Queries
 
                 foreach (var movie in user.FavoriteMovies)
                 {
-
                     var result = await _moviesRepository.GetMovieByIdAsync(
                         movieId: movie.MovieId);
 

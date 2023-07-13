@@ -48,6 +48,7 @@ import { GraphQLModule } from './graphql.module';
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { InMemoryCache } from '@apollo/client';
 import { HttpLink } from 'apollo-angular/http';
+import { MemberMovieInteractionsComponent } from './components/member/member-movie-interactions/member-movie-interactions.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { HttpLink } from 'apollo-angular/http';
     TopratedMoviesComponent,
     PopularTvComponent,
     TopratedTvComponent,
+    MemberMovieInteractionsComponent,
   ],
   imports: [
     CommonModule,
