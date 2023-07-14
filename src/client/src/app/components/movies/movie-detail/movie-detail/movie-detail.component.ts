@@ -181,6 +181,10 @@ export class MovieDetailComponent implements OnInit {
     this.isFavorite = true;
     this.favoriteMoviesService.addToFavoriteMovies(id).subscribe({
       next: (movie) => {
+        const favoriteMovie = {
+          movieId: id,
+        };
+        this.memberService.addFavoriteMovie(favoriteMovie as FavouriteMovie);
         this.toastr.success('Movied Added To Favorites');
       },
       error: (error) => {
@@ -194,6 +198,7 @@ export class MovieDetailComponent implements OnInit {
     this.isFavorite = false;
     this.favoriteMoviesService.removeFromFavoriteMovies(id).subscribe({
       next: (movie) => {
+        this.memberService.removeFavoriteMovie(id);
         this.toastr.success('Movie Removed From Favorites', 'REMOVED');
       },
       error: (error) => {
@@ -263,6 +268,10 @@ export class MovieDetailComponent implements OnInit {
     this.isWatched = true;
     this.watchedMoviesService.addToWatchedMovies(id).subscribe({
       next: (movie) => {
+        const watchedMovie = {
+          movieId: id,
+        };
+        this.memberService.addWatchedMovie(watchedMovie as WatchedMovie);
         this.toastr.success('Movied Added To Watched', 'ADDED');
       },
       error: (error) => {
@@ -275,6 +284,7 @@ export class MovieDetailComponent implements OnInit {
     this.isWatched = false;
     this.watchedMoviesService.removeFromWatchedMovies(id).subscribe({
       next: (movie) => {
+        this.memberService.removeWatchedMovie(id);
         this.toastr.success('Movie Removed From Watched', 'REMOVED');
       },
       error: (error) => {
@@ -309,7 +319,7 @@ export class MovieDetailComponent implements OnInit {
     } as WatchLater;
     this.watchLaterMovieService.addWatchLaterMovie(watchLaterMovie).subscribe({
       next: (movie) => {
-        // this.memberService.addWatchLaterMovie(watchLaterMovie);
+        this.memberService.addWatchLaterMovie(watchLaterMovie);
         this.toastr.success('Movied Added To Watch Later', 'ADDED');
       },
       error: (error) => {
@@ -323,7 +333,7 @@ export class MovieDetailComponent implements OnInit {
     this.isWatchLater = false;
     this.watchLaterMovieService.removeWatchLaterMovie(id).subscribe({
       next: (movie) => {
-        // this.memberService.removeWatchLater(id);
+        this.memberService.removeWatchLater(id);
         this.toastr.success('Movie Removed From Watch Later', 'REMOVED');
       },
       error: (error) => {

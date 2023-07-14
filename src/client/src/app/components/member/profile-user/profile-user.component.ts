@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
 import { UserInteractions } from 'src/app/_models/userInteractions';
@@ -15,7 +16,7 @@ import { UserInteractionsService } from 'src/app/_services/user-interactions.ser
   templateUrl: './profile-user.component.html',
   styleUrls: ['./profile-user.component.css'],
 })
-export class ProfileUserComponent implements OnInit {
+export class ProfileUserComponent implements OnInit, OnDestroy {
   @ViewChild('memberTabs', { static: true }) memberTabs?: TabsetComponent;
   member: Member = {} as Member;
   activeTab?: TabDirective;
@@ -33,6 +34,7 @@ export class ProfileUserComponent implements OnInit {
   };
   loading = true;
   error: any;
+  private querySubscription: Subscription | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +47,9 @@ export class ProfileUserComponent implements OnInit {
   ngOnInit(): void {
     this.getMember();
     this.getUserInteractionsData();
+  }
+  ngOnDestroy() {
+    this.querySubscription?.unsubscribe();
   }
 
   onTabActivated(data: TabDirective) {
@@ -60,7 +65,7 @@ export class ProfileUserComponent implements OnInit {
   }
 
   getUserInteractionsData() {
-    this.userInteractionsService
+    this.querySubscription = this.userInteractionsService
       .getUserData()
       .valueChanges.subscribe((result: any) => {
         this.userInteractions = result.data;

@@ -124,6 +124,7 @@ export class UserInteractionsService {
           }
         }
       `,
+      fetchPolicy: 'no-cache',
     });
   }
 }
